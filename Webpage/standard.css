@@ -45,6 +45,7 @@ body {
 	height:20px;
 	width:100%;
 	background:#BD383C;
+	border-top:1px solid black;
 	position:fixed;
     left: 0;
     bottom: 0;
