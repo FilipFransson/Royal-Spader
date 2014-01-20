@@ -1,0 +1,73 @@
+/* Notes
+
+	Fine ass colors:
+	#69AD9C
+	#A4C079
+	#E3D1B1
+	#FFBE6D
+	#BD383C
+
+
+*/
+
+/* Imports */
+@import url(http://fonts.googleapis.com/css?family=Exo+2);
+
+/*Clear everything*/
+* {
+	margin:0;
+	padding:0;
+}
+
+/*Major design, eg heights, widths, backgrounds etc*/
+body, html, .mainwrapper {
+	width:100%;
+	height:100%;
+}
+body {
+	overflow:visible;
+}
+.mainwrapper {
+	background:#FFBE6D;
+}
+.headerwrapper {
+	height: 30px;
+	background:#69AD9C;
+	border-bottom:10px solid #A4C079;
+}
+.bodywrapper {
+	background:#FFBE6D;
+	position:relative;
+    left: 0;
+    top: 0;
+}
+.footerwrapper {
+	height:20px;
+	width:100%;
+	background:#BD383C;
+	position:fixed;
+    left: 0;
+    bottom: 0;
+}
+.maincontent {
+	background:#FFFFFF;
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid black;
+	border-radius:20px;
+	margin-bottom:20px;
+}
+
+/*Minor designs, eg text, borders etc*/
+h2 {
+	font-family: 'Exo 2', sans-serif;
+}
+.headerwrapper {
+	padding:3px;
+	padding-left:50px;
+}
+.footerwrapper {
+	padding:2px;
+	padding-left:10px;
+	font-family: 'Exo 2', sans-serif;
+}
