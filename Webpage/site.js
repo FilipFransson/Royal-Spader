@@ -1,7 +1,10 @@
 ﻿$( document ).ready(function() {	
 	var superadmin = false;
-	var producer = false;
+	var producer = true;
 	var shopOwner = false;
+	var newData;
+	var fadeOutTime = 200;
+	var fadeInTime = 200;
 	
 	function getMenu(){
 		var menuUrl = "";
@@ -24,6 +27,8 @@
 				
 				$(".menulink").click(function (event){
 					event.preventDefault();
+					$(".menulink").removeClass("active");
+					$(this).addClass("active");
 					openPageUrl(this.href)
 				});
 		});
@@ -49,9 +54,15 @@
 			url: pageUrl,
 			context: document.body
 			}).done(function(data) {
-				
-				$(".maincontent").html(data);
+				$(".maincontent").fadeOut(fadeOutTime);
+				newData = data;
+				setTimeout(switchData, fadeOutTime);
+				$(".maincontent").fadeIn(fadeInTime);
 		});
+	}
+	
+	function switchData(){
+		$(".maincontent").html(newData);
 	}
 	
 	openPage();

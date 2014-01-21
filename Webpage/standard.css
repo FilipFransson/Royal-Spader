@@ -97,7 +97,7 @@ div.headermenu ul li a, div.menu ul li a:visited
 div.headermenu ul li a:hover
 {
     background-color:#4BC3DD;
-    color:#EAD8C0;
+    color: #EAD8C0;
     text-decoration: none;
     border-radius:3px;
 }
@@ -112,8 +112,27 @@ div.headermenu li {
 	position: relative;
 	float: left;
 }
+fieldset legend {
+	margin: 10px;
+	padding: 4px;
+}
+fieldset {
+	padding: 6px;
+}
+input {
+	margin: 5px;
+	margin-left: 0px;
+}
+tr{
+	margin:5px;
+	border:1px solid black;
+}
 
 /*Minor designs, eg text, borders etc*/
+.maincontent {
+	font-family: Calibri;
+}
+
 h2 {
 	font-family: 'Exo 2', sans-serif;
 }
@@ -125,8 +144,10 @@ h2 {
 	padding:2px;
 	padding-left:10px;
 	font-family: 'Exo 2', sans-serif;
-	
 }
 .headermenu {
 	font-family: 'Exo 2', sans-serif;
+}
+a.active {
+	background-color:#00FF00 !important;
 }
