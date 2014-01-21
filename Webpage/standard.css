@@ -1,11 +1,9 @@
 ﻿/* Notes
 
 	Fine ass colors:
-	#69AD9C
-	#A4C079
-	#E3D1B1
-	#FFBE6D
-	#BD383C
+	#000000
+	#f30808
+	#FFFFFF
 
 
 */
@@ -84,7 +82,7 @@ div.headermenu ul
 
 div.headermenu ul li a, div.menu ul li a:visited
 {
-    background-color: 69AD9C;
+    background-color: #f30808;
     color: #fff;
     display:inline-block;
     line-height: 1.35em;
