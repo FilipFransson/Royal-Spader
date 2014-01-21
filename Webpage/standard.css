@@ -108,6 +108,10 @@ div.headermenu ul li a:active
     color: #EAD8C0;
     text-decoration: none;
 }
+div.headermenu li {
+	position: relative;
+	float: left;
+}
 
 /*Minor designs, eg text, borders etc*/
 h2 {
