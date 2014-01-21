@@ -1,6 +1,6 @@
 ﻿$( document ).ready(function() {	
 	var superadmin = false;
-	var producer = true;
+	var producer = false;
 	var shopOwner = false;
 	var newData;
 	var fadeOutTime = 200;
