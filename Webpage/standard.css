@@ -26,16 +26,16 @@ body {
 	overflow:visible;
 }
 .mainwrapper {
-	background:#000000;
+	background:#1F3352;
 }
 .headerwrapper {
 	height: 30px;
-	background:#f30808;
-	border-bottom:10px solid #fff;
-	color: #fff;
+	background:#DC3610;
+	border-bottom:10px solid #F6FFFB;
+	color: #F6FFFB;
 }
 .bodywrapper {
-	background:#000000;
+	background:#1F3352;
 	position:relative;
     left: 0;
     top: 0;
@@ -43,7 +43,7 @@ body {
 .footerwrapper {
 	height:20px;
 	width:100%;
-	background:#f30808;
+	background:#DC3610;
 	border-top:1px solid black;
 	position:fixed;
     left: 0;
@@ -51,7 +51,7 @@ body {
     text-align: center;
 }
 .maincontent {
-	background:#FFFFFF;
+	background:#F6FFFB;
 	margin: 10px;
 	padding: 10px;
 	border: 1px solid black;
@@ -82,7 +82,7 @@ div.headermenu ul
 
 div.headermenu ul li a, div.menu ul li a:visited
 {
-    background-color: #f30808;
+    background-color: #DC3610;
     color: #fff;
     display:inline-block;
     line-height: 1.35em;
@@ -94,16 +94,16 @@ div.headermenu ul li a, div.menu ul li a:visited
 
 div.headermenu ul li a:hover
 {
-    background-color:#fff;
-    color: #000000;
+    background-color:#F6FFFB;
+    color: #1F3352;
     text-decoration: none;
     border-radius:3px;
 }
 
 div.headermenu ul li a:active
 {
-    background-color:#fff;
-    color: #000000;
+    background-color:#F6FFFB;
+    color: #1F3352;
     text-decoration: none;
 }
 
@@ -119,7 +119,7 @@ h2 {
 	padding:2px;
 	padding-left:10px;
 	font-family: 'Exo 2', sans-serif;
-	color: #fff;
+	color: #F6FFFB;
 }
 .headermenu {
 	font-family: 'Exo 2', sans-serif;
