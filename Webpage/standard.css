@@ -35,7 +35,7 @@ body {
 	color: #EAD8C0;
 }
 .bodywrapper {
-	background:#1F3352;
+	background:#0C365B;
 	position:relative;
     left: 0;
     top: 0;
@@ -54,11 +54,13 @@ body {
 }
 .maincontent {
 	background:#EAD8C0;
-	margin: 10px;
+	margin: 0px auto;
+	margin-top:10px;
 	padding: 10px;
 	border: 1px solid black;
 	border-radius:20px;
 	margin-bottom:20px;
+	width:930px;
 }
 .headermenu {
 	float: right;
@@ -99,7 +101,8 @@ div.headermenu ul li a:hover
     background-color:#4BC3DD;
     color: #EAD8C0;
     text-decoration: none;
-    border-radius:3px;
+    border-top-right-radius:3px;
+	border-top-left-radius:3px;
 }
 
 div.headermenu ul li a:active
