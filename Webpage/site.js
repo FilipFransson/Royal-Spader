@@ -1,6 +1,6 @@
 ﻿$( document ).ready(function() {
 	function getMenu(){
-		$(".headermenu").html("Länk 1&nbsp;&nbsp;|&nbsp;&nbsp;Länk 2&nbsp;&nbsp;|&nbsp;&nbsp;Länk 3");
+		$(".headermenu").html('<ul><li style="position: relative; float: left;"><a href="">Länk 1</a></li><li style="position: relative; float: left;"><a href="">Länk </a></li><li style="position: relative; float: left;"><a href="">Länk 3</a></li></ul>');
 	}
 	
 	function openPage(){
