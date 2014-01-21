@@ -28,15 +28,16 @@ body {
 	overflow:visible;
 }
 .mainwrapper {
-	background:#FFBE6D;
+	background:#000000;
 }
 .headerwrapper {
 	height: 30px;
-	background:#69AD9C;
-	border-bottom:10px solid #A4C079;
+	background:#f30808;
+	border-bottom:10px solid #fff;
+	color: #fff;
 }
 .bodywrapper {
-	background:#FFBE6D;
+	background:#000000;
 	position:relative;
     left: 0;
     top: 0;
@@ -44,11 +45,12 @@ body {
 .footerwrapper {
 	height:20px;
 	width:100%;
-	background:#BD383C;
+	background:#f30808;
 	border-top:1px solid black;
 	position:fixed;
     left: 0;
     bottom: 0;
+    text-align: center;
 }
 .maincontent {
 	background:#FFFFFF;
@@ -83,7 +85,7 @@ div.headermenu ul
 div.headermenu ul li a, div.menu ul li a:visited
 {
     background-color: 69AD9C;
-    color: #000;
+    color: #fff;
     display:inline-block;
     line-height: 1.35em;
     padding: 4px 20px;
@@ -94,15 +96,16 @@ div.headermenu ul li a, div.menu ul li a:visited
 
 div.headermenu ul li a:hover
 {
-    background-color:#A4C079;
-    color: #000;
+    background-color:#fff;
+    color: #000000;
     text-decoration: none;
+    border-radius:3px;
 }
 
 div.headermenu ul li a:active
 {
-    background-color:Orange;
-    color: #fff;
+    background-color:#fff;
+    color: #000000;
     text-decoration: none;
 }
 
@@ -118,6 +121,7 @@ h2 {
 	padding:2px;
 	padding-left:10px;
 	font-family: 'Exo 2', sans-serif;
+	color: #fff;
 }
 .headermenu {
 	font-family: 'Exo 2', sans-serif;
