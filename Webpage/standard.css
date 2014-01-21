@@ -26,13 +26,13 @@ body {
 	overflow:visible;
 }
 .mainwrapper {
-	background:#1F3352;
+	background:#0C365B;
 }
 .headerwrapper {
 	height: 30px;
-	background:#DC3610;
-	border-bottom:10px solid #F6FFFB;
-	color: #F6FFFB;
+	background:#0C365B;
+	border-bottom:10px solid #4BC3DD;
+	color: #EAD8C0;
 }
 .bodywrapper {
 	background:#1F3352;
@@ -43,15 +43,17 @@ body {
 .footerwrapper {
 	height:20px;
 	width:100%;
-	background:#DC3610;
+	background:#4BC3DD;
 	border-top:1px solid black;
+	color: #EAD8C0;
 	position:fixed;
     left: 0;
     bottom: 0;
     text-align: center;
+    text-shadow: 1px 1px 1px black
 }
 .maincontent {
-	background:#F6FFFB;
+	background:#EAD8C0;
 	margin: 10px;
 	padding: 10px;
 	border: 1px solid black;
@@ -69,7 +71,7 @@ body {
 }
 div.headermenu
 {
-    padding: 8px 0px 0px 8px;
+    padding: 6px 0px 0px 8px;
 }
 
 div.headermenu ul
@@ -82,8 +84,8 @@ div.headermenu ul
 
 div.headermenu ul li a, div.menu ul li a:visited
 {
-    background-color: #DC3610;
-    color: #fff;
+    background-color: #0C365B;
+    color: #EAD8C0;
     display:inline-block;
     line-height: 1.35em;
     padding: 4px 20px;
@@ -94,16 +96,16 @@ div.headermenu ul li a, div.menu ul li a:visited
 
 div.headermenu ul li a:hover
 {
-    background-color:#F6FFFB;
-    color: #1F3352;
+    background-color:#4BC3DD;
+    color:#EAD8C0;
     text-decoration: none;
     border-radius:3px;
 }
 
 div.headermenu ul li a:active
 {
-    background-color:#F6FFFB;
-    color: #1F3352;
+    background-color:#4BC3DD;
+    color: #EAD8C0;
     text-decoration: none;
 }
 
@@ -119,7 +121,7 @@ h2 {
 	padding:2px;
 	padding-left:10px;
 	font-family: 'Exo 2', sans-serif;
-	color: #F6FFFB;
+	
 }
 .headermenu {
 	font-family: 'Exo 2', sans-serif;
