@@ -42,13 +42,9 @@ body {
 	color: #E8E8E8;
 }
 .bodywrapper {
-<<<<<<< HEAD
-	background:#0C365B;
-=======
 	padding-top:20px;
 	padding-bottom:20px;
 	background:#1F3352;
->>>>>>> e74d23dd752a21ddad17e1dd11fad8bd680ea35a
 	position:relative;
     left: 0;
     top: 0;
@@ -64,20 +60,12 @@ body {
     text-shadow: 1px 1px 1px black
 }
 .maincontent {
-<<<<<<< HEAD
-	background:#EAD8C0;
-	margin: 0px auto;
-	margin-top:10px;
-	padding: 10px;
-=======
 	background:#FFF;
 	margin: 10px;
 	padding: 20px;
->>>>>>> e74d23dd752a21ddad17e1dd11fad8bd680ea35a
 	border: 1px solid black;
 	border-radius:20px;
 	margin-bottom:20px;
-	width:930px;
 }
 .headermenu {
 	float: right;
@@ -116,8 +104,6 @@ div.headermenu ul li a:hover
     background-color:#4BC3DD;
     color: #E8E8E8;
     text-decoration: none;
-    border-top-right-radius:3px;
-	border-top-left-radius:3px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
     text-shadow: 1px 1px 1px black
