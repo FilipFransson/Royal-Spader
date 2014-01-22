@@ -149,6 +149,10 @@ table.listtable{
 h2 {
 	font-family: 'Exo 2', sans-serif;
 }
+
+p {
+	font-family: Calibri;
+}
 .headerwrapper {
 	padding:3px;
 	padding-left:50px;
@@ -166,4 +170,9 @@ a.active {
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
     text-shadow: 1px 1px 1px black
+}
+
+a.homeclick {
+	  text-decoration:none;
+	  color:#E8E8E8;
 }
