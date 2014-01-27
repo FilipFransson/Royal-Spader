@@ -31,7 +31,7 @@
 					$(this).addClass("active");
 					openPageUrl(this.href)
 				});
-		});
+			});
 	}
 	
 	function openPage(){
