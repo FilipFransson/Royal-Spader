@@ -8,6 +8,6 @@ import java.util.ArrayList;
 public class myListGroup {
 
     public String name;
-    public ArrayList <String> children = new ArrayList<String>();
+    public ArrayList <MyListChild> children = new ArrayList<MyListChild>();
 
 }

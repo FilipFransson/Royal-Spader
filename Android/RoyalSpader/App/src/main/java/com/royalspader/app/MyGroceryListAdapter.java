@@ -10,14 +10,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by cissi on 2014-01-27.
+ * Created by cissi on 2014-01-28.
  */
-public class myListAdapter extends BaseExpandableListAdapter{
+public class MyGroceryListAdapter extends BaseExpandableListAdapter {
 
-    ArrayList <myListGroup> Groups;
+    ArrayList<myListGroup> Groups;
     Context ctx;
 
-    public myListAdapter(Context ctx, ArrayList<myListGroup> List){
+    public MyGroceryListAdapter (Context ctx, ArrayList<myListGroup> List){
         this.ctx = ctx;
         Groups = List;
     }
@@ -103,8 +103,6 @@ public class myListAdapter extends BaseExpandableListAdapter{
 
         itemName.setText(name);
 
-        v.setOnClickListener(Groups.get(groupPosition).children.get(childPosition).onClickListener);
-
         return v;
 
     }
@@ -113,4 +111,6 @@ public class myListAdapter extends BaseExpandableListAdapter{
     public boolean isChildSelectable(int i, int i2) {
         return false;
     }
+
+
 }
