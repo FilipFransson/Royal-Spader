@@ -18,28 +18,31 @@ public class GroceryListDAOImpl implements GroceryListDAO {
 	
 	@Override
 	public void add(GroceryList groceryList) {
-		sessionFactory.getCurrentSession().save(groceryList);
+		getCurrentSession().save(groceryList);
 	}
 
 	@Override
 	public void edit(GroceryList groceryList) {
-		sessionFactory.getCurrentSession().update(groceryList);
+		getCurrentSession().update(groceryList);
 	}
 
 	@Override
 	public void delete(int groceryListId) {
-		sessionFactory.getCurrentSession().delete(getGroceryList(groceryListId));
+		getCurrentSession().delete(getGroceryList(groceryListId));
 	}
 
 	@Override
 	public GroceryList getGroceryList(int groceryListId) {
-		return (GroceryList)sessionFactory.getCurrentSession().get(GroceryList.class, groceryListId);
+		return (GroceryList)getCurrentSession().get(GroceryList.class, groceryListId);
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List getAllGroceryLists() {
-		return sessionFactory.getCurrentSession().createQuery("from grocery_lists").list();
+		return getCurrentSession().createCriteria(GroceryList.class).list();
 	}
 
+	protected final Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
+	}
 }

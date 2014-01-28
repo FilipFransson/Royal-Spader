@@ -2,6 +2,7 @@ package se.royalspades.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,29 +18,32 @@ public class CompanyDAOImpl implements CompanyDAO {
 
 	@Override
 	public void add(Company company) {
-		sessionFactory.getCurrentSession().save(company);
+		getCurrentSession().save(company);
 	}
 
 	@Override
 	public void edit(Company company) {
-		sessionFactory.getCurrentSession().update(company);
+		getCurrentSession().update(company);
 	}
 
 	@Override
 	public void delete(int companyId) {
-		sessionFactory.getCurrentSession().delete(getCompany(companyId));
+		getCurrentSession().delete(getCompany(companyId));
 	}
 
 	@Override
 	public Company getCompany(int companyId) {
-		return (Company)sessionFactory.getCurrentSession().get(Company.class, companyId);
+		return (Company)getCurrentSession().get(Company.class, companyId);
 	}
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List getAllCompanies() {
-		return sessionFactory.getCurrentSession().createCriteria(Company.class).list();
-				//createQuery("FROM companies").list();
+		return getCurrentSession().createCriteria(Company.class).list();
+	}
+	
+	protected final Session getCurrentSession() {
+		return sessionFactory.getCurrentSession();
 	}
 
 }

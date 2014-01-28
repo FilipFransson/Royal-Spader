@@ -3,6 +3,16 @@ public class App {
 	
 	 public static void main( String[] args ){
 		 
+		 // http://software.aurorasolutions.org/how-to-oauth-2-0-with-spring-security-2/
+		 // http://www.javacodegeeks.com/2012/02/oauth-with-spring-security.html		 
+		 // http://keenformatics.blogspot.it/2013/08/how-to-solve-json-infinite-recursion.html
+		 
+		 // http://www.youtube.com/watch?v=SC0FPuDKei0
+		 
+		 // http://www.youtube.com/watch?v=8uBcpsIEz2I
+		 
+		 // http://stackoverflow.com/questions/10826293/restful-authentication-via-spring
+		 
 		 // http://www.baeldung.com/hibernate-4-spring
 		 
 		 // http://stackoverflow.com/questions/7774295/spring-xml-file-configuration-hierarchy-help-explanation/7774597#7774597

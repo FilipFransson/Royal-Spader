@@ -6,22 +6,21 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Table(name = "companies", catalog = "spade_db")
 public class Company implements Serializable{
 
@@ -113,9 +112,8 @@ public class Company implements Serializable{
 	public void setUser(User user){
 		this.user = user;
 	}
-
-	////////// skip inverse?
 	
+	//@JsonManagedReference 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
 	public Set<Product> getCompanyProducts() {
 		return companyProducts;
@@ -124,4 +122,5 @@ public class Company implements Serializable{
 	public void setCompanyProducts(Set<Product> companyProducts) {
 		this.companyProducts = companyProducts;
 	}
+
 }

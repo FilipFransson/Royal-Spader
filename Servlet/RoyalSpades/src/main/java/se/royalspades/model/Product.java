@@ -11,14 +11,20 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference; 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Table(name = "products", catalog = "spade_db")
 public class Product implements Serializable{
 
@@ -84,8 +90,10 @@ public class Product implements Serializable{
 		this.unit = unit;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	//@JsonBackReference
+	@JsonIgnoreProperties(value = { "user", "companyProducts" })
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "company_id", nullable = false)
 	public Company getCompany() {
 		return company;
 	}
@@ -102,8 +110,10 @@ public class Product implements Serializable{
 	
 	public void setCategory(Category category) {
 		this.category = category;
-	}
+	} 
+
 	
+	@JsonBackReference  //
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
 	public Set<GroceryList> getGroceryLists() {
 		return groceryLists;

@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;;
+
+
 @Entity
 @Table(name = "users", catalog = "spade_db")
 public class User implements Serializable{
@@ -86,6 +89,7 @@ public class User implements Serializable{
 		this.email = email;
 	}
 	
+	@JsonIgnore
     @Column(name = "username", length = 45)
 	public String getUsername() {
 		return username;
@@ -96,6 +100,7 @@ public class User implements Serializable{
 	}
 	
     @Column(name = "password", length = 45)
+    @JsonIgnore 
 	public String getPassword() {
 		return password;
 	}
@@ -104,6 +109,7 @@ public class User implements Serializable{
 		this.password = password;
 	}
 	
+	@JsonIgnore
     @Column(name = "salt", length = 45)
 	public String getSalt() {
 		return salt;
@@ -111,6 +117,4 @@ public class User implements Serializable{
 	public void setSalt(String salt) {
 		this.salt = salt;
 	}
-	
-	
 }

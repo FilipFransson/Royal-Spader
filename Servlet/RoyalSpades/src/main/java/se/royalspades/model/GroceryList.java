@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "grocery_lists", catalog = "spade_db")
 public class GroceryList implements Serializable{
@@ -69,9 +71,11 @@ public class GroceryList implements Serializable{
 		this.listOwner = listOwner;
 	}
 	
+	//@JsonIgnoreProperties(value = { "company" })
+	@JsonManagedReference
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	    @JoinTable(name = "grocery_lists_has_products", catalog = "spade_db", joinColumns = {
-	        @JoinColumn(name = "grocery_lists_id", nullable = false, updatable = false) },
+	        @JoinColumn(name = "grocery_lists_id", nullable = false, updatable = false) },  
 	            inverseJoinColumns = { @JoinColumn(name = "products_id",
 	            nullable = false, updatable = false) })
 	public Set<Product> getProducts() {

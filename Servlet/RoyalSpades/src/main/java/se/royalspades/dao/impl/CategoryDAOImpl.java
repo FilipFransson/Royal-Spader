@@ -39,7 +39,7 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List getAllCategories() {
-		return getCurrentSession().createQuery("from categories").list();
+		return getCurrentSession().createCriteria(Category.class).list();
 	}	
 	
 	protected final Session getCurrentSession() {

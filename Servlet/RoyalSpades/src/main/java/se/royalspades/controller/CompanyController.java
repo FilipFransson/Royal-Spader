@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import se.royalspades.model.Company;
 import se.royalspades.service.CompanyService;
 
@@ -24,7 +25,7 @@ public class CompanyController {
 		return companyService.getAllCompanies();
 	}
 }
-
+   
 
 /*     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
