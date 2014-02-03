@@ -1,4 +1,4 @@
-﻿$( document ).ready(function() {	
+﻿$( document ).ready(function() {
 	var superadmin = false;
 	var producer = false;
 	var shopOwner = true;
@@ -31,10 +31,10 @@
 					$(this).addClass("active");
 					openPageUrl(this.href)
 				});
-		});
+			});
 	}
 	
-	function openPage(){
+	function openMainPage(){
 		var pageUrl = "";
 		if(superadmin){
 			pageUrl = "pages/admin/main.html";
@@ -63,8 +63,43 @@
 	
 	function switchData(){
 		$(".maincontent").html(newData);
+		
+		$(".link").click(function (event){
+			event.preventDefault();
+			openPageUrl(this.href)
+		});
 	}
 	
-	openPage();
+	function getUrl(p){
+		if(!superadmin && !producer && !shopOwner){
+			if(p == '1'){
+				return "pages/default/main.html";
+			}
+			if(p == '2'){
+				return "pages/default/settings.html";
+			}
+			if(p == '3'){
+				return "pages/default/help.html";
+			}
+			if(p == '4'){
+				return "pages/default/newGroceryBag.html";
+			}
+		}
+	}
+	
+	var hashArray = window.location.hash.replace("#", "").split('&');
+	var page = "";
+	for(var i = 0; i < hashArray.length; i++){
+		if(hashArray[i][0] == 'p'){
+			page = hashArray[i].replace("p=", "");
+			openPageUrl(getUrl(page));
+		}
+	}
+	
+	if(page == ""){
+		openMainPage();
+	} else {
+		//if(window.location.hash
+	}
 	getMenu();
 });
