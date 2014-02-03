@@ -1,7 +1,7 @@
 ﻿$( document ).ready(function() {	
 	var superadmin = false;
 	var producer = false;
-	var shopOwner = true;
+	var shopOwner = false;
 	var newData;
 	var fadeOutTime = 200;
 	var fadeInTime = 200;
