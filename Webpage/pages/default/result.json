@@ -1,0 +1,39 @@
+﻿[{
+	"@id": 1,
+	"id": 1,
+	"name": "Coca-Cola",
+	"volume": 33,
+	"unit": "cl",
+	"company": {
+		"@id": 2,
+		"name": "Coca-Cola Company",
+		"orgNumber": "1232222890",
+		"address": "pepsivägen 13 ",
+		"phone": "072-302221",
+		"type": "producer",
+		"id": 1
+	},
+	"category": {
+		"id": 1,
+		"name": "Soda"
+	}
+},{
+	"@id": 2,
+	"id": 2,
+	"name": "Fanta",
+	"volume": 33,
+	"unit": "cl",
+	"company": {
+		"@id": 2,
+		"name": "Coca-Cola Company",
+		"orgNumber": "1232222890",
+		"address": "pepsivägen 13 ",
+		"phone": "072-302221",
+		"type": "producer",
+		"id": 1
+	},
+	"category": {
+		"id": 1,
+		"name": "Soda"
+	}
+}]
