@@ -1,5 +1,5 @@
 <script>
-	window.location.hash = "p=" + ${pageUid;};
+	window.location.hash = "p=" + ${pageUid};
 </script>
 <h2>
 	Settings page

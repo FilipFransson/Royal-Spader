@@ -105,7 +105,7 @@
 	for(var i = 0; i < hashArray.length; i++){
 		if(hashArray[i][0] == 'p'){
 			page = hashArray[i].replace("p=", "");
-			openPageUrlAndUpdateHash(getUrl(page), page);
+			openPageUrl(getUrl(page));
 		}
 	}
 	

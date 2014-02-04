@@ -1,4 +1,6 @@
-
+<script>
+	window.location.hash = "p=" + ${pageUid};
+</script>
 <h2>
 	Mina kassar
 </h2>
