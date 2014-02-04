@@ -16,7 +16,13 @@
 	<resources mapping="/resources/**" location="/resources/" />
     <resources mapping="/static/**" location="/static/" />	
 	<resources mapping="/resources/**" location="/resources/theme/" />
-    <resources mapping="/common/**" location="/resourses/common/" />
+    <resources mapping="/admin/**" location="/admin/" />
+    <resources mapping="/menu/**" location="/menu/" />
+    <resources mapping="/home/**" location="/home/" />
+    <resources mapping="/producer/**" location="/producer/" />
+    <resources mapping="/shopowner/**" location="/shopowner/" />
+    
+    
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

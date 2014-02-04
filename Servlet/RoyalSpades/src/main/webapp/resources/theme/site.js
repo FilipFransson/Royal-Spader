@@ -9,13 +9,13 @@
 	function getMenu(){
 		var menuUrl = "";
 		if(superadmin){
-			menuUrl = "menu/adminMenu.html";
+			menuUrl = "../menu/admin";
 		} else if(producer) {
-			menuUrl = "menu/producerMenu.html";
+			menuUrl = "../menu/producer";
 		} else if(shopOwner) {
-			menuUrl = "menu/shopOwnerMenu.html";
+			menuUrl = "../menu/shopowner";
 		} else {
-			menuUrl = "menu/defaultMenu.html";
+			menuUrl = "../menu/default";
 		}
 		
 		$.ajax({
@@ -37,13 +37,13 @@
 	function openMainPage(){
 		var pageUrl = "";
 		if(superadmin){
-			pageUrl = "admin/main.html";
+			pageUrl = "../admin/main";
 		} else if(producer) {
-			pageUrl = "producer/main.html";
+			pageUrl = "../producer/main";
 		} else if(shopOwner) {
-			pageUrl = "shopowner/main.html";
+			pageUrl = "../shopowner/main";
 		} else {
-			pageUrl = "home/main.html";
+			pageUrl = "../home/main";
 		}
 		
 		openPageUrl(pageUrl);
@@ -86,16 +86,16 @@
 	function getUrl(p){
 		if(!superadmin && !producer && !shopOwner){
 			if(p == '1'){
-				return "pages/default/main.html";
+				return "../home/main";
 			}
 			if(p == '2'){
-				return "pages/default/settings.html";
+				return "../home/settings";
 			}
 			if(p == '3'){
-				return "pages/default/help.html";
+				return "../home/help";
 			}
 			if(p == '4'){
-				return "pages/default/newGroceryBag.html";
+				return "../home/newgrocerybag";
 			}
 		}
 	}
