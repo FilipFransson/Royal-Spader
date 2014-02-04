@@ -1,12 +1,12 @@
 <ul>
 	<li>
-		<a class="menulink" href="pages/admin/main.html">Admin</a>
+		<a class="menulink" href="admin/main">Admin</a>
 	</li>
 	<li>
-		<a class="menulink" href="pages/admin/shop.html">Butik</a>
+		<a class="menulink" href="admin/shop">Butik</a>
 	</li>
 	<li>
-		<a class="menulink" href="pages/admin/supplier.html">Leverantör</a>
+		<a class="menulink" href="admin/supplier">Leverantör</a>
 	</li>
 	
 </ul>
