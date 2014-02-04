@@ -27,14 +27,18 @@
         android:layout_height="wrap_content"
         android:hint="@string/username"
         android:fontFamily="Verdana"
-        android:textColor="#EAD8C0" />
+        android:textColor="#EAD8C0"
+        android:id="@+id/username"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/password"
         android:fontFamily="Verdana"
-        android:textColor="#EAD8C0" />
+        android:textColor="#EAD8C0"
+        android:id="@+id/password"
+        android:inputType="textPassword"/>
 
     <Button
         android:layout_width="80dp"
