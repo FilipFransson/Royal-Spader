@@ -38,7 +38,8 @@ public class varorFragment extends Fragment {
 
         temp2 = data.get(0);
 
-        ExpandableListView exList = (ExpandableListView)rootView.findViewById(R.id.grocerys);
+	    assert rootView != null;
+	    ExpandableListView exList = (ExpandableListView)rootView.findViewById(R.id.grocerys);
         myListGroup temp = new myListGroup();
         temp.name = "Benjamin!";
         //temp.children.add("FilipFix!");
