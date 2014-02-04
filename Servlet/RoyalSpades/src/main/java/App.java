@@ -1,7 +1,20 @@
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import se.royalspades.model.Brand;
+import se.royalspades.model.Category;
+import se.royalspades.model.GroceryListProduct;
+import se.royalspades.model.Product;
+import se.royalspades.model.StoreProduct;
+import se.royalspades.model.User;
+import se.royalspades.service.UserService;
+
 
 public class App {
 	
 	 public static void main( String[] args ){
+		 	
 		 
 		 
 		 // http://forum.spring.io/forum/spring-projects/security/115172-md5-hash-on-database-digest-authentication

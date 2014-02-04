@@ -1,4 +1,4 @@
-ï»¿<!doctype html>
+<!doctype html>
 <html>
 	<head>
 		<link rel="stylesheet" href="standard.css">
@@ -6,7 +6,7 @@
 		<script src="http://datatables.net/download/build/jquery.dataTables.min.js"></script>
 		<script src="site.js"></script>
 		<title>&spades; Royal Spades &spades;</title>
-     <script language="JavaScript" type="text/javascript">
+     	<script type="text/javascript">
      
     $(document).ready(function(){
 		$.ajax({
@@ -55,7 +55,7 @@
 				<div class="maincontent">
                 
 					<p>
-						Aktivera Javascript fÃ¶r att kunna anvÃ¤nda denna sida!
+						Aktivera Javascript för att kunna använda denna sida!
 					</p>
 				</div>
 			</div>
