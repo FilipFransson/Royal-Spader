@@ -1,5 +1,7 @@
 package com.royalspader.app.classes;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,50 +13,122 @@ import java.util.List;
  * Created by cissi on 2014-02-03.
  */
 public class Product {
-    int id;
-    String name;
-    double volume;
-    String unit;
-    Brand brand;
-    Category category;
-    List<Store> stores;
-    int tokenId;
+
+	@SerializedName("id")
+	int id;
+	@SerializedName("name")
+	String name;
+	@SerializedName("volume")
+	double volume;
+	@SerializedName("unit")
+	String unit;
+	@SerializedName("brand")
+	Brand brand;
+	@SerializedName("category")
+	Category category;
+	@SerializedName("stores")
+	List<Store> stores;
+	@SerializedName("@id")
+	int tokenId;
 
 
-    public Product(JSONObject object){
+	public Product(JSONObject object) {
 
-        try {
-            id = object.getInt("id");
-            name = object.getString("name");
-            volume = object.getDouble("volume");
-            unit = object.getString("unit");
-            brand = new Brand(object.getJSONObject("brand"));
-            category = new Category(object.getJSONObject("category"));
-            stores = Store.list(object.getJSONArray("stores"));
-            tokenId = object.getInt("@id");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+		try {
+			id = object.getInt("id");
+			name = object.getString("name");
+			volume = object.getDouble("volume");
+			unit = object.getString("unit");
+			brand = new Brand(object.getJSONObject("brand"));
+			category = new Category(object.getJSONObject("category"));
+			stores = Store.list(object.getJSONArray("stores"));
+			tokenId = object.getInt("@id");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 
-    }
+	}
 
-    public Product() {
+	public Product() {
 
-    }
+	}
 
-    public static List<Product> list(JSONArray productArray) {
-        List<Product> product = new ArrayList<Product>();
-        for (int i = 0; i < productArray.length(); i++) {
-            try {
-                product.add(new Product(productArray.getJSONObject(i)));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        return product;
-    }
+	public static List<Product> list(JSONArray productArray) {
+		List<Product> product = new ArrayList<Product>();
+		for (int i = 0; i < productArray.length(); i++) {
+			try {
+				product.add(new Product(productArray.getJSONObject(i)));
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+		}
+		return product;
+	}
 
-    /*
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getVolume() {
+		return volume;
+	}
+
+	public void setVolume(double volume) {
+		this.volume = volume;
+	}
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public List<Store> getStores() {
+		return stores;
+	}
+
+	public void setStores(List<Store> stores) {
+		this.stores = stores;
+	}
+
+	public int getTokenId() {
+		return tokenId;
+	}
+
+	public void setTokenId(int tokenId) {
+		this.tokenId = tokenId;
+	}
+	/*
     [{"@id":1,
     "id":1,
     "name":"Coca-Cola",
