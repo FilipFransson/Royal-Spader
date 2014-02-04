@@ -10,19 +10,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import se.royalspades.model.Company;
-import se.royalspades.service.CompanyService;
+import se.royalspades.model.Brand;
+import se.royalspades.service.BrandService;
 
 @Controller
-@RequestMapping(value ="/api/company")
-public class CompanyController {
-	@Autowired CompanyService companyService; 
+@RequestMapping(value ="/api/brand")
+public class BrandController {
+	@Autowired BrandService brandService; 
 	
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value ="/all", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody List<Company> getAllCompaniesResponse(){
-		return companyService.getAllCompanies();
+	public @ResponseBody List<Brand> getAllBrandsResponse(){
+		return brandService.getAllBrands();
 	}
 }
    
@@ -30,3 +30,7 @@ public class CompanyController {
 /*     <bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>      (hibernate.cfg.xml mellan 2 sista bean*/
+
+
+
+///royalspades/api/brand/all

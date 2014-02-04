@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import se.royalspades.model.User;
 import se.royalspades.service.CategoryService;
-import se.royalspades.service.CompanyService;
 import se.royalspades.service.UserService;
 
 /**

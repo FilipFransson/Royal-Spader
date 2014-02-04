@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import se.royalspades.model.User;
 import se.royalspades.service.CategoryService;
-import se.royalspades.service.CompanyService;
 import se.royalspades.service.UserService;
 
 /**
@@ -34,12 +33,12 @@ public class HomeController {
 	public String home(Locale locale, Model model) {
 		
 		//redirect to main page
-		return "home/home";
+		return "index";
 	}
 	
 	
 	@RequestMapping("/main")
-	public String main(Map<String, Object> map){
+	public String main(Locale locale, Model model){
 		//Default user - Main page
 		model.addAttribute("pageUid", "1a6d5630-8d75-11e3-baa8-0800200c9a66" );
 		
@@ -47,7 +46,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/help")
-	public String help(Map<String, Object> map){
+	public String help(Locale locale, Model model){
 		//Default user - Help page
 		model.addAttribute("pageUid", "ecae7380-8d76-11e3-baa8-0800200c9a66" );
 		
@@ -55,7 +54,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/newgrocerybag")
-	public String newgrocerybag(Map<String, Object> map){
+	public String newgrocerybag(Locale locale, Model model){
 		//Default user - New grocery bag page
 		model.addAttribute("pageUid", "f5cb8520-8d76-11e3-baa8-0800200c9a66" );
 		
@@ -63,7 +62,7 @@ public class HomeController {
 	}
 	
 	@RequestMapping("/settings")
-	public String settings(Map<String, Object> map){
+	public String settings(Locale locale, Model model){
 		//Default user - New grocery bag page
 		model.addAttribute("pageUid", "fd2e63a0-8d76-11e3-baa8-0800200c9a66" );
 		

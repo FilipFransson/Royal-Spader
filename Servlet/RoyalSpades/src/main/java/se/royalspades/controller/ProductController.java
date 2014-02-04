@@ -52,3 +52,5 @@ public class ProductController {
 }
 
 
+///royalspades/api/product/1
+///royalspades/api/product/all

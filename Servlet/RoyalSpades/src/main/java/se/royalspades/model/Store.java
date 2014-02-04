@@ -6,56 +6,67 @@ import java.util.Set;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
-@Table(name = "companies", catalog = "spade_db")
-public class Company implements Serializable{
+@Table(name = "stores", catalog = "spade_db")
+public class Store implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private int companyId;
+	private int id;
 	private String name;
 	private String orgNumber;
 	private String address;
 	private String phone;
-	private String type;
 	private User user;
-    private Set<Product> companyProducts = new HashSet<Product>(0);
-
-	public Company(){
+    private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>(0);
+    
+	public Store(){
 	}
 	
-	public Company(String name, String orgNumber, String address, String phone,
-			String type, User user) {
+	public Store(String name, String orgNumber, String address, String phone, User user) {
 		this.name = name;
 		this.orgNumber = orgNumber;
 		this.address = address;
 		this.phone = phone;
-		this.type = type;
 		this.user = user;
+	}
+	
+	public Store(String name, String orgNumber, String address, String phone, User user, Set<StoreProduct> storeProducts) {
+		this.name = name;
+		this.orgNumber = orgNumber;
+		this.address = address;
+		this.phone = phone;
+		this.user = user;
+		this.storeProducts = storeProducts;
 	}
 	
 	@Id
     @GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
 	public int getId() {
-		return companyId;
+		return id;
 	}
 	
-	public void setId(int companyId) {
-		this.companyId = companyId;
+	public void setId(int storeId) {
+		this.id = storeId;
 	}
 	
     @Column(name = "name", length = 45)
@@ -94,14 +105,6 @@ public class Company implements Serializable{
 		this.phone = phone;
 	}
 	
-    @Column(name = "type", nullable = false, length = 45)
-	public String getType() {
-		return type;
-	}
-    
-	public void setType(String type) {
-		this.type = type;
-	}
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
@@ -113,14 +116,14 @@ public class Company implements Serializable{
 		this.user = user;
 	}
 	
-	//@JsonManagedReference 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
-	public Set<Product> getCompanyProducts() {
-		return companyProducts;
+	@JsonIgnoreProperties(value = { "storeProduct", "storeProducts", "store" })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.store")
+	public Set<StoreProduct> getStoreProduct() {
+		return storeProducts;
 	}
 
-	public void setCompanyProducts(Set<Product> companyProducts) {
-		this.companyProducts = companyProducts;
+	public void setStoreProduct(Set<StoreProduct> storeProducts) {
+		this.storeProducts = storeProducts;
 	}
-
+	
 }

@@ -23,3 +23,6 @@ public class CategoryController {
 		return categoryService.getAllCategories();
 	}
 }
+
+
+///royalspades/api/category/all

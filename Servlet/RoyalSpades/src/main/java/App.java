@@ -3,10 +3,38 @@ public class App {
 	
 	 public static void main( String[] args ){
 		 
-		 // http://software.aurorasolutions.org/how-to-oauth-2-0-with-spring-security-2/
-		 // http://www.javacodegeeks.com/2012/02/oauth-with-spring-security.html		 
-		 // http://keenformatics.blogspot.it/2013/08/how-to-solve-json-infinite-recursion.html
 		 
+		 // http://forum.spring.io/forum/spring-projects/security/115172-md5-hash-on-database-digest-authentication
+		 
+		 // The service and DAO needed for GroceryListProduct?? how to set the volume value? straight on model?
+		 
+		 //https://github.com/Fruzenshtein/security-spr/tree/master/src/main/webapp/WEB-INF/pages
+//https://github.com/fgakk/samples/tree/master/java/spring/restful-token-login/src/main/java/com/fga/examples/restful_token_login/service		 
+		 /*
+		 // anvander sessions nu och ar inte stateless??
+		  * 
+		  * http://www.baeldung.com/2011/11/20/basic-and-digest-authentication-for-a-restful-service-with-spring-security-3-1/
+		  * https://github.com/eugenp/REST#readme
+		  * http://www.javacodegeeks.com/2012/12/authentication-against-a-restful-service-with-spring-security.html
+		  * http://security.stackexchange.com/questions/19620/securing-a-javascript-single-page-app-with-restful-backend
+
+   <http auto-config="false" create-session="stateless">
+      <http-basic entry-point-ref="authenticationEntryPoint" />
+   </http>
+
+   <beans:bean id="authenticationEntryPoint"
+     class="com.blogspot.vozis.security.VozisBasicAuthenticationEntryPoint">
+      <beans:property name="realmName" value="Vozis" />
+   </beans:bean>
+
+   <authentication-manager alias="authenticationManager">
+      <authentication-provider user-service-ref="userService" />
+   </authentication-manager>
+
+   <beans:bean id="userService" class="com.blogspot.vozis.security.UserServiceImpl" />
+</beans:beans>   
+
+		 */
 		 // http://www.youtube.com/watch?v=SC0FPuDKei0
 		 
 		 // http://www.youtube.com/watch?v=8uBcpsIEz2I
