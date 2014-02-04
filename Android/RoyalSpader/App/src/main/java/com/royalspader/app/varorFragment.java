@@ -9,11 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
+import com.royalspader.app.classes.Product;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by cissi on 2014-01-28.
@@ -30,14 +33,10 @@ public class varorFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_grocerys, container, false);
 
-        JSONArray data = new APIManager().getItems();
-        JSONObject  temp2 = new JSONObject();
+        List<Product> data = new APIManager().getItems();
+        Product temp2 = new Product();
 
-        try {
-            temp2 = data.getJSONObject(1);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        temp2 = data.get(0);
 
         ExpandableListView exList = (ExpandableListView)rootView.findViewById(R.id.grocerys);
         myListGroup temp = new myListGroup();
