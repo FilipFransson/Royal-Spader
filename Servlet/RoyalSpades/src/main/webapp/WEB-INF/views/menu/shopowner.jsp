@@ -1,12 +1,12 @@
 <ul>
 	<li>
-		<a class="menulink" href="pages/shopOwner/main.html">Min butik</a>
+		<a class="menulink" href="main">Min butik</a>
 	</li>
 	<li>
-		<a class="menulink" href="pages/shopOwner/settings.html">Inställningar</a>
+		<a class="menulink" href="settings">Inställningar</a>
 	</li>
 	<li>
-		<a class="menulink" href="pages/shopOwner/help.html">Hjälp</a>
+		<a class="menulink" href="help">Hjälp</a>
 	</li>
     <li>
 		<a class="loginLink" href="#">Login</a>
