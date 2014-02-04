@@ -22,8 +22,8 @@ import se.royalspades.service.UserService;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value = "/home")
-public class HomeController {
+@RequestMapping(value = "/admin")
+public class AdminController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -32,41 +32,43 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		//redirect to main page
-		return "home/home";
+		//Redirecta till main
+		return "admin/home";
 	}
 	
 	
 	@RequestMapping("/main")
-	public String main(Map<String, Object> map){
-		//Default user - Main page
-		model.addAttribute("pageUid", "1a6d5630-8d75-11e3-baa8-0800200c9a66" );
+	public String main(Locale locale, Model model){
+		//Admin - Main page
+		model.addAttribute("pageUid", "9e60de60-8d77-11e3-baa8-0800200c9a66" );
 		
-		return "home/main";
+		return "admin/main";
 	}
 	
-	@RequestMapping("/help")
-	public String help(Map<String, Object> map){
-		//Default user - Help page
-		model.addAttribute("pageUid", "ecae7380-8d76-11e3-baa8-0800200c9a66" );
+	@RequestMapping("/shop")
+	public String shop(Locale locale, Model model){
+		//Admin - shop page
+		model.addAttribute("pageUid", "a82b9520-8d77-11e3-baa8-0800200c9a66" );
 		
-		return "home/help";
+		
+		return "admin/shop";
 	}
 	
-	@RequestMapping("/newgrocerybag")
-	public String newgrocerybag(Map<String, Object> map){
-		//Default user - New grocery bag page
-		model.addAttribute("pageUid", "f5cb8520-8d76-11e3-baa8-0800200c9a66" );
+	@RequestMapping("/supplier")
+	public String supplier(Locale locale, Model model){
+		//Admin - supplier page
+		model.addAttribute("pageUid", "ae8fef60-8d77-11e3-baa8-0800200c9a66" );
 		
-		return "home/newgrocerybag";
+		
+		return "admin/supplier";
 	}
 	
-	@RequestMapping("/settings")
-	public String settings(Map<String, Object> map){
-		//Default user - New grocery bag page
-		model.addAttribute("pageUid", "fd2e63a0-8d76-11e3-baa8-0800200c9a66" );
+	@RequestMapping("/user")
+	public String user(Locale locale, Model model){
+		//Admin - user page
+		model.addAttribute("pageUid", "b8d6db00-8d77-11e3-baa8-0800200c9a66" );
 		
-		return "home/settings";
+		
+		return "admin/user";
 	}
 }

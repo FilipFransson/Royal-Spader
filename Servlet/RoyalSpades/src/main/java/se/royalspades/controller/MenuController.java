@@ -22,7 +22,6 @@ import se.royalspades.service.UserService;
  * Handles requests for the application home page.
  */
 @Controller
-@RequestMapping(value = "/home")
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
@@ -38,35 +37,17 @@ public class HomeController {
 	}
 	
 	
-	@RequestMapping("/main")
+	@RequestMapping("/menu")
 	public String main(Map<String, Object> map){
-		//Default user - Main page
-		model.addAttribute("pageUid", "1a6d5630-8d75-11e3-baa8-0800200c9a66" );
-		
-		return "home/main";
-	}
-	
-	@RequestMapping("/help")
-	public String help(Map<String, Object> map){
-		//Default user - Help page
-		model.addAttribute("pageUid", "ecae7380-8d76-11e3-baa8-0800200c9a66" );
-		
-		return "home/help";
-	}
-	
-	@RequestMapping("/newgrocerybag")
-	public String newgrocerybag(Map<String, Object> map){
-		//Default user - New grocery bag page
-		model.addAttribute("pageUid", "f5cb8520-8d76-11e3-baa8-0800200c9a66" );
-		
-		return "home/newgrocerybag";
-	}
-	
-	@RequestMapping("/settings")
-	public String settings(Map<String, Object> map){
-		//Default user - New grocery bag page
-		model.addAttribute("pageUid", "fd2e63a0-8d76-11e3-baa8-0800200c9a66" );
-		
-		return "home/settings";
+		//Menu
+		//if (admin){
+		//return "menu/admin";
+		//} else if (producer) {
+		//return "menu/producer";
+		//} else if (shopOwner) {
+		//return "menu/shopowner"
+		//} else {
+		return "menu/default"
+		//}
 	}
 }
