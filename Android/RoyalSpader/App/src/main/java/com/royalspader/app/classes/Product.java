@@ -1,8 +1,10 @@
 package com.royalspader.app.classes;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,10 +18,10 @@ public class Product {
     Brand brand;
     Category category;
     List<Store> stores;
+    int tokenId;
 
 
-
-    Product(JSONObject object){
+    public Product(JSONObject object){
 
         try {
             id = object.getInt("id");
@@ -27,12 +29,31 @@ public class Product {
             volume = object.getDouble("volume");
             unit = object.getString("unit");
             brand = new Brand(object.getJSONObject("brand"));
+            category = new Category(object.getJSONObject("category"));
             stores = Store.list(object.getJSONArray("stores"));
+            tokenId = object.getInt("@id");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
     }
+
+    public Product() {
+
+    }
+
+    public static List<Product> list(JSONArray productArray) {
+        List<Product> product = new ArrayList<Product>();
+        for (int i = 0; i < productArray.length(); i++) {
+            try {
+                product.add(new Product(productArray.getJSONObject(i)));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return product;
+    }
+
     /*
     [{"@id":1,
     "id":1,
