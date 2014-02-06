@@ -1,4 +1,4 @@
-package com.royalspader.app.classes;
+package com.royalspader.app.objects;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -27,6 +27,10 @@ public class Category {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	public Category() {
 
 	}
 

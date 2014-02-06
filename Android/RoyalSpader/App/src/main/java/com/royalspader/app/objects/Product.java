@@ -1,4 +1,4 @@
-package com.royalspader.app.classes;
+package com.royalspader.app.objects;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -26,8 +26,8 @@ public class Product {
 	Brand brand;
 	@SerializedName("category")
 	Category category;
-	@SerializedName("stores")
-	List<Store> stores;
+	@SerializedName("productStores")
+	List<StoreProduct> productStores;
 	@SerializedName("@id")
 	int tokenId;
 
@@ -41,7 +41,7 @@ public class Product {
 			unit = object.getString("unit");
 			brand = new Brand(object.getJSONObject("brand"));
 			category = new Category(object.getJSONObject("category"));
-			stores = Store.list(object.getJSONArray("stores"));
+			//productStores = Store.list(object.getJSONArray("productStores"));
 			tokenId = object.getInt("@id");
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -113,12 +113,12 @@ public class Product {
 		this.category = category;
 	}
 
-	public List<Store> getStores() {
-		return stores;
+	public List<StoreProduct> getProductStores() {
+		return productStores;
 	}
 
-	public void setStores(List<Store> stores) {
-		this.stores = stores;
+	public void setProductStores(List<StoreProduct> productStores) {
+		this.productStores = productStores;
 	}
 
 	public int getTokenId() {

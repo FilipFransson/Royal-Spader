@@ -3,17 +3,12 @@ package com.royalspader.app;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
-import com.royalspader.app.classes.Product;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.royalspader.app.objects.Product;
 
 import java.util.ArrayList;
 import java.util.List;

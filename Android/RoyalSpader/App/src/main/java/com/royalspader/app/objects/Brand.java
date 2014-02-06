@@ -1,18 +1,14 @@
-package com.royalspader.app.classes;
+package com.royalspader.app.objects;
 
 import com.google.gson.annotations.SerializedName;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by cissi on 2014-02-03.
  */
-public class Store {
+public class Brand {
 
 	@SerializedName("id")
 	int id;
@@ -28,7 +24,7 @@ public class Store {
 	int tokenId;
 
 
-	public Store(JSONObject object) {
+	public Brand(JSONObject object) {
 
 
 		try {
@@ -41,19 +37,12 @@ public class Store {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}
-	//{"@id":3,"id":3,"name":"COOP","orgNumber":"9876543456789","address":"vwbivubv","phone":"98-8765678"},
 
-	public static List<Store> list(JSONArray storeArray) {
-		List<Store> stores = new ArrayList<Store>();
-		for (int i = 0; i < storeArray.length(); i++) {
-			try {
-				stores.add(new Store(storeArray.getJSONObject(i)));
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
-		return stores;
+		//"brand":{"@id":2,"id":1,"name":"Carlsberg","orgNumber":"1234567890","address":"colavägen 13 ","phone":"072-302921"},
+	}
+
+	public Brand() {
+
 	}
 
 	public int getId() {
