@@ -108,7 +108,16 @@ $( document ).ready(function() {
 			row += "</td><td>";
 			row += arr[i].company.phone;
 			row += "</td><td>";*/
-			row += arr[i].category.name;
+			if($.isNumeric(arr[i].category)){
+				for(var j = 0; j < arr.length; j++){
+					if(arr[j].category['@id'] == arr[i].category){
+						arr[i].category = arr[j].category;
+						row += arr[i].category.name;
+					}
+				}
+			} else {
+				row += arr[i].category.name;
+			}
 			row += '</td><td style="text-align:center;">';
 			row += '<input type="checkbox">';
 			row += "</td></tr>";
