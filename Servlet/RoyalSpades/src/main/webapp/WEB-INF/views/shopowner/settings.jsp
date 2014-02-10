@@ -1,5 +1,5 @@
 <script>
-	window.location.hash = "p=" + '${pageUid}';
+	window.location.hash = "p=" + ${pageUid;};
 </script>
 <h2>
 	Inställningar
@@ -7,37 +7,29 @@
 
 <fieldset class="accountSettings">
 	<legend>Kontoinställningar</legend>
-	<form name="account" action="" method="post" id="settings">
+	<form name="account" action="#" method="post">
 		<table class="formtable">
 			<tr>
 				<td>
-					<label for="first_name">Namn: </label>
+					<label for="name">Namn: </label>
 				</td>
 				<td>
-					<input type="text" id="last_name" name="last_name" value="Kalle Kula">
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<label for="last_name">Namn: </label>
-				</td>
-				<td>
-					<input type="text" id="last_name" name="last_name" value="Kalle Kula">
+					<input type="text" id="name" value="Kalle Kula">
 				</td>
 			</tr>
 			<tr><td>&nbsp;</td><td></td></tr>
 			<tr>
 				<td>
-					<label for="email">Mailadress: </label>
+					<label for="mail">Mailadress: </label>
 				</td>
 				<td>
-					<input type="text" id="email" name="email" value="cool_kalle_04@hotmail.com">
+					<input type="text" id="mail" value="cool_kalle_04@hotmail.com">
 				</td>
 			</tr>
 			<tr><td>&nbsp;</td><td></td></tr>
 			<tr>
 				<td>
-					<label for="nowPass">Nuvarande lösenord: </label>
+					<label for="mail">Nuvarande lösenord: </label>
 				</td>
 				<td>
 					<input type="password" id="mail" value="asdasd">
@@ -45,24 +37,24 @@
 			</tr>
 			<tr>
 				<td>
-					<label for="newPass">Nytt lösenord: </label>
+					<label for="newMail">Nytt lösenord: </label>
 				</td>
 				<td>
-					<input type="password" id="newPass" name="newPass" value="">
+					<input type="password" id="newMail" value="">
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<label for="newPassAgain">Upprepa nytt lösenord: </label>
+					<label for="mail">Upprepa nytt lösenord: </label>
 				</td>
 				<td>
-					<input type="password" id="newPassAgain" name="newPassAgain" value="">
+					<input type="password" id="mail" value="">
 				</td>
 			</tr>
 			<tr><td>&nbsp;</td><td></td></tr>
 			<tr>
 				<td>
-					<input type="Submit" value="Spara" onclick="e.preventDefault();">
+					<input type="Submit" value="Spara">
 				</td>
 				<td>
 				</td>
@@ -70,12 +62,3 @@
 		</table>
 	</form>
 </fieldset>
-<script>
-	$("#settings").submit(function (e){
-		e.preventDefault();
-		$.post('', $(this).serialize(), function(response){
-			alert("funkar yo");
-		});
-		e.preventDefault();
-	});
-</script>

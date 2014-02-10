@@ -20,32 +20,35 @@
 /*Major design, eg heights, widths, backgrounds etc*/
 body, html {
 	width:100%;
-	height:100%;
+	min-height:100%;
 }
 body {
-	background: url('http://i.imgur.com/BCnHINv.jpg');
+	background-color:#3D4460;
 	background-size:cover;
 	overflow:visible;
 }
 .mainwrapper {
 	background:#0C365B;
 	width:930px;
-	margin: 0 auto;
+	margin: 80px 0px 175px 190px;
 	border-left:1px solid black;
 	border-right:1px solid black;
 	overflow:hidden;
+	border-radius: 20px;
 }
-.headerwrapper {
+.headerwrapper 
+{
+    width:100%;
 	height: 30px;
-	background:#0C365B;
-	border-bottom:10px solid #4BC3DD;
+	background:#18005E;
+	border-bottom:10px solid #81959E;
 	color: #E8E8E8;
 }
 .bodywrapper {
-	background:#0C365B;
+	background:#18005E;
 	padding-top:20px;
 	padding-bottom:20px;
-	background:#1F3352;
+	background:#18005E;
 	position:relative;
     left: 0;
     top: 0;
@@ -53,7 +56,7 @@ body {
 .footerwrapper {
 	height:20px;
 	width:100%;
-	background:#4BC3DD;
+	background:#81959E;
 	border-top:1px solid black;
 	border-bottom:1px solid black;
 	color: #E8E8E8;
@@ -81,7 +84,7 @@ body {
 }
 div.headermenu
 {
-    padding: 0px 0px 0px 8px;
+    padding: 0px 230px 0px 8px;
 }
 
 div.headermenu ul
@@ -94,7 +97,7 @@ div.headermenu ul
 
 div.headermenu ul li a, div.menu ul li a:visited
 {
-    background-color: #0C365B;
+    background-color: #18005E;
     color: #E8E8E8;
     display:inline-block;
     line-height: 1.35em;
@@ -106,7 +109,7 @@ div.headermenu ul li a, div.menu ul li a:visited
 
 div.headermenu ul li a:hover
 {
-    background-color:#4BC3DD;
+    background-color:#81959E;
     color: #E8E8E8;
     text-decoration: none;
     border-top-right-radius:3px;
@@ -114,15 +117,15 @@ div.headermenu ul li a:hover
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
     text-shadow: 1px 1px 1px black;
-	border-bottom:1px solid #4BC3DD;
+	border-bottom:1px solid #81959E;
 }
 
 div.headermenu ul li a:active
 {
-    background-color:#4BC3DD;
+    background-color:#81959E;
     color: #E8E8E8;
     text-decoration: none;
-	border-bottom:1px solid #4BC3DD;
+	border-bottom:1px solid #81959E;
 }
 div.headermenu li {
 	position: relative;
@@ -158,15 +161,27 @@ table.listtable{
 h2 {
 	font-family: 'Exo 2', sans-serif;
 }
+h2.royal {
+	font-family: 'Exo 2', sans-serif;
+	padding-left:140px;
+	width:160px;
+}
 
 p {
 	font-family: Calibri;
 }
-.headerwrapper {
+.headerwrapper 
+{
+    position: fixed; 
+    top: 0; 
 	padding:3px;
 	padding-left:50px;
+	z-index:9000;
 }
-.footerwrapper {
+.footerwrapper 
+{
+    position: fixed; 
+    bottom: 0; 
 	padding:2px;
 	padding-left:10px;
 	font-family: 'Exo 2', sans-serif;
@@ -175,11 +190,11 @@ p {
 	font-family: 'Exo 2', sans-serif;
 }
 a.active {
-	background-color:#4BC3DD !important;
+	background-color:#81959E !important;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
     text-shadow: 1px 1px 1px black;
-	border-bottom:1px solid #4BC3DD;
+	border-bottom:1px solid #81959E;
 }
 
 a.homeclick {
@@ -371,6 +386,11 @@ p.change_link{
 #register{  
     z-index: 21;
 }
+#register p
+{
+    margin-left:200px;
+    margin-right:200px;
+}
 #register p.button input 
 {
     width: 30%;
@@ -394,6 +414,7 @@ p.change_link{
 #register input:not([type="checkbox"]){
     width: 92%;
     margin-top: 4px;
+   
     padding: 10px 5px 10px 32px;    
     border: 1px solid rgb(178, 178, 178);
     box-sizing : content-box;
@@ -481,3 +502,5 @@ div.modal-bg {
   height:100%;
   z-index:10; 
 }
+
+

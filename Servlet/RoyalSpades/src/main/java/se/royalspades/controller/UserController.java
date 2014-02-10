@@ -42,19 +42,27 @@ public class UserController {
 	@RequestMapping(value ="/user/new_user", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE })
 	ResponseEntity <String> createUser(@RequestBody @Valid User user){
 		
-		// create salt
-		String salt = BCrypt.gensalt(10,new SecureRandom(Long.valueOf(new Date().getTime()).toString().getBytes()));
-		user.setSalt(salt);
+		// check if username is in use
+		User oldUser = null;
+		oldUser = userService.getUserByUsername(user.getUsername());
 		
-		// role for everyone, update at request
-		user.setRole("user");
-		
-		// salt password
-		user.setPassword(BCrypt.hashpw(user.getPassword(), salt));
-		
-		userService.add(user);
-		
-		return new ResponseEntity <String>("Användarkonto för " + user.getUsername() + " skapat!", HttpStatus.OK);
+		if(oldUser != null){
+			return new ResponseEntity <String>("Användarnamnet är upptaget! Välj ett annat.", HttpStatus.BAD_REQUEST);	
+		} else {
+			// create salt
+			String salt = BCrypt.gensalt(10,new SecureRandom(Long.valueOf(new Date().getTime()).toString().getBytes()));
+			user.setSalt(salt);
+			
+			// role for everyone, update at request
+			user.setRole("user");
+			
+			// salt password
+			user.setPassword(BCrypt.hashpw(user.getPassword(), salt));
+			
+			userService.add(user);
+			
+			return new ResponseEntity <String>("Användarkonto för " + user.getUsername() + " skapat!", HttpStatus.OK);	
+		}
 	}
 	
 	

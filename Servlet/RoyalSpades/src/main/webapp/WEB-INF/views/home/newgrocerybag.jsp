@@ -1,5 +1,5 @@
 <script>
-	window.location.hash = "p=" + ${pageUid;};
+	window.location.hash = "p=" + "${pageUid}";
 </script>
 <h2>
 Ny matkasse
@@ -76,7 +76,7 @@ $( document ).ready(function() {
 	$.ajax({
 		type: "GET",
 		//url: "http://172.16.6.175:8080/royalspades/api/product/all/",
-		url: "pages/default/result.json",
+		url: "/royalspades/api/product/all/",
 		dataType: "text",
 		success: function (data, textStatus, jqXHR) {
 		var arr = JSON.parse(data);
@@ -108,7 +108,16 @@ $( document ).ready(function() {
 			row += "</td><td>";
 			row += arr[i].company.phone;
 			row += "</td><td>";*/
-			row += arr[i].category.name;
+			if($.isNumeric(arr[i].category)){
+				for(var j = 0; j < arr.length; j++){
+					if(arr[j].category['@id'] == arr[i].category){
+						arr[i].category = arr[j].category;
+						row += arr[i].category.name;
+					}
+				}
+			} else {
+				row += arr[i].category.name;
+			}
 			row += '</td><td style="text-align:center;">';
 			row += '<input type="checkbox">';
 			row += "</td></tr>";

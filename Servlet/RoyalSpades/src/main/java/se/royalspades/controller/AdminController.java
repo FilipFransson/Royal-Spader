@@ -62,4 +62,12 @@ public class AdminController {
 		
 		return "admin/user";
 	}
+	
+	@RequestMapping("/categories")
+	public String settings(Locale locale, Model model){
+		//Default user - New grocery bag page
+		model.addAttribute("pageUid", "fd2e63a0-8d76-22c8-baa8-0800200c9a66" );
+		
+		return "admin/categories";
+	}
 }

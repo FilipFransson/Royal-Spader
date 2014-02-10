@@ -67,6 +67,18 @@ public class APIManager {
         }
 	    return DataModule.products;
     }
+<<<<<<< HEAD
+    private Brand findBrand(int tokenID){
+        int i = 0;
+        Brand brand = null;
+        while (brands.get(i).getToken() != tokenID) {
+            i++;
+        };
+        brand = brands.get(i);
+        return brand;
+    }
+
+=======
 
 	/**
 	 * Checks DataModule after Object with the id, else gets data from database
@@ -115,7 +127,13 @@ public class APIManager {
 	 * @param id
 	 * @return Store
 	 */
+<<<<<<< HEAD
 	private Store getStore(int id){
+=======
+>>>>>>> f925f1882dd011dc19b94b2956cd92bfcb87a88a
+    private JSONArray getData(String URL){
+        JSONArray URL_Data = null;
+>>>>>>> febae0e745a713b5b47e02badc313a29f53b87c3
 
 		for(Store store : DataModule.stores){
 			if (store.getId() == id) return store;
