@@ -61,7 +61,7 @@ public class APIManager {
         brand = brands.get(i);
         return brand;
     }
-         
+
     private JSONArray getData(String URL){
         JSONArray URL_Data = null;
 
