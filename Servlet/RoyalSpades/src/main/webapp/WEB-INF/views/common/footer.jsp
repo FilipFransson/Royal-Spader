@@ -1,5 +1,5 @@
-			<div class="footerwrapper">
+        <div class="footerwrapper">
 				&copy; 2014 Royal Spader
-			</div>
+		</div>
 	</body>
 </html>
