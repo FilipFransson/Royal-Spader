@@ -1,11 +1,25 @@
 ﻿$( document ).ready(function() {
+	var superadmin = false;
+	var producer = false;
+	var shopOwner = false;
 	var newData;
 	var fadeOutTime = 200;
 	var fadeInTime = 200;
 	
 	function getMenu(){
+		var menuUrl = "";
+		if(superadmin){
+			menuUrl = "../menu/admin";
+		} else if(producer) {
+			menuUrl = "../menu/producer";
+		} else if(shopOwner) {
+			menuUrl = "../menu/shopowner";
+		} else {
+			menuUrl = "../menu/default";
+		}
+		
 		$.ajax({
-			url: "../menu/",
+			url: menuUrl,
 			context: document.body
 			}).done(function(data) {
 			
@@ -21,7 +35,18 @@
 	}
 	
 	function openMainPage(){
-		openPageUrl("/main/");
+		var pageUrl = "";
+		if(superadmin){
+			pageUrl = "../admin/main";
+		} else if(producer) {
+			pageUrl = "../producer/main";
+		} else if(shopOwner) {
+			pageUrl = "../shopowner/main";
+		} else {
+			pageUrl = "../home/main";
+		}
+		
+		openPageUrl(pageUrl);
 	}
 	
 	function openPageUrl(pageUrl){
@@ -59,17 +84,19 @@
 	}
 	
 	function getUrl(p){
-		if(p == '7ada6860-8d79-11e3-baa8-0800200c9a66'){
-			return "../shopowner/main";
-		}
-		if(p == '83bf04e0-8d79-11e3-baa8-0800200c9a66'){
-			return "../shopowner/help";
-		}
-		if(p == '8f93bc70-8d79-11e3-baa8-0800200c9a66'){
-			return "../shopowner/settings";
-		}
-		if(p == '4'){
-			return "../home/newgrocerybag";
+		if(!superadmin && !producer && !shopOwner){
+			if(p == '1'){
+				return "../home/main";
+			}
+			if(p == '2'){
+				return "../home/settings";
+			}
+			if(p == '3'){
+				return "../home/help";
+			}
+			if(p == '4'){
+				return "../home/newgrocerybag";
+			}
 		}
 	}
 	

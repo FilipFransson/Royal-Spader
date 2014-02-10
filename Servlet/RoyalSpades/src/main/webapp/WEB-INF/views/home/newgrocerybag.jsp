@@ -1,5 +1,5 @@
 <script>
-	window.location.hash = "p=" + ${pageUid;};
+	window.location.hash = "p=" + "${pageUid}";
 </script>
 <h2>
 Ny matkasse
@@ -76,7 +76,7 @@ $( document ).ready(function() {
 	$.ajax({
 		type: "GET",
 		//url: "http://172.16.6.175:8080/royalspades/api/product/all/",
-		url: "pages/default/result.json",
+		url: "/royalspades/api/product/all/",
 		dataType: "text",
 		success: function (data, textStatus, jqXHR) {
 		var arr = JSON.parse(data);
