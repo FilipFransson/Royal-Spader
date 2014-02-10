@@ -1,22 +1,13 @@
 package se.royalspades.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import se.royalspades.model.User;
-import se.royalspades.service.CategoryService;
-import se.royalspades.service.CompanyService;
-import se.royalspades.service.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -70,5 +61,13 @@ public class AdminController {
 		
 		
 		return "admin/user";
+	}
+	
+	@RequestMapping("/categories")
+	public String settings(Locale locale, Model model){
+		//Default user - New grocery bag page
+		model.addAttribute("pageUid", "fd2e63a0-8d76-22c8-baa8-0800200c9a66" );
+		
+		return "admin/categories";
 	}
 }

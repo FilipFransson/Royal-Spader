@@ -36,6 +36,11 @@ public class UserDAOImpl implements UserDAO{
 		return (User)getCurrentSession().get(User.class, userId);
 	}
 
+	@Override
+	public User getUserByUsername(String username) {
+		return (User)getCurrentSession().get(User.class, username);
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List getAllUsers() {

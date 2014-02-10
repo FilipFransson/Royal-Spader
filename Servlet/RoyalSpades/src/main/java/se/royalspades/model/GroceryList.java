@@ -15,13 +15,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 @Table(name = "grocery_lists", catalog = "spade_db")
 public class GroceryList implements Serializable{
 	
@@ -29,8 +34,8 @@ public class GroceryList implements Serializable{
 	private int id;
 	private String name;
 	private User listOwner;
-	private Set<Product> products = new HashSet<Product>(0); 
-
+	private Set<GroceryListProduct> groceryListProducts = new HashSet<GroceryListProduct>(0);
+	
 	public GroceryList(){
 		
 	}
@@ -40,6 +45,13 @@ public class GroceryList implements Serializable{
 		this.name = name;
 		this.listOwner = listOwner;
 	}
+	
+	public GroceryList(String name, User listOwner, Set<GroceryListProduct> groceryListProduct){
+		this.name = name;
+		this.listOwner = listOwner;
+		this.groceryListProducts = groceryListProduct;
+	}
+	
 	
 	@Id
     @GeneratedValue(strategy = IDENTITY)
@@ -70,20 +82,13 @@ public class GroceryList implements Serializable{
 	public void setListOwner(User listOwner) {
 		this.listOwner = listOwner;
 	}
-	
-	//@JsonIgnoreProperties(value = { "company" })
-	@JsonManagedReference
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	    @JoinTable(name = "grocery_lists_has_products", catalog = "spade_db", joinColumns = {
-	        @JoinColumn(name = "grocery_lists_id", nullable = false, updatable = false) },  
-	            inverseJoinColumns = { @JoinColumn(name = "products_id",
-	            nullable = false, updatable = false) })
-	public Set<Product> getProducts() {
-		return products;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.groceryList", cascade = CascadeType.ALL)
+	public Set<GroceryListProduct> getGroceryListProducts() {
+		return groceryListProducts;
 	}
 
-	public void setProducts(Set<Product> products) {
-		this.products = products;
+	public void setGroceryListProducts(Set<GroceryListProduct> groceryListProducts) {
+		this.groceryListProducts = groceryListProducts;
 	}
-
 }

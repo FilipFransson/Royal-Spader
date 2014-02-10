@@ -1,12 +1,12 @@
 <script>
-	window.location.hash = "p=" + ${pageUid;};
+	window.location.hash = "p=" + "${pageUid}";
 </script>
 <h2>
 	Mina kassar
 </h2>
 
 <p>
-<a href="pages/default/newGroceryBag.html" class="link">Ny matkasse</a>
+<a href="/royalspades/home/newgrocerybag" class="link">Ny matkasse</a>
 </p>
 
 <fieldset class="allGrocerybags">

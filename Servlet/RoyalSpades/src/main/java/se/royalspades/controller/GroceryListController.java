@@ -63,4 +63,9 @@ public class GroceryListController {
 
 
 
-//handle notfoundexception
+
+///royalspades/api/grocerylist/all
+
+///royalspades/api/grocerylist/user/1
+
+

@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;;
 
 
@@ -19,11 +21,16 @@ public class User implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private int id;
+	@NotEmpty
 	private String firstName;
+	@NotEmpty
 	private String lastName;
 	private String role;
+	@NotEmpty
 	private String email;
+	@NotEmpty
 	private String username;
+	@NotEmpty
 	private String password;
 	private String salt;
 	
@@ -89,8 +96,7 @@ public class User implements Serializable{
 		this.email = email;
 	}
 	
-	@JsonIgnore
-    @Column(name = "username", length = 45)
+    @Column(name = "username", unique = true, length = 45)
 	public String getUsername() {
 		return username;
 	}

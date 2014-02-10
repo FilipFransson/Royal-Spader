@@ -6,20 +6,24 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference; 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -33,25 +37,48 @@ public class Product implements Serializable{
 	private String name;
 	private double volume;
 	private String unit;
-	private Company company;
+	private Brand brand;
 	private Category category;
-	//private Set<Company> productsCompany = new HashSet<Company>(0); 
-	private Set<GroceryList> groceryLists = new HashSet<GroceryList>(0);
-
-	public Product(String name, double volume, String unit, Company company,
-			Category category) {
-		super();
-		this.name = name;
-		this.volume = volume;
-		this.unit = unit;
-		this.company = company;
-		this.category = category;
-	}
+	private Set<GroceryListProduct> groceryListProducts = new HashSet<GroceryListProduct>(0);
+	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>(0);
 	
 	public Product(){
 		
 	}
 	
+	public Product(String name, double volume, String unit, Brand brand,
+			Category category) {
+		super();
+		this.name = name;
+		this.volume = volume;
+		this.unit = unit;
+		this.brand = brand;
+		this.category = category;
+	}
+	
+	public Product(String name, double volume, String unit, Brand brand,
+			Category category, Set<GroceryListProduct> groceryListProducts) {
+		super();
+		this.name = name;
+		this.volume = volume;
+		this.unit = unit;
+		this.brand = brand;
+		this.category = category;
+		this.groceryListProducts = groceryListProducts;
+	}
+	
+	public Product(String name, double volume, String unit, Brand brand,
+			Category category, Set<GroceryListProduct> groceryListProducts, Set<StoreProduct> storeProducts) {
+		super();
+		this.name = name;
+		this.volume = volume;
+		this.unit = unit;
+		this.brand = brand;
+		this.category = category;
+		this.groceryListProducts = groceryListProducts;
+		this.storeProducts = storeProducts;
+	}
+
 	@Id
     @GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
@@ -91,19 +118,20 @@ public class Product implements Serializable{
 	}
 	
 	//@JsonBackReference
-	@JsonIgnoreProperties(value = { "user", "companyProducts" })
+	@JsonIgnoreProperties(value = { "user", "brandProducts" })
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "company_id", nullable = false)
-	public Company getCompany() {
-		return company;
+	@JoinColumn(name = "brand_id", nullable = false)
+	public Brand getBrand() {
+		return brand;
 	}
 	
-	public void setCompany(Company company) {
-		this.company = company;
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@JsonIgnoreProperties(value = { "products" })
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "category_id", nullable = false)
 	public Category getCategory() {
 		return category;
 	}
@@ -112,15 +140,24 @@ public class Product implements Serializable{
 		this.category = category;
 	} 
 
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product")
+	public Set<GroceryListProduct> getGroceryListProducts() {
+		return groceryListProducts;
+	}
+
+	public void setGroceryListProducts(Set<GroceryListProduct> groceryListProducts) {
+		this.groceryListProducts = groceryListProducts;
+	}
 	
-	@JsonBackReference  //
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "products")
-	public Set<GroceryList> getGroceryLists() {
-		return groceryLists;
+	@JsonIgnoreProperties(value = { "storeProduct", "storeProducts", "user" })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product")
+	public Set<StoreProduct> getStoreProducts() {
+		return storeProducts;
 	}
 
-	public void setGroceryLists(Set<GroceryList> groceryLists) {
-		this.groceryLists = groceryLists;
+	public void setStoreProducts(Set<StoreProduct> storeProducts) {
+		this.storeProducts = storeProducts;
 	}
-
+	
 }

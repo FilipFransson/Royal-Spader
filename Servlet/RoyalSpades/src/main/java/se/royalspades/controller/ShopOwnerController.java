@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import se.royalspades.model.User;
 import se.royalspades.service.CategoryService;
-import se.royalspades.service.CompanyService;
 import se.royalspades.service.UserService;
 
 /**
@@ -23,7 +22,7 @@ import se.royalspades.service.UserService;
  */
 @Controller
 @RequestMapping(value = "/shopowner")
-public class ProducerController {
+public class ShopOwnerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
