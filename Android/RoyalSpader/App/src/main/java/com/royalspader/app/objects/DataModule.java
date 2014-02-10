@@ -10,10 +10,10 @@ import java.util.List;
  */
 public class DataModule {
 
-	public volatile static List<Product> products;
-	public volatile static List<Store> stores;
-	public volatile static List<Brand> brands;
-	public volatile static List<Category> categories;
+	public volatile static List<Product> products = new ArrayList<Product>();
+	public volatile static List<Store> stores = new ArrayList<Store>();
+	public volatile static List<Brand> brands = new ArrayList<Brand>();
+	public volatile static List<Category> categories = new ArrayList<Category>();
 
 	public static void instantiate(){
 		products = new ArrayList<Product>();
