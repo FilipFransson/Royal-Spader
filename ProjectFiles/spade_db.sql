@@ -2,15 +2,12 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-DROP SCHEMA IF EXISTS `spade_db` ;
 CREATE SCHEMA IF NOT EXISTS `spade_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `spade_db` ;
 
 -- -----------------------------------------------------
 -- Table `spade_db`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`users` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NOT NULL,
@@ -28,15 +25,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `spade_db`.`stores`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`stores` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`stores` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `organisation_number` VARCHAR(45) NULL,
   `address` VARCHAR(45) NULL,
   `phone` VARCHAR(45) NULL,
-  `user_id` INT NOT NULL,
+  `user_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idcompanies_UNIQUE` (`id` ASC),
   INDEX `fk_companies_users1_idx` (`user_id` ASC),
@@ -52,8 +47,6 @@ COMMENT = '	';
 -- -----------------------------------------------------
 -- Table `spade_db`.`categories`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`categories` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`categories` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
@@ -65,12 +58,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `spade_db`.`grocery_lists`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`grocery_lists` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`grocery_lists` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
-  `user_id` INT NOT NULL,
+  `user_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   INDEX `fk_grocery_lists_users1_idx` (`user_id` ASC),
@@ -85,15 +76,13 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `spade_db`.`brands`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`brands` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`brands` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   `organisation_number` VARCHAR(45) NULL,
   `address` VARCHAR(45) NULL,
   `phone` VARCHAR(45) NULL,
-  `user_id` INT NOT NULL,
+  `user_id` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idcompanies_UNIQUE` (`id` ASC),
   INDEX `fk_brands_users1_idx` (`user_id` ASC),
@@ -109,8 +98,6 @@ COMMENT = '	';
 -- -----------------------------------------------------
 -- Table `spade_db`.`products`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`products` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
@@ -137,8 +124,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `spade_db`.`grocery_lists_has_products`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`grocery_lists_has_products` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`grocery_lists_has_products` (
   `grocery_list_id` INT NOT NULL,
   `product_id` INT NOT NULL,
@@ -162,12 +147,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `spade_db`.`companies_has_products`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `spade_db`.`companies_has_products` ;
-
 CREATE TABLE IF NOT EXISTS `spade_db`.`companies_has_products` (
   `store_id` INT NOT NULL,
   `product_id` INT NOT NULL,
   `category_id` INT NOT NULL,
+  `price` DOUBLE NULL,
   PRIMARY KEY (`store_id`, `product_id`, `category_id`),
   INDEX `fk_companies_has_products_products1_idx` (`product_id` ASC),
   INDEX `fk_companies_has_products_companies1_idx` (`store_id` ASC),
@@ -189,61 +173,6 @@ CREATE TABLE IF NOT EXISTS `spade_db`.`companies_has_products` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO cn;
- DROP USER cn;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'cn' IDENTIFIED BY 'pw';
-
-GRANT ALL ON `spade_db`.* TO 'cn';
-GRANT SELECT ON TABLE `spade_db`.* TO 'cn';
-GRANT EXECUTE ON ROUTINE `spade_db`.* TO 'cn';
-GRANT SELECT, INSERT, TRIGGER ON TABLE `spade_db`.* TO 'cn';
-GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `spade_db`.* TO 'cn';
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO es;
- DROP USER es;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'es' IDENTIFIED BY 'pw';
-
-GRANT ALL ON `spade_db`.* TO 'es';
-GRANT SELECT ON TABLE `spade_db`.* TO 'es';
-GRANT SELECT, INSERT, TRIGGER ON TABLE `spade_db`.* TO 'es';
-GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `spade_db`.* TO 'es';
-GRANT EXECUTE ON ROUTINE `spade_db`.* TO 'es';
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO fs;
- DROP USER fs;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'fs' IDENTIFIED BY 'pw';
-
-GRANT ALL ON `spade_db`.* TO 'fs';
-GRANT SELECT ON TABLE `spade_db`.* TO 'fs';
-GRANT SELECT, INSERT, TRIGGER ON TABLE `spade_db`.* TO 'fs';
-GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `spade_db`.* TO 'fs';
-GRANT EXECUTE ON ROUTINE `spade_db`.* TO 'fs';
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO eg;
- DROP USER eg;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'eg' IDENTIFIED BY 'pw';
-
-GRANT ALL ON `spade_db`.* TO 'eg';
-GRANT SELECT ON TABLE `spade_db`.* TO 'eg';
-GRANT SELECT, INSERT, TRIGGER ON TABLE `spade_db`.* TO 'eg';
-GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `spade_db`.* TO 'eg';
-GRANT EXECUTE ON ROUTINE `spade_db`.* TO 'eg';
-SET SQL_MODE = '';
-GRANT USAGE ON *.* TO vo;
- DROP USER vo;
-SET SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
-CREATE USER 'vo' IDENTIFIED BY 'pw';
-
-GRANT ALL ON `spade_db`.* TO 'vo';
-GRANT SELECT ON TABLE `spade_db`.* TO 'vo';
-GRANT SELECT, INSERT, TRIGGER ON TABLE `spade_db`.* TO 'vo';
-GRANT SELECT, INSERT, TRIGGER, UPDATE, DELETE ON TABLE `spade_db`.* TO 'vo';
-GRANT EXECUTE ON ROUTINE `spade_db`.* TO 'vo';
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
@@ -338,16 +267,16 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `spade_db`;
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (2, 1, 1);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (2, 2, 2);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (2, 3, 1);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (2, 4, 2);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (3, 1, 1);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (3, 3, 2);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (3, 5, 1);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (4, 2, 2);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (4, 3, 1);
-INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`) VALUES (4, 4, 2);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (2, 1, 1, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (2, 2, 2, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (2, 3, 1, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (2, 4, 2, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (3, 1, 1, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (3, 3, 2, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (3, 5, 1, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (4, 2, 2, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (4, 3, 1, NULL);
+INSERT INTO `spade_db`.`companies_has_products` (`store_id`, `product_id`, `category_id`, `price`) VALUES (4, 4, 2, NULL);
 
 COMMIT;
 
