@@ -2,14 +2,14 @@
 	window.location.hash = "p=" + '${pageUid}';
 </script>
 <h2> 
-	Ny butik
+	Ny leverantör
 </h2>
 
-<form id="newShopForm">
+<form id="newSupplierForm">
 	<table>
 		<tr>
 			<td>
-				<label for="name">Namn på butik: </label>
+				<label for="name">Namn på leverantör: </label>
 			</td>
 			<td>
 				<input name="name" id="name"><br />
@@ -41,9 +41,9 @@
 		</tr>
 	</table>
 </form>
-<button id="newShopButton">Lägg till</button>
+<button id="newSupplierButton">Lägg till</button>
 <script>
-	$("#newShopButton").click(function () {
+	$("#newSupplierButton").click(function () {
 		
 		
 		$.fn.serializeObject = function()
@@ -64,7 +64,7 @@
 		};
 		
 
-		var data = JSON.stringify($("#newShopForm").serializeObject());
+		var data = JSON.stringify($("#newSupplierForm").serializeObject());
 		console.log(data);
 		
 		
@@ -75,7 +75,7 @@
 			},
 			dataType: "json",
 			type: "POST",
-			url: "http://172.16.6.175:8080/royalspades/api/store/admin/add_store/",
+			url: "http://172.16.6.175:8080/royalspades/api/producer/admin/add_producer/",
 			data: data,
 			context: document.body
 			}).done(function(data) {

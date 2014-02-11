@@ -103,6 +103,15 @@
 		if(p == 'cf3daa14-80ef-4da3-9d4e-e00ad67174cf'){
 			return "../admin/newShop";
 		}
+		if(p == '9d175af0-f947-4827-8e93-cd44a8531d1a'){
+			return "../admin/editShop";
+		}
+		if(p == '387a42ea-ab92-4420-9c84-a6d58706ff2c'){
+			return "../admin/editSupplier";
+		}
+		if(p == '2e7898b9-5e3f-42a1-a02d-d0735da229c4'){
+			return "../admin/newSupplier";
+		}
 	}
 	
 	var hashArray = window.location.hash.replace("#", "").split('&');

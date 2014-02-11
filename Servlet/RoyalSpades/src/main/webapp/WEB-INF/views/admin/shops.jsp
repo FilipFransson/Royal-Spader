@@ -6,7 +6,7 @@
 </h2>
 <a class="link" href="newShop">Ny shop</a>
 <br />
-<table id="dataTable" class="groceryTable listtable">
+<table id="dataTable" class="shopTable listtable">
 	<thead>
 		<tr>
 			<th>
@@ -47,11 +47,15 @@ $( document ).ready(function() {
 	$.ajax({
 		type: "GET",
 		url: "http://172.16.6.175:8080/royalspades/api/store/all/",
-		dataType: "text",
+		headers: {
+			'Accept':"application/json",
+			'Content-Type':"application/json"
+		},
+		dataType: "json",
 		success: function (data, textStatus, jqXHR) {
 			var arr = JSON.parse(data);
 			
-			$(".groceryTable").append("<tbody>");
+			$(".shopTable").append("<tbody>");
 			for(var i = 0; i < arr.length; i++){
 				var row = "<tr><td>";
 				row += arr[i].name;
@@ -60,18 +64,18 @@ $( document ).ready(function() {
 				row += "</td><td>";
 				row += arr[i].orgNumber;
 				row += "</td><td>";
-				
-				
+				row += arr[i].phone;
 				row += "</td><td>";
+				row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
 				row += '</td><td style="text-align:center;">';
 				row += '<input type="checkbox">';
 				row += "</td></tr>";
-				$(".groceryTable").append(row);
+				$(".shopTable").append(row);
 			}
 			
-			$(".groceryTable").append("</tbody>");
+			$(".shopTable").append("</tbody>");
 			
-			$('.groceryTable').dataTable({
+			$('.shopTable').dataTable({
 				"aLengthMenu": [
 		            [25, 50, 100, -1],
 		            [25, 50, 100, "All"]],
