@@ -68,7 +68,7 @@ $( document ).ready(function() {
 				row += "</td><td>";
 				row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
 				row += '</td><td style="text-align:center;">';
-				row += '<input type="checkbox">';
+				row += '<a class="link" href="editShop/?id=' + arr[i].id + '">Redigera</a>';
 				row += "</td></tr>";
 				$(".shopTable").append(row);
 			}
