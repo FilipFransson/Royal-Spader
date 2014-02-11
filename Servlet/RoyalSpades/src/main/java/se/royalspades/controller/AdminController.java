@@ -67,7 +67,7 @@ public class AdminController {
 	@RequestMapping("/editShop")
 	public String editShop(Locale locale, Model model, @RequestParam(value = "id", required = true) int id){
 		//Admin - edit shop page
-		model.addAttribute("pageUid", "9d175af0-f947-4827-8e93-cd44a8531d1a" );
+		model.addAttribute("pageUid", "39af771a-f069-4e2a-bce9-bd2e2f8b383a" );
 		
 		model.addAttribute("id", id);
 		
@@ -83,24 +83,12 @@ public class AdminController {
 		return "admin/newShop";
 	}
 	
-	@RequestMapping("/editSupplier")
-	public String editSupplier(Locale locale, Model model, @RequestParam(value = "id", required = true) int id){
-		//Admin - edit supplier page
-		model.addAttribute("pageUid", "387a42ea-ab92-4420-9c84-a6d58706ff2c" );
+	@RequestMapping("/categories")
+	public String categories(Locale locale, Model model) {
+		//Admin - administration of categories 
+		model.addAttribute("pageUid","cf3daa14-80ef-4da3-7f9a-e00ad67174cf" );
 		
-		model.addAttribute("id", id);
+		return "admin/categories";
 		
-		return "admin/editSupplier";
 	}
-	
-	@RequestMapping("/newSupplier")
-	public String newSupplier(Locale locale, Model model){
-		//Admin - new supplier page
-		model.addAttribute("pageUid", "2e7898b9-5e3f-42a1-a02d-d0735da229c4" );
-		
-		
-		return "admin/newSupplier";
-	}
-	
-	
 }
