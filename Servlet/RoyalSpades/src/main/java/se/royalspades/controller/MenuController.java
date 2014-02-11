@@ -15,6 +15,15 @@ public class MenuController {
 	public String menu(Locale locale, Model model) {
 		
 		//redirect to main page
+		if(true){
+			return "menu/admin";
+		}
+		if(false){
+			return "menu/producer";
+		}
+		if(false){
+			return "menu/shopowner";
+		}
 		return "menu/default";
 	}
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Handles requests for the application home page.
@@ -24,7 +25,7 @@ public class AdminController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		//Redirecta till main
-		return "admin/home";
+		return "index";
 	}
 	
 	
@@ -36,22 +37,22 @@ public class AdminController {
 		return "admin/main";
 	}
 	
-	@RequestMapping("/shop")
+	@RequestMapping("/shops")
 	public String shop(Locale locale, Model model){
 		//Admin - shop page
 		model.addAttribute("pageUid", "a82b9520-8d77-11e3-baa8-0800200c9a66" );
 		
 		
-		return "admin/shop";
+		return "admin/shops";
 	}
 	
-	@RequestMapping("/supplier")
+	@RequestMapping("/suppliers")
 	public String supplier(Locale locale, Model model){
 		//Admin - supplier page
 		model.addAttribute("pageUid", "ae8fef60-8d77-11e3-baa8-0800200c9a66" );
 		
 		
-		return "admin/supplier";
+		return "admin/suppliers";
 	}
 	
 	@RequestMapping("/user")
@@ -63,11 +64,22 @@ public class AdminController {
 		return "admin/user";
 	}
 	
-	@RequestMapping("/categories")
-	public String settings(Locale locale, Model model){
-		//Default user - New grocery bag page
-		model.addAttribute("pageUid", "fd2e63a0-8d76-22c8-baa8-0800200c9a66" );
+	@RequestMapping("/editShop")
+	public String editShop(Locale locale, Model model, @RequestParam(value = "id", required = true) int id){
+		//Admin - edit shop page
+		model.addAttribute("pageUid", "39af771a-f069-4e2a-bce9-bd2e2f8b383a" );
 		
-		return "admin/categories";
+		model.addAttribute("id", id);
+		
+		return "admin/editShop";
+	}
+	
+	@RequestMapping("/newShop")
+	public String newShop(Locale locale, Model model){
+		//Admin - new shop page
+		model.addAttribute("pageUid", "cf3daa14-80ef-4da3-9d4e-e00ad67174cf" );
+		
+		
+		return "admin/newShop";
 	}
 }

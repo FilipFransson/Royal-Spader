@@ -35,18 +35,7 @@
 	}
 	
 	function openMainPage(){
-		var pageUrl = "";
-		if(superadmin){
-			pageUrl = "../admin/main";
-		} else if(producer) {
-			pageUrl = "../producer/main";
-		} else if(shopOwner) {
-			pageUrl = "../shopowner/main";
-		} else {
-			pageUrl = "../home/main";
-		}
-		
-		openPageUrl(pageUrl);
+		openPageUrl("main/");
 	}
 	
 	function openPageUrl(pageUrl){
@@ -97,6 +86,22 @@
 			if(p == '4'){
 				return "../home/newgrocerybag";
 			}
+		}
+		if(p == '9e60de60-8d77-11e3-baa8-0800200c9a66'){
+			return "../admin/main";
+		}
+		if(p == 'a82b9520-8d77-11e3-baa8-0800200c9a66'){
+			return "../admin/shops";
+		}
+		if(p == 'ae8fef60-8d77-11e3-baa8-0800200c9a66'){
+			return "../admin/suppliers";
+		}
+		if(p == '39af771a-f069-4e2a-bce9-bd2e2f8b383a'){
+			//redirect to shops since no id
+			return "../admin/shops";
+		}
+		if(p == 'cf3daa14-80ef-4da3-9d4e-e00ad67174cf'){
+			return "../admin/newShop";
 		}
 	}
 	
