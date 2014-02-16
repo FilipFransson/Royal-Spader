@@ -12,19 +12,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class MenuController {
 	
 	@RequestMapping(value = "/default", method = RequestMethod.GET)
-	public String menu(Locale locale, Model model) {
+	public String menuDefault(Locale locale, Model model) {
 		
 		//redirect to main page
-		if(true){
-			return "menu/admin";
-		}
-		if(false){
-			return "menu/producer";
-		}
-		if(false){
-			return "menu/shopowner";
-		}
 		return "menu/default";
+	}
+	
+	@RequestMapping(value = "/admin", method = RequestMethod.GET)
+	public String menuAdmin(Locale locale, Model model) {
+		
+		//redirect to main page
+		return "menu/admin";
+	}
+	
+	@RequestMapping(value = "/producer", method = RequestMethod.GET)
+	public String menuProducer(Locale locale, Model model) {
+		
+		//redirect to main page
+		return "menu/producer";
+	}
+	
+	@RequestMapping(value = "/shopowner", method = RequestMethod.GET)
+	public String menuShopOwner(Locale locale, Model model) {
+		
+		//redirect to main page
+		return "menu/shopowner";
+	}
+	
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public String menuUser(Locale locale, Model model) {
+		
+		//redirect to main page
+		return "menu/user";
 	}
 
 }

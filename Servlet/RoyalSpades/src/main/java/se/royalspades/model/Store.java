@@ -20,7 +20,10 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  
@@ -31,9 +34,13 @@ public class Store implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String orgNumber;
+	@NotEmpty
 	private String address;
+	@NotEmpty
 	private String phone;
 	private User user;
     private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>(0);
@@ -106,8 +113,9 @@ public class Store implements Serializable{
 	}
 	
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@OneToOne(fetch = FetchType.EAGER)
+	//@PrimaryKeyJoinColumn
+	@JoinColumn(name = "user_id")
 	public User getUser(){
 		return user;
 	}

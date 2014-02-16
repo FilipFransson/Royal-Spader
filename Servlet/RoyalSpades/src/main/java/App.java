@@ -17,6 +17,9 @@ public class App {
 		 	
 		 
 		 
+		 
+		 // http://beansgocrazy.blogspot.se/2011/07/custom-authentication-with-spring.html
+		 
 		 // http://forum.spring.io/forum/spring-projects/security/115172-md5-hash-on-database-digest-authentication
 		 
 		 // The service and DAO needed for GroceryListProduct?? how to set the volume value? straight on model?

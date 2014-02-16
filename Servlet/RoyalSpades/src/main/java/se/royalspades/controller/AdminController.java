@@ -24,6 +24,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+	
 		//Redirecta till main
 		return "index";
 	}
@@ -35,6 +36,14 @@ public class AdminController {
 		model.addAttribute("pageUid", "9e60de60-8d77-11e3-baa8-0800200c9a66" );
 		
 		return "admin/main";
+	}
+	
+	@RequestMapping("/help")
+	public String help(Locale locale, Model model){
+		//Admin - Help page
+		model.addAttribute("pageUid", "1c63de21-99cc-21e3-baa8-9830222c9a66" );
+		
+		return "admin/help";
 	}
 	
 	@RequestMapping("/shops")
@@ -53,6 +62,16 @@ public class AdminController {
 		
 		
 		return "admin/suppliers";
+	}
+	
+	
+	@RequestMapping("/newSupplier")
+	public String newSupplier(Locale locale, Model model){
+		//Admin - supplier page
+		model.addAttribute("pageUid", "ad1gef60-8d22-33r3-baa8-0555020c9r66" );
+		
+		
+		return "admin/newSupplier";
 	}
 	
 	@RequestMapping("/user")

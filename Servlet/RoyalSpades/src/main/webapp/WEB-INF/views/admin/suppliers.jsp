@@ -46,7 +46,7 @@ $( document ).ready(function() {
 	
 	$.ajax({
 		type: "GET",
-		url: "http://172.16.6.175:8080/royalspades/api/producer/all/",
+		url: "/royalspades/api/brand/all/",
 		headers: {
 			'Accept':"application/json",
 			'Content-Type':"application/json"

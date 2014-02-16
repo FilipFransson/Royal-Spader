@@ -1,11 +1,15 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <ul>
 	<li>
-		<a class="menulink" href="pages/producer/wares.html">Varor</a>
+		<a class="menulink" href="wares">Varor</a>
 	</li>
 	<li>
-		<a class="menulink" href="pages/producer/categories.html">Kategorier</a>
+		<a class="menulink" href="categories">Kategorier</a>
 	</li>
 	<li>
-		<a class="menulink active" href="pages/producer/main.html">Hjälp</a>
+		<a class="menulink" href="help">Hjälp</a>
+	</li>
+	<li>
+		<a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
 	</li>
 </ul>

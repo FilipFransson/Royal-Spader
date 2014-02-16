@@ -31,8 +31,8 @@ public class ProducerController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		//Redirecta till main
-		return "producer/home";
+		//Redirecta till index
+		return "index";
 	}
 	
 	
@@ -60,5 +60,14 @@ public class ProducerController {
 		
 		
 		return "producer/wares";
+	}
+	
+	@RequestMapping("/help")
+	public String help(Locale locale, Model model){
+		//Producer - wares page
+		model.addAttribute("pageUid", "c1d6dec0-8d78-99e3-baa8-0230246c9a66" );
+		
+		
+		return "producer/help";
 	}
 }

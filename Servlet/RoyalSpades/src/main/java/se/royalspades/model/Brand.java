@@ -11,10 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,9 +30,13 @@ public class Brand implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
+	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String orgNumber;
+	@NotEmpty
 	private String address;
+	@NotEmpty
 	private String phone;
 	private User user;
     private Set<Product> brandProducts = new HashSet<Product>(0);
@@ -92,8 +99,9 @@ public class Brand implements Serializable{
 		this.phone = phone;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	@OneToOne(fetch = FetchType.EAGER)
+	//@PrimaryKeyJoinColumn
+	@JoinColumn(name = "user_id")
 	public User getUser(){
 		return user;
 	}

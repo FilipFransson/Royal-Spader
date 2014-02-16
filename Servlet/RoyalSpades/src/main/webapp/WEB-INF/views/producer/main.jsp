@@ -1,8 +1,8 @@
 <script>
-	window.location.hash = "p=" + ${pageUid;};
+	window.location.hash = "p=" + "${pageUid}";
 </script>
 <h2>
-	Hjälp
+	Välkommen
 </h2>
 <p>
 	Här kan lägga redigera varor och kategorier.<br />

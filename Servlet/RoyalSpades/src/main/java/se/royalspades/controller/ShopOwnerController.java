@@ -24,7 +24,7 @@ import se.royalspades.service.UserService;
 @RequestMapping(value = "/shopowner")
 public class ShopOwnerController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -32,7 +32,7 @@ public class ShopOwnerController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		//Redirecta till main
-		return "producer/home";
+		return "index";
 	}
 	
 	
@@ -41,7 +41,7 @@ public class ShopOwnerController {
 		//Producer - Main page
 		model.addAttribute("pageUid", "7ada6860-8d79-11e3-baa8-0800200c9a66" );
 		
-		return "producer/main";
+		return "shopowner/main";
 	}
 	
 	@RequestMapping("/help")
