@@ -74,6 +74,15 @@ public class AdminController {
 		return "admin/newSupplier";
 	}
 	
+	@RequestMapping("/editSupplier")
+	public String editSupplier(Locale locale, Model model){
+		//Admin - supplier page
+		model.addAttribute("pageUid", "cfcd9e0b-c1cd-4122-9486-b96cb026bb3c" );
+		
+		
+		return "admin/editSupplier";
+	}
+	
 	@RequestMapping("/user")
 	public String user(Locale locale, Model model){
 		//Admin - user page

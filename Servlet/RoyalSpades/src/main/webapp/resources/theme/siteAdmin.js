@@ -80,7 +80,7 @@
 		if(p == '9d175af0-f947-4827-8e93-cd44a8531d1a'){
 			return  baseUrl + "/admin/editShop";
 		}
-		if(p == '387a42ea-ab92-4420-9c84-a6d58706ff2c'){
+		if(p == 'cfcd9e0b-c1cd-4122-9486-b96cb026bb3c'){
 			return  baseUrl + "/admin/editSupplier";
 		}
 		if(p == 'ad1gef60-8d22-33r3-baa8-0555020c9r66'){
