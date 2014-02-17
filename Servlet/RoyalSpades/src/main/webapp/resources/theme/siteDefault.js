@@ -40,7 +40,6 @@ $( document ).ready(function() {
 		});
 	}
 	
-	
 	function openPageUrl(pageUrl){
 		$.ajax({
 			url: pageUrl,
