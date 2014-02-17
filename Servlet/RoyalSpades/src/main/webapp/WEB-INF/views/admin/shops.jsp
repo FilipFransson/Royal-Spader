@@ -6,7 +6,7 @@
 </h2>
 <a class="link" href="newShop">Ny shop</a>
 <br />
-<table id="dataTable" class="shopTable listtable">
+<table id="dataTable" class="shopTable listtable groceryTable">
 	<thead>
 		<tr>
 			<th>
@@ -32,7 +32,7 @@
 </table>
 
 <script>
-$( document ).ready(function() {	
+$( document ).ready(function() {
 	function preZero(s){
 		s += "";
 		if(s.length < 2){
@@ -85,10 +85,10 @@ $( document ).ready(function() {
 		        "sScrollY": "300px",
 				"oLanguage": {
 					"sLengthMenu": "Visar _MENU_ produkter per sida",
-					"sZeroRecords": "Hittade inget - tyvärr",
+					"sZeroRecords": "Hittade inget - tyvÃ¤rr",
 					"sInfo": "Visar _START_ till _END_ av _TOTAL_ varor",
 					"sInfoEmpty": "Visar 0 av 0 varor",
-					"sInfoFiltered": "(filtrerat från _MAX_ varor)",
+					"sInfoFiltered": "(filtrerat frÃ¥n _MAX_ varor)",
 					"sSearch": "Filtrera: "
 				}		
 			});
@@ -98,4 +98,5 @@ $( document ).ready(function() {
 		}
 	});
 });
+
 </script>
