@@ -75,6 +75,11 @@ $( document ).ready(function() {
 			
 			$(".shopTable").append("</tbody>");
 			
+			$(".shopTable").find(".link").click(function (event){
+				event.preventDefault();
+				openPageUrl(this.href);
+			});
+			
 			$('.shopTable').dataTable({
 				"aLengthMenu": [
 		            [25, 50, 100, -1],

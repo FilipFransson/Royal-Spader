@@ -7,38 +7,39 @@
 		</div>
 	</c:if>
 
-
-<form name="f" action="<c:url value='/j_spring_security_check' />" autocomplete="on" method="POST"> 
-    <h1>Logga in</h1> 
-    <table>
-    	<tr>
-    		<td>
-        		<label for="username" class="uname" data-icon="u" > Användarnamn eller Email </label>
-        	</td><td>
-        		<input type="text" id="username" name="j_username" required type="text" placeholder="myusername or mymail@mail.com"/>
-       		</td>
-     	</tr>
-     	<tr>
-     		<td>
-        		<label for="password" class="youpasswd" data-icon="p"> Lösenord </label>
-       		</td><td>
-          		<input type="password" id="password" name="j_password" required type="password" placeholder="eg. X8df!90EO" />
-       		</td>
-     	</tr>
-     	<tr>
-     		<td>
-        		<label for="loginkeeping">Håll mig inloggad</label>
-     		</td><td>
-     			<input type="checkbox" name="_spring_security_remember_me" id="loginkeeping" value="loginkeeping" />
-     		</td>
-    	</tr>
-    	
-     	<tr>
-     		<td>
-        		<input name="submit" type="submit" value="Logga in" /> 
-     		</td><td>
-     			&nbsp;
-     		</td>
-    	</tr>
-    </table> 
-</form>
+<div class="login">
+	<form name="f" action="<c:url value='/j_spring_security_check' />" autocomplete="on" method="POST"> 
+	    <h1>Logga in</h1> 
+	    <table>
+	    	<tr>
+	    		<td>
+	        		<label for="username" class="uname" data-icon="u" > Användarnamn eller Email </label>
+	        	</td><td>
+	        		<input type="text" id="username" name="j_username" required type="text" placeholder="myusername or mymail@mail.com"/>
+	       		</td>
+	     	</tr>
+	     	<tr>
+	     		<td>
+	        		<label for="password" class="youpasswd" data-icon="p"> Lösenord </label>
+	       		</td><td>
+	          		<input type="password" id="password" name="j_password" required type="password" placeholder="eg. X8df!90EO" />
+	       		</td>
+	     	</tr>
+	     	<tr>
+	     		<td>
+	        		<label for="loginkeeping">Håll mig inloggad</label>
+	     		</td><td>
+	     			<input type="checkbox" name="_spring_security_remember_me" id="loginkeeping" value="loginkeeping" />
+	     		</td>
+	    	</tr>
+	    	
+	     	<tr>
+	     		<td>
+	        		<input name="submit" type="submit" value="Logga in" /> 
+	     		</td><td>
+	     			&nbsp;
+	     		</td>
+	    	</tr>
+	    </table> 
+	</form>
+</div>

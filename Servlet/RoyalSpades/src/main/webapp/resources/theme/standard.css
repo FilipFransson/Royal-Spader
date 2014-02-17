@@ -235,7 +235,7 @@ input {
 }
 
 /**** general text styling ****/
-#wrapper h1{
+#login h1{
     font-size: 48px;
     color: rgb(6, 106, 117);
     padding: 2px 0 10px 0;
@@ -246,7 +246,7 @@ input {
 }
  
 /** For the moment only webkit supports the background-clip:text; */
-#wrapper h1{
+#login h1{
     background: 
     -webkit-repeating-linear-gradient(-45deg, 
         rgb(18, 83, 93) , 
@@ -258,7 +258,7 @@ input {
     -webkit-background-clip: text;
 }
  
-#wrapper h1:after{
+#login h1:after{
     content:' ';
     display:block;
     width:100%;
@@ -273,7 +273,7 @@ input {
             rgba(147,184,189,0) 100%); 
 }
 /* all the input except submit and checkbox */
-#wrapper input:not([type="checkbox"]){
+#login input:not([type="checkbox"]){
     width: 92%;
     margin-top: 4px;
     padding: 10px 5px 10px 32px;    
@@ -283,14 +283,14 @@ input {
     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
     transition: all 0.2s linear;
 }
-#wrapper input:not([type="checkbox"]):active,
-#wrapper input:not([type="checkbox"]):focus{
+#login input:not([type="checkbox"]):active,
+#login input:not([type="checkbox"]):focus{
     border: 1px solid rgba(91, 90, 90, 0.7);
     background: rgba(238, 236, 240, 0.2);   
     box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.9) inset;
 } 
 /*styling both submit buttons */
-#wrapper p.button input{
+#login p.button input{
     width: 30%;
     cursor: pointer;    
     background: rgb(61, 157, 179);
@@ -308,11 +308,11 @@ input {
         0px 5px 3px 3px rgb(210, 210, 210);
     transition: all 0.2s linear;
 }
-#wrapper p.button input:hover{
+#login p.button input:hover{
     background: rgb(74, 179, 198);
 }
-#wrapper p.button input:active,
-#wrapper p.button input:focus{
+#login p.button input:active,
+#login p.button input:focus{
     background: rgb(40, 137, 154);
     position: relative;
     top: 1px;
@@ -360,7 +360,7 @@ p.change_link{
     rgb(247, 247, 247) 30px
     );
 }
-#wrapper p.change_link a {
+#login p.change_link a {
     display: inline-block;
     font-weight: bold;
     background: rgb(247, 248, 241);
@@ -372,12 +372,12 @@ p.change_link{
     border: 1px solid rgb(203, 213, 214);
     transition: all 0.4s  linear;
 }
-#wrapper p.change_link a:hover {
+#login p.change_link a:hover {
     color: rgb(57, 191, 215);
     background: rgb(247, 247, 247);
     border: 1px solid rgb(74, 179, 198);
 }
-#wrapper p.change_link a:active{
+#login p.change_link a:active{
     position: relative;
     top: 1px;
 }
@@ -444,11 +444,6 @@ p.change_link{
     animation-name: fadeInLeft;
     animation-delay: .1s;
 }
-.animate{
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: both;
-}
 
 #popupbox{
   margin-right:800px;
@@ -461,47 +456,4 @@ p.change_link{
   font-family: arial; 
   visibility:hidden;
   }
-  
-  .animate{
-    animation-duration: 0.5s;
-    animation-timing-function: ease;
-    animation-fill-mode: both;
-}
-@keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-     
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-#toregister:target ~ #wrapper #login,
-#tologin:target ~ #wrapper #register{
-    animation-name: fadeOutLeftBig;
-}
- 
-@keyframes fadeOutLeft {
-    0% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-     
-    100% {
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-}
-div.modal-bg { 
-  background:#000; 
-  position:fixed; 
-  top:0; left:0; 
-  width:100%;
-  opacity:0.5; 
-  height:100%;
-  z-index:10; 
-}
-
 
