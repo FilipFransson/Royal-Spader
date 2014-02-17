@@ -27,7 +27,7 @@ $( document ).ready(function() {
 		}
 		return s;
 	}
-	//Här är vi! :) 
+	
 	//kunna posta datan i formuläret för att skapa ny cat, kunna markera nya poster och ta bort eller ändra
 	
 	$("#addCatBtn").on("click", function(){

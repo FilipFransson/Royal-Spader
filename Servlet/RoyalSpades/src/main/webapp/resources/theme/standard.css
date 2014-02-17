@@ -1,4 +1,4 @@
-﻿/* Notes
+/* Notes
 
 	Fine ass colors:
 	#000000
@@ -23,7 +23,8 @@ body, html {
 	min-height:100%;
 }
 body {
-	background-color:#3D4460;
+	background-image: url("../Images/tumblr_static.jpg"); 
+	/*background-color:#3D4460;*/
 	background-size:cover;
 	overflow:visible;
 }

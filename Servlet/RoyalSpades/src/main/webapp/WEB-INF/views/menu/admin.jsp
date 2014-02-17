@@ -7,6 +7,9 @@
 		<a class="menulink" href="suppliers">Leverantörer</a>
 	</li>
 	<li>
+		<a class="menulink" href="categories">Varukategorier</a>
+	</li>
+	<li>
 		<a class="menulink" href="help">Hjälp</a>
 	</li>	
 	<li>
