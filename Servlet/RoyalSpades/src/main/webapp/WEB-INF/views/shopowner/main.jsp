@@ -16,7 +16,7 @@
 <br />
 <fieldset class="allWares">
 	<legend>Varor</legend>
-	<table class="listtable">
+	<table class="listtable categoryTable">
 		<tr>
 			<th>
 				&nbsp;
@@ -139,32 +139,31 @@
             dataType: "json",
             success: function (data, textStatus, jqXHR) {
                 console.log(data);
-                var arr = data;
+                var arr = data["storeProduct"];
                 $("#shopName").html(data["name"]);
                 $("#shopAddress").html(data["address"]);
                 //var arr = JSON.parse([data]);
 
-                $(".shopTable").append("<tbody>");
+                //$(".shopTable").append("<tbody>");
+                $(".categoryTable tbody").empty();
                 for(var i = 0; i < arr.length; i++){
-                    var row = "<tr><td>";
-                    row += arr[i].name;
-                    row += '</td><td style="text-align:right;">';
-                    row += arr[i].address;
-                    row += "</td><td>";
-                    row += arr[i].orgNumber;
-                    row += "</td><td>";
-                    row += arr[i].phone;
-                    row += "</td><td>";
-                    row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
-                    row += '</td><td style="text-align:center;">';
-                    row += '<a class="link" href="editShop/?id=' + arr[i].id + '">Redigera</a>';
-                    row += "</td></tr>";
-                    $(".shopTable").append(row);
+                    var row = '<tr>' +
+                            '<td><a href="#"><i class="fa fa-sort-down"></i></a></td>' +
+                            '<td><a href="#"><i class="fa fa-sort-up"></i></a></td>' +
+                            '<td>';
+                    row += arr[i]["product"]["name"];
+                    row +=  '</td><td>';
+                    row +=  arr[i]["category"]["name"];
+                    row +=  '</td><td>' +
+                            '<a href="editShop/?id=' + arr[i].id + '"><i class="fa fa-edit"></i></a>' +
+                            '</td></tr>';
+
+                    $(".categoryTable tbody").append(row);
                 }
+                 console.log(row);
+                //$(".shopTable").append("</tbody>");
 
-                $(".shopTable").append("</tbody>");
-
-                $('.shopTable').dataTable({
+                /*$('.shopTable').dataTable({
                     "aLengthMenu": [
                         [25, 50, 100, -1],
                         [25, 50, 100, "All"]],
@@ -180,7 +179,7 @@
                         "sInfoFiltered": "(filtrerat från _MAX_ varor)",
                         "sSearch": "Filtrera: "
                     }
-                });
+                });*/
             },
             error: function (data, textStatus, jqXHR) {
                 alert("Error: " + textStatus + ", " + jqXHR);

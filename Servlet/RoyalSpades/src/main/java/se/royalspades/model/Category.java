@@ -77,6 +77,7 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
+    @JsonIgnore
 	@JsonIgnoreProperties(value = "stores")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<Product> getProducts() {
