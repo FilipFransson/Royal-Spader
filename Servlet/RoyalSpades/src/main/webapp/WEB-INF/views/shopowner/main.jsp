@@ -5,14 +5,14 @@
 	Min butik
 </h2>
 <br />
-<h3>
+<h3 id="shopName">
 	Ica Kvantum Norremark
 </h3>
-<p>
-	Norremarksv‰gen 5<br />
-	35245 V‰xjˆ<br />
-	<a href="#"><img src="http://i.imgur.com/vwJIAvn.png" width="20"></a>
+<p id="shopAddress">
+	Norremarksv√§gen 5<br />
+	35245 V√§xj√∂<br />
 </p>
+<a href="#"><i class="fa fa-edit"></i></a>
 <br />
 <fieldset class="allWares">
 	<legend>Varor</legend>
@@ -36,19 +36,19 @@
 		</tr>
 		<tr>
 			<td>
-				<a href="#">&darr;</a>
+				<a href="#"><i class="fa fa-sort-down"></i></a>
 			</td>
 			<td>
-				<a href="#">&uarr;</a>
+				<a href="#"><i class="fa fa-sort-up"></i></a>
 			</td>
 			<td>
 				Fanta
 			</td>
 			<td>
-				L‰skeblask
+				L√§skeblask
 			</td>
 			<td>
-				<a href="#"><img src="http://i.imgur.com/vwJIAvn.png" width="20"></a>
+				<a href="#"><i class="fa fa-edit"></i></a>
 			</td>
 		</tr>
 	</table>
@@ -71,32 +71,32 @@
 		</tr>
 		<tr>
 			<td>
-				<a href="#">&darr;</a>
+				<a href="#"><i class="fa fa-sort-down"></i></a>
 			</td>
 			<td>
 				<!--<a href="#">&uarr;</a>-->
 			</td>
 			<td>
-				L‰skeblask
+				L√§skeblask
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="#">&darr;</a>
+				<a href="#"><i class="fa fa-sort-down"></i></a>
 			</td>
 			<td>
-				<a href="#">&uarr;</a>
+				<a href="#"><i class="fa fa-sort-up"></i></a>
 			</td>
 			<td>
-				Frukt och grˆnt
+				Frukt och gr√∂nt
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="#">&darr;</a>
+				<a href="#"><i class="fa fa-sort-down"></i></a>
 			</td>
 			<td>
-				<a href="#">&uarr;</a>
+				<a href="#"><i class="fa fa-sort-up"></i></a>
 			</td>
 			<td>
 				Mejeri
@@ -107,7 +107,7 @@
 				<!--<a href="#">&darr;</a>-->
 			</td>
 			<td>
-				<a href="#">&uarr;</a>
+				<a href="#"><i class="fa fa-sort-up"></i></a>
 			</td>
 			<td>
 				Kolonial
@@ -115,3 +115,76 @@
 		</tr>
 	</table>
 </fieldset>
+<script>
+    $( document ).ready(function() {
+        console.log("fail");
+        function preZero(s){
+            s += "";
+            if(s.length < 2){
+                s = "0" + s;
+            }
+            return s;
+        }
+        var d = new Date();
+        $("input[name$='date']").val(d.getFullYear() + "-" + preZero(d.getMonth()+1) + "-" + preZero(d.getDate()) + " " + preZero(d.getHours()) + ":" + preZero(d.getMinutes())).prop('disabled', true);
+
+
+        $.ajax({
+            type: "GET",
+            url: "/api/store/2/",
+            headers: {
+                'Accept':"application/json",
+                'Content-Type':"application/json"
+            },
+            dataType: "json",
+            success: function (data, textStatus, jqXHR) {
+                console.log(data);
+                var arr = data;
+                $("#shopName").html(data["name"]);
+                $("#shopAddress").html(data["address"]);
+                //var arr = JSON.parse([data]);
+
+                $(".shopTable").append("<tbody>");
+                for(var i = 0; i < arr.length; i++){
+                    var row = "<tr><td>";
+                    row += arr[i].name;
+                    row += '</td><td style="text-align:right;">';
+                    row += arr[i].address;
+                    row += "</td><td>";
+                    row += arr[i].orgNumber;
+                    row += "</td><td>";
+                    row += arr[i].phone;
+                    row += "</td><td>";
+                    row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
+                    row += '</td><td style="text-align:center;">';
+                    row += '<a class="link" href="editShop/?id=' + arr[i].id + '">Redigera</a>';
+                    row += "</td></tr>";
+                    $(".shopTable").append(row);
+                }
+
+                $(".shopTable").append("</tbody>");
+
+                $('.shopTable').dataTable({
+                    "aLengthMenu": [
+                        [25, 50, 100, -1],
+                        [25, 50, 100, "All"]],
+                    "iDisplayLength" : -1,
+                    "bScrollInfinite": true,
+                    "bScrollCollapse": false,
+                    "sScrollY": "300px",
+                    "oLanguage": {
+                        "sLengthMenu": "Visar _MENU_ produkter per sida",
+                        "sZeroRecords": "Hittade inget - tyv√§rr",
+                        "sInfo": "Visar _START_ till _END_ av _TOTAL_ varor",
+                        "sInfoEmpty": "Visar 0 av 0 varor",
+                        "sInfoFiltered": "(filtrerat fr√•n _MAX_ varor)",
+                        "sSearch": "Filtrera: "
+                    }
+                });
+            },
+            error: function (data, textStatus, jqXHR) {
+                alert("Error: " + textStatus + ", " + jqXHR);
+            }
+        });
+    });
+</script>

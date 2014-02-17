@@ -52,7 +52,7 @@ public class StoreProduct implements Serializable{
 	}
 	
 	@Transient
-	@JsonIgnoreProperties(value = { "storeProducts", "storeProduct"})
+	@JsonIgnoreProperties(value = { "storeProducts", "storeProduct", "store" })
 	public Product getProduct() {
 		return getPk().getProduct();
 	}
