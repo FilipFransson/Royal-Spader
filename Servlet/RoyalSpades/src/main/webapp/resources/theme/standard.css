@@ -160,6 +160,7 @@ table.listtable{
 #login, #register {
 	width: 400px;
 	margin:0 auto;
+	text-align:right;
 }
 
 
