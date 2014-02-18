@@ -157,6 +157,10 @@ table.listtable{
 		padding-right:5px;
 	}
 
+#login, #register {
+	width: 400px;
+	margin:0 auto;
+}
 
 
 /* Text */

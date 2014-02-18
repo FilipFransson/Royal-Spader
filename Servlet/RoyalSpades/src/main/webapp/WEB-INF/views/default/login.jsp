@@ -7,7 +7,7 @@
 		</div>
 	</c:if>
 
-<div class="login">
+<div id="login">
 	<form name="f" action="<c:url value='/j_spring_security_check' />" autocomplete="on" method="POST"> 
 	    <h1>Logga in</h1> 
 	    <table>
