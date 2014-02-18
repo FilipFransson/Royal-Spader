@@ -43,6 +43,16 @@ $( document ).ready(function() {
 	var d = new Date();
 	$("input[name$='date']").val(d.getFullYear() + "-" + preZero(d.getMonth()+1) + "-" + preZero(d.getDate()) + " " + preZero(d.getHours()) + ":" + preZero(d.getMinutes())).prop('disabled', true);
 	
+	function deleteShop(event, id){
+		event.preventDefault();
+		
+		if (confirm('Är du säker på att du vill ta bort affären?')) {
+			
+			$.post('/royalspades/api/store/admin/remove_store/' + id, null, function(response) {
+				  console.log(response);
+		      });
+		}
+	}
 	
 	$.ajax({
 		type: "GET",
@@ -69,16 +79,12 @@ $( document ).ready(function() {
 				row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
 				row += '</td><td style="text-align:center;">';
 				row += '<a class="link" href="editShop/?id=' + arr[i].id + '">Redigera</a>';
+				row += '&nbsp;<a class="link" href="" onclick="deleteShop(event, ' + arr[i].id + ')">X</a>';
 				row += "</td></tr>";
 				$(".shopTable").append(row);
 			}
 			
 			$(".shopTable").append("</tbody>");
-			
-			$(".shopTable").find(".link").click(function (event){
-				event.preventDefault();
-				openPageUrl(this.href);
-			});
 			
 			$('.shopTable').dataTable({
 				"aLengthMenu": [

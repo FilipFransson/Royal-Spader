@@ -69,6 +69,7 @@ $( document ).ready(function() {
 				row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
 				row += '</td><td style="text-align:center;">';
 				row += '<a class="link" href="editSupplier/?id=' + arr[i].id + '">Redigera</a>';
+				row += '&nbsp;<a class="link" href="deleteSupplier/?id=' + arr[i].id + '">X</a>';
 				row += "</td></tr>";
 				$(".supplierTable").append(row);
 			}
