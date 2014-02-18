@@ -134,11 +134,13 @@
             url: "/api/store/2/",
             headers: {
                 'Accept':"application/json",
-                'Content-Type':"application/json"
+                'Content-Type':"application/json",
+                'converters':"* text"
             },
-            dataType: "json",
+            dataType: "text",
             success: function (data, textStatus, jqXHR) {
                 console.log(data);
+                data = JSON.parse(data, parseJSON);
                 var arr = data["storeProduct"];
                 $("#shopName").html(data["name"]);
                 $("#shopAddress").html(data["address"]);
