@@ -203,21 +203,6 @@ a.homeclick {
 	  color:#E8E8E8;
 }
 
-
-#subscribe, 
-#login{
-    position: fixed;
-    top: 75px;
-    left:500px;
-    width: 25%; 
-    padding: 13px 3% 45px 3%;
-    background: rgb(247, 247, 247);
-    border: 1px solid rgba(147, 184, 189,0.8);
-    box-shadow: 
-        0pt 2px 5px rgba(105, 108, 109,  0.7),  
-        0px 0px 8px 5px rgba(208, 223, 226, 0.4) inset;
-    border-radius: 5px;
-}
 ::-webkit-input-placeholder  { 
     color: rgb(190, 188, 188); 
     font-style: italic;
@@ -232,8 +217,7 @@ input {
 }
 
 
-#register input[type="submit"],
-.login input[type="submit"]
+input[type="submit"]
 {
     width: 30%;
     cursor: pointer;    
@@ -253,8 +237,7 @@ input {
     transition: all 0.2s linear;
     text-align: center;
 }
-#register input:not([type="checkbox"]),
-.login input:not([type="checkbox"]){
+input:not([type="checkbox"]){
     width: 92%;
     margin-top: 4px;
    
@@ -266,7 +249,7 @@ input {
     transition: all 0.2s linear;
 }
 
-.login h1, #register h1 {
+#login h1, #register h1 {
     font-size: 48px;
     color: rgb(6, 106, 117);
     padding: 2px 0 10px 0;
