@@ -2,27 +2,53 @@
  * Created by Artwar on 2014-02-18.
  */
 var dataModule = [];
-function parseJSON(key, value){
-    var found = false;
-    var object = ["category", "product", "user", "brand", "store"];
-    for (var i = 0; i < object.length; i++){
-        if(object[i] == key){
-            found = true;
-            break;
+function parseJSON(data){
+    dataModule = [];
+    return JSON.parse(data, function(key, value){
+
+        switch (key){
+            case "brand":
+            case "category":
+            case "product":
+            case "store":
+            case "user":
+                if (isNaN(value)){
+                    dataModule.push(value);
+                    console.log([key,value]);
+                } else {
+                    for(var i = 0; i < dataModule.length; i++){
+                        var d = dataModule[i];
+                        if (d["@id"] == value){
+                            return d
+                        }
+                    }
+                }
+                break;
         }
-    }
-    if (found){
-        if (isNaN(value)){
-            dataModule.push(value);
-        } else {
-            for(var i = 0; i < dataModule.length; i++){
-                var d = dataModule[i];
-                if (d["@id"] == value){
-                    return d
+        return value;
+    });
+}
+/*function(key, value){
+
+    switch (key){
+        case "brand":
+        case "category":
+        case "product":
+        case "store":
+        case "user":
+            if (isNaN(value)){
+                dataModule.push(value);
+                console.log([key,value]);
+            } else {
+                for(var i = 0; i < dataModule.length; i++){
+                    var d = dataModule[i];
+                    if (d["@id"] == value){
+                        return d
+                    }
                 }
             }
-        }
+            break;
     }
 
     return value;
-}
+}   */
