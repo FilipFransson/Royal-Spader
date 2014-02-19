@@ -55,8 +55,8 @@
             </select>
         </div>
         <div>
-            <form>
-                <table class="listtable shopTableNewProducts">
+            <form id="shopFormNewProducts">
+                <table id="shopTableNewProducts" class="listtable shopTableNewProducts">
                     <thead>
                     <tr>
                         <th>Brand</th>
@@ -72,10 +72,11 @@
                         <td>Mineralvatten</td>
                         <td>Läsk</td>
                         <td>9.98</td>
-                        <td><i class="fa fa-times"></i></td>
+                        <td><i class="fa fa-times shopRemoveRow"></i></td>
                     </tr>
                     </tbody>
                 </table>
+                <button type="submit">Submit</button>
             </form>
         </div>
     </div>
@@ -96,10 +97,10 @@
 	</table>
 </fieldset>
 <script>
-    var allProducts;
-    var allCategories;
+
+
+
     $( document ).ready(function() {
-        console.log("fail");
         function preZero(s){
             s += "";
             if(s.length < 2){
@@ -110,190 +111,12 @@
         var d = new Date();
         $("input[name$='date']").val(d.getFullYear() + "-" + preZero(d.getMonth()+1) + "-" + preZero(d.getDate()) + " " + preZero(d.getHours()) + ":" + preZero(d.getMinutes())).prop('disabled', true);
 
-        $.ajax({
-            type: "GET",
-            url: "/api/product/all/",
-            headers: {
-                'Accept':"application/json",
-                'Content-Type':"application/json"
-            },
-            dataType: "text",
-            success: function (data, textStatus, jqXHR) {
-                allProducts = parseJSON(data);
-            },
-            error: function (data, textStatus, jqXHR) {
-                alert("Error: " + textStatus + ", " + jqXHR);
-            }
-        });
-        $.ajax({
-            type: "GET",
-            url: "/api/store/2/",
-            headers: {
-                'Accept':"application/json",
-                'Content-Type':"application/json"
-            },
-            dataType: "text",
-            success: function (data, textStatus, jqXHR) {
-                //console.log(data);
-                data = parseJSON(data);
-                var arr = data["storeProduct"];
-                $("#shopName").html(data["name"]);
-                $("#shopAddress").html(data["address"]);
-
-                //$(".shopTable").append("<tbody>");
-                $(".productTable tbody").empty();
-                for(var i = 0; i < arr.length; i++){
-                    var row = '<tr>' +
-                            '<td><a href="#"><i class="fa fa-sort-down"></i></a></td>' +
-                            '<td><a href="#"><i class="fa fa-sort-up"></i></a></td>' +
-                            '<td>';
-                    row += arr[i]["product"]["name"];
-                    row +=  '</td><td>';
-                    row +=  arr[i]["category"]["name"];
-                    row +=  '</td><td>';
-                    row +=  arr[i]["price"];
-                    row +=  '</td><td>' +
-                            '<a href="editShop/?id=' + arr[i].id + '"><i class="fa fa-edit"></i></a>' +
-                            '</td></tr>';
-
-                    $(".productTable tbody").append(row);
-                }
-            },
-            error: function (data, textStatus, jqXHR) {
-                alert("Error: " + textStatus + ", " + jqXHR);
-            }
-        });
-        $.ajax({
-            type: "GET",
-            url: "/api/brand/all/",
-            headers: {
-                'Accept':"application/json",
-                'Content-Type':"application/json"
-            },
-            dataType: "text",
-            success: function (data, textStatus, jqXHR) {
-                data = parseJSON(data);
-                //console.log(data);
-                //var arr = JSON.parse([data]);
-
-                //$(".shopTable").append("<tbody>");
-                $("#selectNewProductsBrand").empty();
-                for(var i = 0; i < data.length; i++){
-                    var row = '<option value="'+data[i]['id']+'">';
-                    row +=  data[i]["name"];
-                    row +=  '</option>';
-
-                    $("#selectNewProductsBrand").append(row);
-                }
-
-                $(document).on("click", "#selectNewProductsBrand option", function(event){
-                    //console.log(event.currentTarget.value);
-                    for (var i = 0; i < data.length; i++){
-                        var d = data[i];
-                        if(d['id'] == event.currentTarget.value){
-                            $("#selectNewProducts").empty();
-                            if (d['brandProducts'].length == 0) {
-                                $("#selectNewProducts").append('<option>Inga Producter</option>');
-                                return;
-                            }
-                            for (var i = 0; i < d['brandProducts'].length; i++) {
-                                var row = '<option value="'+d['brandProducts'][i]['id']+'">';
-                                row +=  d['brandProducts'][i]["name"];
-                                row +=  '</option>';
-
-                                $("#selectNewProducts").append(row);
-                                row = undefined;
-                            }
-                            return;
-                        }
-                    }
-                });
-
-            },
-            error: function (data, textStatus, jqXHR) {
-                alert("Error: " + textStatus + ", " + jqXHR);
-            }
-        });
-        $.ajax({
-            type: "GET",
-            url: "/api/category/all/",
-            headers: {
-                'Accept':"application/json",
-                'Content-Type':"application/json"
-            },
-            dataType: "json",
-            success: function (data, textStatus, jqXHR) {
-                allCategories = data;
-                //console.log(data);
-                //data = parseJSON(data);
+        setStoreAllProducts();
+        setStoreProductTable(2);
+        setStoreNewProductBrandSelect();
+        setStoreCategoriesTable();
 
 
-                $(".categoryTable tbody").empty();
-                for(var i = 0; i < data.length; i++){
-                    var row = '<tr>' +
-                            '<td><a href="#"><i class="fa fa-sort-down"></i></a></td>' +
-                            '<td><a href="#"><i class="fa fa-sort-up"></i></a></td>' +
-                            '<td>';
-                    row += data[i]["name"];
-                    row += '</td></tr>';
-
-                    $(".categoryTable tbody").append(row);
-                }
-            },
-            error: function (data, textStatus, jqXHR) {
-                alert("Error: " + textStatus + ", " + jqXHR);
-            }
-        });
-        $( document).on("click", "#shopProductCreateNew", function(){
-            $(".shopProductPage").slideUp();
-            $("#shopSelectNewContainer").slideDown();
-
-            $("#shopProductCreateNew").addClass('active');
-            $("#shopProductShow").removeClass('active');
-        });
-        $( document).on("click", "#shopProductShow", function(){
-            $(".shopProductPage").slideDown();
-            $("#shopSelectNewContainer").slideUp();
-
-            $("#shopProductCreateNew").removeClass('active');
-            $("#shopProductShow").addClass('active');
-        });
-        $( document).on("click", "#shopNewProductsAdd", function(){
-            var selected = $("#selectNewProducts").val();
-            var tableBody = $(".shopTableNewProducts tbody");
-            var deleteIcon = '<td><i class="fa fa-times"></i></td>';
-
-            tableBody.empty();
-            console.log(allProducts);
-
-            for (var i = 0; i < selected.length; i++) {
-
-                for (var j = 0; j < allProducts.length; j++) {
-                    if (selected[i] == allProducts[j]['id']){
-                        var d = allProducts[j];
-                        console.log(d);
-                        var row = '<tr>' +
-                                '<td>'+d['brand']['name']+'</td>' +
-                                '<td>'+d['name']+'</td>' +
-                                '<td>'+createCategorySelect(d['category']['id'])+'</td>' +
-                                '<td><input class="priceInput" name="productPrice" placeholder="Pris"></td>' +
-                                deleteIcon + '</tr>';
-                        tableBody.append(row);
-                        break;
-                    }
-                }
-            }
-        });
     });
-    function createCategorySelect(selected){
-        var html = '<select name="category">';
-        for (var i = 0; i < allCategories.length; i++) {
-            var d = allCategories[i];
-            var select = (selected == d['id']) ? "selected" : "";
-            var row = '<option '+select+' value="'+d['id']+'">'+d['name']+'</option>';
-            html += row;
-        }
-        html += '</select>';
-        return html;
-    }
+
 </script>
