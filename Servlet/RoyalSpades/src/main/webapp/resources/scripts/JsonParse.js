@@ -14,7 +14,7 @@ function parseJSON(data){
             case "user":
                 if (isNaN(value)){
                     dataModule.push(value);
-                    console.log([key,value]);
+                    //console.log([key,value]);
                 } else {
                     for(var i = 0; i < dataModule.length; i++){
                         var d = dataModule[i];
