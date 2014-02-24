@@ -1,21 +1,14 @@
 package se.royalspades.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import se.royalspades.model.User;
-import se.royalspades.service.CategoryService;
-import se.royalspades.service.UserService;
 
 /**
  * Handles requests for the application home page.
@@ -24,7 +17,8 @@ import se.royalspades.service.UserService;
 @RequestMapping(value = "/shopowner")
 public class ShopOwnerController {
 	
-	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@SuppressWarnings("unused")
+	private static final Logger logger = LoggerFactory.getLogger(ShopOwnerController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.

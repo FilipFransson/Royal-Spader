@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+	@SuppressWarnings("unused")
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);	
 	
 	/**
 	 * 	Mapping for the page displayed to customers
