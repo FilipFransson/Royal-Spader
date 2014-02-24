@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@SuppressWarnings("serial")
 @Embeddable
 public class GroceryListProductId implements Serializable {
 	private GroceryList groceryList;

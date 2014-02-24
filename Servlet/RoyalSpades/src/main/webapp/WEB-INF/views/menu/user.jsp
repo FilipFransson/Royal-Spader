@@ -10,6 +10,6 @@
 		<a class="menulink" id="topMenuLink3" href="help">Hjälp</a>
 	</li>
 	<li>
-		<a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
+		<a href="<c:url value="/j_spring_security_logout" />" > Logga ut</a>
 	</li>
 </ul>

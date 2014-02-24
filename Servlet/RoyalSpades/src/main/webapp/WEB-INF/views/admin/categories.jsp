@@ -24,10 +24,40 @@
 	<input type="text" type="text" name="name" placeholder = "Skriv in din nya varukategori." >
 	<button submit="" id="toggleeditCatBtn">Spara</button>
 </form>
+<<<<<<< HEAD
 	
 	<script>
 $( document ).ready(function() {	
 	refreshTable();
+=======
+	<button id= editCatBtn >Redigera</button><br>
+	<button id= deleteCatBtn >Ta bort</button>
+
+<div class="response"></div>
+<div class="error"></div>
+	<script>
+$( document ).ready(function() {	
+	
+	$.fn.serializeObject = function()
+	{
+	   var o = {};
+	   var a = this.serializeArray();
+	   a.re
+	   $.each(a, function() {
+	       if (o[this.name]) {
+	           if (!o[this.name].push) {
+	               o[this.name] = [o[this.name]];
+	           }
+	           o[this.name].push(this.value || '');
+	       } else {
+	           o[this.name] = this.value || '';
+	       }
+	   });
+	   return o;
+	};
+	
+	
+>>>>>>> b70e6b35b8dc30f748848762f36e001a8ecd9087
 	function preZero(s){
 		s += "";
 		if(s.length < 2){
@@ -45,27 +75,55 @@ $( document ).ready(function() {
 		
 		$("#addCatBtn").show();
 	});
-	
 
-    // Save category AJAX Form Submit
-    $('#newCatForm').submit(function(e) {
-       e.preventDefault(); // prevent actual form submit and page reload
+   // Save category
+	$('#newCatForm').submit(function(e) {
+		  $(".response").text("");
+	  	  $('.error').text("");
+    	  var data = $(this).serializeObject();
+    	  // will pass the form data and parse it to json string
+    	  $.ajax({
+    		  url: baseUrl+'/api/category/admin/add_category',
+    		  data: JSON.stringify(data),
+    		  contentType:'application/json',
+    		  accept:'application/json',
+    		  processData:false,
+    		  type: 'POST',
+    		  complete: function(response) {
+  				if(response.status == 200){
+  	    			// clear values
+  				    $(':input','#newCatForm')
+  						.not(':button, :submit, :reset, :hidden')
+  						.val('');
+  		    	    $('.response').text(response.responseText);
+  		    	    refreshTable();
+  				}
+				
+    		  }, error: function(response){
+    			if(response.status != 200){
+        			var responseJSON = response.responseJSON;
+        			
+        	  	   	if(typeof responseJSON != 'undefined'){
+        	  	   		var errors = '';
+        	  	   		
+            	  	   	for(var i = 0; i < responseJSON.fieldErrors.length; i ++){
+                	  	   	errors += (responseJSON.fieldErrors[i].message); 
+                	  	   	errors += '<br>';
+            	  	   	}
+            	  	  	
+            	  	   	$('.error').append(errors);
 
-  	  $("#response").text("");
-  	  
-      // will pass the form data using the jQuery serialize function
-      $.post(baseUrl+'/api/category/admin/add_category', $(this).serialize(), function(response) {
-		  console.log(response);
-        // clear values
-        $(':input','#newCatForm')
-			.not(':button, :submit, :reset, :hidden')
-			.val('')
-			.removeAttr('selected');
-      		refreshTable();
-        $('#response').text(response);
-      });
-       
-    });
+        	  	   	} else {
+            	  	   	$('.error').text(response.responseText); 
+        	  	   	}
+    			}
+    	  	   	
+    		  }
+    	  });
+	   
+	  e.preventDefault(); // prevent actual form submit and page reload
+	});
+ 
 	
 	//kunna posta datan i formuläret för att skapa ny cat, kunna markera nya poster och ta bort eller �ndra
 	
@@ -88,7 +146,7 @@ $( document ).ready(function() {
 			success: function (data, textStatus, jqXHR) {
 				var arr = JSON.parse(data);
 				//startar en tbody-tag
-				//loopar igenom all data och lägger i en tabell
+				//loopar igenom all data och l�gger i en tabell
 				for(var i = 0; i < arr.length; i++){
 					var row = arr[i].name;
 				}
@@ -116,8 +174,12 @@ $( document ).ready(function() {
 function refreshTable (){
 //Diven töms på information och sedan laddas om
 	
+<<<<<<< HEAD
 
 //Hämtar all data från kategorier i db:n
+=======
+	//H�mtar all data fr�n kategorier i db:n
+>>>>>>> b70e6b35b8dc30f748848762f36e001a8ecd9087
 	$.ajax({
 		type: "GET",
 		url: "/royalspades/api/category/all/",
@@ -125,9 +187,14 @@ function refreshTable (){
 		success: function (data, textStatus, jqXHR) {
 			var arr = JSON.parse(data);
 			//startar en tbody-tag
+<<<<<<< HEAD
 			
 			$("#categoryTable tbody").empty();
 			//loopar igenom all data och lägger i en tabell
+=======
+			$("#categoryTable").append("<tbody>");
+			//loopar igenom all data och l�gger i en tabell
+>>>>>>> b70e6b35b8dc30f748848762f36e001a8ecd9087
 			for(var i = 0; i < arr.length; i++){
 				var row = "<tr><td>";
 				row += arr[i].name;
