@@ -1,10 +1,10 @@
-<script>
+﻿<script>
 	window.location.hash = "p=" + '${pageUid}';
 </script>
 <h2> 
-	Leverant�r
+	Leverantör
 </h2>
-<a class="link" href="newSupplier">Ny leverant�r</a>
+<a class="link" href="newSupplier">Ny leverantör</a>
 <br />
 <table id="dataTable" class="supplierTable listtable">
 	<thead>
@@ -32,6 +32,45 @@
 </table>
 
 <script>
+var oTable;
+function deleteSupplier(event, id){
+	$('.error').text("");
+	
+	if (confirm('Är du säker på att du vill ta bort leverantören?')) {
+   
+		$.ajax({
+			url:'/royalspades/api/brand/admin/remove_brand/' + id, 
+			type:'DELETE',
+  		  	contentType:'application/json',
+		  	accept:'application/json',
+		  	processData:false,
+			complete: function(response) {
+	    		console.log(response);
+	    		
+	    		if(response.status == 200){
+	    			// shop was removed
+		    		// remove from table
+	    			
+	    			var pos = oTable.fnGetPosition( $('#' + id) );
+	    			oTable.fnDeleteRow(pos);
+	    			$('#' + id).remove();
+	    			
+	    		} else {
+	    			// can't remove that shop
+	    			$('.error').text(response.responseText);
+	    		}
+	    		
+			},
+			error: function (response, data, textStatus, jqXHR) {
+				if(response.status != 200){
+					$('.error').text("Error: " + textStatus + ", " + jqXHR);
+				}
+			}
+	    });
+    }
+	return false;
+}	
+
 $( document ).ready(function() {	
 	function preZero(s){
 		s += "";
@@ -75,7 +114,7 @@ $( document ).ready(function() {
 			
 			$(".supplierTable").append("</tbody>");
 			
-			$('.supplierTable').dataTable({
+			oTable = $('.supplierTable').dataTable({
 				"aLengthMenu": [
 		            [25, 50, 100, -1],
 		            [25, 50, 100, "All"]],
@@ -85,10 +124,10 @@ $( document ).ready(function() {
 		        "sScrollY": "300px",
 				"oLanguage": {
 					"sLengthMenu": "Visar _MENU_ produkter per sida",
-					"sZeroRecords": "Hittade inget - tyv�rr",
+					"sZeroRecords": "Hittade inget - tyvärr",
 					"sInfo": "Visar _START_ till _END_ av _TOTAL_ varor",
 					"sInfoEmpty": "Visar 0 av 0 varor",
-					"sInfoFiltered": "(filtrerat fr�n _MAX_ varor)",
+					"sInfoFiltered": "(filtrerat från _MAX_ varor)",
 					"sSearch": "Filtrera: "
 				}		
 			});
