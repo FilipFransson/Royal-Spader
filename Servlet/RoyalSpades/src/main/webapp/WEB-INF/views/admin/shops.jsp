@@ -4,7 +4,7 @@
 <h2> 
 	Butiker
 </h2>
-<a class="link" href="newShop">Ny shop</a>
+<a class="link" href="newShop">Ny butik</a>
 <br />
 <table id="dataTable" class="shopTable listtable">
 	<thead>
@@ -58,6 +58,7 @@ function deleteShop(event, id){
 	    			// shop was removed
 		    		// remove from table
 	    			$('#' + id).remove();
+	    			$('.shopTable').fnDraw(false);
 	    		} else {
 	    			// can't remove that shop
 	    			$('.error').text(response.responseText);
@@ -132,7 +133,7 @@ $( document ).ready(function() {
 			}
 			
 		    $(".shopTable").append("</tbody>");
-			
+		    
 			$('.shopTable').dataTable({
 				"aLengthMenu": [
 		            [25, 50, 100, -1],
@@ -142,10 +143,10 @@ $( document ).ready(function() {
 		        "bScrollCollapse": false,
 		        "sScrollY": "300px",
 				"oLanguage": {
-					"sLengthMenu": "Visar _MENU_ produkter per sida",
+					"sLengthMenu": "Visar _MENU_ butiker per sida",
 					"sZeroRecords": "Hittade inget - tyvärr",
 					"sInfo": "Visar _START_ till _END_ av _TOTAL_ varor",
-					"sInfoEmpty": "Visar 0 av 0 varor",
+					"sInfoEmpty": "Visar 0 av 0 butiker",
 					"sInfoFiltered": "(filtrerat från _MAX_ varor)",
 					"sSearch": "Filtrera: "
 				}		
