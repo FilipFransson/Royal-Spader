@@ -20,7 +20,8 @@
 			<script src="<c:url value="/resources/theme/siteProducer.js" />"></script>
 		</sec:authorize>
 		<sec:authorize access="hasRole('ROLE_MODERATOR')">	
-		    <!-- shop owner -->	
+		    <!-- shop owner -->
+            <script src="<c:url value="/resources/scripts/ShopScript.js" />"></script>
 			<script src="<c:url value="/resources/theme/siteShopOwner.js" />"></script>
 		</sec:authorize>
 	    <sec:authorize access="hasRole('ROLE_USER')">	
