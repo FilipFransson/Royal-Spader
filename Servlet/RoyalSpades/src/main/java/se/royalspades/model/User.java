@@ -6,17 +6,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;;
+
 
 @Entity
 @Table(name = "users", catalog = "spade_db")
@@ -25,38 +24,31 @@ public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String firstName;
 	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String lastName;
 	private String role;
 	@NotEmpty
-	@Size(min = 2, max = 45)
-	@Email
 	private String email;
 	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String username;
 	@NotEmpty
-	@Size(min = 5, max = 145)
 	private String password;
-	private String passwordConfirm;
-	private String requestedAuthority;
+	private String salt;
 	
 	public User(){
 		
 	}
 	
 	public User(String firstName, String lastName, String role, String email, String username,
-			String password, String requestedAuthority) {
+			String password, String salt) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.role = role;
 		this.email = email;
 		this.username = username;
 		this.password = password;
-		this.requestedAuthority = requestedAuthority;
+		this.salt = salt;
 	}
 	
 	@Id
@@ -115,34 +107,22 @@ public class User implements Serializable{
 		this.username = username;
 	}
 	
-    @Column(name = "password", length = 255)
+    @Column(name = "password", length = 45)
     @JsonIgnore 
 	public String getPassword() {
 		return password;
 	}
     
-    @JsonProperty("password")
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
-    @Transient
-    @JsonIgnore 
-	public String getPasswordConfirm() {
-		return passwordConfirm;
+	
+	@JsonIgnore
+    @Column(name = "salt", length = 45)
+	public String getSalt() {
+		return salt;
 	}
-
-	@JsonProperty("passwordConfirm")
-	public void setPasswordConfirm(String passwordConfirm) {
-		this.passwordConfirm = passwordConfirm;
-	}
-
-	@Column(name = "requested_authority", length = 45)
-	public String getRequestedAuthority() {
-		return requestedAuthority;
-	}
-
-	public void setRequestedAuthority(String requestedAuthority) {
-		this.requestedAuthority = requestedAuthority;
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }

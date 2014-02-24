@@ -13,14 +13,15 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
+import com.fasterxml.jackson.annotation.JsonBackReference; 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,13 +34,8 @@ public class Product implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String name;
-	@Min(0)
 	private double volume;
-	@NotEmpty
-	@Size(min = 1, max = 45)
 	private String unit;
 	private Brand brand;
 	private Category category;
@@ -155,7 +151,7 @@ public class Product implements Serializable{
 	}
 	
 	@JsonIgnoreProperties(value = { "storeProduct", "storeProducts", "user" })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product", cascade = CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.product")
 	public Set<StoreProduct> getStoreProducts() {
 		return storeProducts;
 	}

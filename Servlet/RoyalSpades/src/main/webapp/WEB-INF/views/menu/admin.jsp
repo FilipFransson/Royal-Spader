@@ -11,11 +11,8 @@
 	</li>
 	<li>
 		<a class="menulink" href="help">Hjälp</a>
-	</li>
-	<li>
-		<a class="menulink" href="apihelp">API Hjälp</a>
 	</li>	
 	<li>
-		<a href="<c:url value="/j_spring_security_logout" />" > Logga ut</a>
+		<a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
 	</li>
 </ul>

@@ -23,7 +23,6 @@ public class BrandDAOImpl implements BrandDAO {
 
 	@Override
 	public void edit(Brand brand) {
-		getCurrentSession().clear();
 		getCurrentSession().update(brand);
 	}
 

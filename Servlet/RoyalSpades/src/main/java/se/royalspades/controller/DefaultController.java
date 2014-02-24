@@ -4,8 +4,6 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -15,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class DefaultController {
 
-	@SuppressWarnings("unused")
-	private static final Logger logger = LoggerFactory.getLogger(DefaultController.class);
-	
 	/**
 	 * 	Mapping for the page displayed for default (before login)
 	 */
@@ -37,7 +32,7 @@ public class DefaultController {
 		} else if(request.isUserInRole("ROLE_USER")){
 			// Customer
 			return "redirect:/home/";
-		}
+		} 
 		
 		// the index page
 		model.addAttribute("pageUid", "2f5gdd560-8d89-33f2-cdd8-0120211c1s33" );
@@ -75,6 +70,14 @@ public class DefaultController {
 		return "default/signup";
 	}
 	
+ 
+	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)
+	public String loginerror(ModelMap model) {
+		// login failed
+		model.addAttribute("pageUid", "2f5gdd560-8d75-11e3-cdd8-0220230c9a66" );
+		model.addAttribute("error", "true");
+		return "default/login";
+	}
  
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
 	public String logout(ModelMap model) {

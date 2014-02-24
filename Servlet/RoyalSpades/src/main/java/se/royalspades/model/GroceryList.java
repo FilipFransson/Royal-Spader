@@ -13,14 +13,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -30,8 +32,6 @@ public class GroceryList implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private int id;
-	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String name;
 	private User listOwner;
 	private Set<GroceryListProduct> groceryListProducts = new HashSet<GroceryListProduct>(0);
@@ -73,9 +73,8 @@ public class GroceryList implements Serializable{
 		this.name = name;
 	}
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	//@PrimaryKeyJoinColumn
-	@JoinColumn(name = "user_id")
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
 	public User getListOwner() {
 		return listOwner;
 	}
@@ -84,7 +83,7 @@ public class GroceryList implements Serializable{
 		this.listOwner = listOwner;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.groceryList", cascade = CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.groceryList", cascade = CascadeType.ALL)
 	public Set<GroceryListProduct> getGroceryListProducts() {
 		return groceryListProducts;
 	}

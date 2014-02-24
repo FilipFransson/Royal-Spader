@@ -21,7 +21,7 @@ import com.google.common.base.Preconditions;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource({ "classpath:persistence-mysql.properties" })
+@PropertySource({ "persistence-mysql.properties" })
 @ComponentScan({ "se.royalspades.controller", "se.royalspades.dao", "se.royalspades.dao.impl", "se.royalspades.model", "se.royalspades.service", "se.royalspades.service.impl" })
 public class PersistenceConfig {
 

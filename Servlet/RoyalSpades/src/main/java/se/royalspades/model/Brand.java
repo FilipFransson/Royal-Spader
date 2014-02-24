@@ -14,8 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -31,23 +31,13 @@ public class Brand implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String name;
 	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String orgNumber;
 	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String address;
 	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String phone;
-	@NotEmpty
-	@Size(min = 2, max = 45)
-	private String city;
-	@NotEmpty
-	@Size(min = 2, max = 6)
-	private String postalCode;
 	private User user;
     private Set<Product> brandProducts = new HashSet<Product>(0);
 
@@ -107,24 +97,6 @@ public class Brand implements Serializable{
     
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-    @Column(name = "city", length = 45)
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
-    @Column(name = "postal_code", length = 45)
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)

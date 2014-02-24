@@ -2,6 +2,7 @@ package se.royalspades.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -39,16 +40,9 @@ public class UserDAOImpl implements UserDAO{
 
 	@Override
 	public User getUserByUsername(String username) {
-		return (User) getCurrentSession().createCriteria(User.class)
-        .add(Restrictions.eq("username", username)).setMaxResults(1)
-         .setCacheable(false)
-        .uniqueResult();
-	}
-	
-	@Override
-	public boolean checkIfUserExists(String username){
-		return getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", username))
-                .setMaxResults(1).uniqueResult() != null;
+		// this was giving errors?
+		return (User)getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", username)).uniqueResult();
+		//return (User)getCurrentSession().get(User.class, username);
 	}
 	
 	@SuppressWarnings("rawtypes")

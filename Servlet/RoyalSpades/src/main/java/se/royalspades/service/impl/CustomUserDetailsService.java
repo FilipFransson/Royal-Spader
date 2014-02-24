@@ -28,6 +28,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		se.royalspades.model.User domainUser = userDAO.getUserByUsername(login);
 		
+		System.out.println(domainUser.getUsername());
+
 		boolean enabled = true;
 		boolean accountNonExpired = true;
 		boolean credentialsNonExpired = true;
@@ -54,10 +56,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 		List<String> roles = new ArrayList<String>();
 
 		if (role.contains("admin")) {
+			roles.add("ROLE_MODERATOR");
 			roles.add("ROLE_ADMIN");
-		} else if (role.equals("producer")){
-			roles.add("ROLE_SUPERVISOR");
-		} else if (role.contains("shopowner")) {
+		} else if (role.contains("moderator")) {
 			roles.add("ROLE_MODERATOR");
 		} else if(role.contains("user")) {
 			roles.add("ROLE_USER");

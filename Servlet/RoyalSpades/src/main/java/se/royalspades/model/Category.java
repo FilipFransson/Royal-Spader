@@ -6,20 +6,19 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -29,8 +28,6 @@ public class Category implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private int id;
-	@NotEmpty
-	@Size(min = 2, max = 45)
 	private String name;
 	private Set<Product> products = new HashSet<Product>(0);
 	private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>(0);
@@ -80,8 +77,8 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
-	@JsonIgnore
-	//@JsonIgnoreProperties(value = { "stores", "products" })
+    @JsonIgnore
+	@JsonIgnoreProperties(value = "stores")
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<Product> getProducts() {
 		return products;
@@ -92,7 +89,7 @@ public class Category implements Serializable{
 	}
 
 	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.category", cascade = CascadeType.ALL, orphanRemoval=true)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.category")
 	public Set<StoreProduct> getStoreProducts() {
 		return storeProducts;
 	}

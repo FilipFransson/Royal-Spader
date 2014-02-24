@@ -9,7 +9,6 @@ public interface UserService {
 	public void edit(User user);
 	public void delete(int userId);
 	public User getUser(int userId);
-	public boolean checkIfUserExists(String username);
 	public User getUserByUsername(String userName);
 	@SuppressWarnings("rawtypes")
 	public List getAllUsers();

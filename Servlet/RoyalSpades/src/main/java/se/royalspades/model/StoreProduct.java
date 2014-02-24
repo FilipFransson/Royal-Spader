@@ -14,7 +14,6 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "companies_has_products", catalog = "spade_db")
 @AssociationOverrides({
@@ -27,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class StoreProduct implements Serializable{
 
 	private StoreProductId pk = new StoreProductId();
-	private double price;
 	
 	public StoreProduct() {
 		
@@ -44,7 +42,7 @@ public class StoreProduct implements Serializable{
 	}
 	
 	@Transient
-	@JsonIgnoreProperties(value = { "storeProducts", "storeProduct", "user", "products" })
+	@JsonIgnoreProperties(value = { "storeProducts", "storeProduct", "user" })
 	public Store getStore() {
 		return getPk().getStore();
 	}
@@ -72,15 +70,6 @@ public class StoreProduct implements Serializable{
 		getPk().setCategory(category);
 	}
 	
-	@Column(name = "price", nullable = true, length = 45)
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
 	public boolean equals(Object o) {
 		if(this == o)
 			return true;

@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 
-@SuppressWarnings("serial")
 @Embeddable
 public class StoreProductId implements Serializable {
 	private Store store;

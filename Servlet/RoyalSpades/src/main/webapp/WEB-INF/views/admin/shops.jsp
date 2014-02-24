@@ -4,9 +4,9 @@
 <h2> 
 	Butiker
 </h2>
-<a class="link" href="newShop">Ny butik</a>
+<a class="link" href="newShop">Ny shop</a>
 <br />
-<table id="dataTable" class="shopTable listtable">
+<table id="dataTable" class="shopTable listtable groceryTable">
 	<thead>
 		<tr>
 			<th>
@@ -14,12 +14,6 @@
 			</th>
 			<th>
 				Adress
-			</th>
-			<th>
-				Postnummer
-			</th>
-			<th>
-				Stad
 			</th>
 			<th>
 				Org. nr
@@ -36,46 +30,9 @@
 		</tr>	
 	</thead>
 </table>
-<br />
-<div class="error"></div>
 
 <script>
-
-function deleteShop(event, id){
-	$('.error').text("");
-	
-	if (confirm('är du säker på att du vill ta bort affären?')) {
-   
-		$.ajax({
-			url:'/royalspades/api/store/admin/remove_store/' + id, 
-			type:'DELETE',
-  		 	contentType:'application/json',
-		    accept:'application/json',
-		    processData:false,
-		    complete: function(response) {
-	    		
-	    		if(response.status == 200) {
-	    			// shop was removed
-		    		// remove from table
-	    			$('#' + id).remove();
-	    			$('.shopTable').fnDraw(false);
-	    		} else {
-	    			// can't remove that shop
-	    			$('.error').text(response.responseText);
-	    		}
-			},
-			error: function (response, data, textStatus, jqXHR) {
-				if(response.status != 200){
-					$('error').text("Error: " + textStatus + ", " + jqXHR);
-				}
-			}
-	    });
-    }
-	return false;
-}	
-
-$( document ).ready(function() {	
-
+$( document ).ready(function() {
 	function preZero(s){
 		s += "";
 		if(s.length < 2){
@@ -83,9 +40,9 @@ $( document ).ready(function() {
 		}
 		return s;
 	}
-	
 	var d = new Date();
 	$("input[name$='date']").val(d.getFullYear() + "-" + preZero(d.getMonth()+1) + "-" + preZero(d.getDate()) + " " + preZero(d.getHours()) + ":" + preZero(d.getMinutes())).prop('disabled', true);
+	
 	
 	$.ajax({
 		type: "GET",
@@ -96,44 +53,33 @@ $( document ).ready(function() {
 		},
 		dataType: "json",
 		success: function (data, textStatus, jqXHR) {
-			var arr = data;
+			var arr = JSON.parse(data);
 			
 			$(".shopTable").append("<tbody>");
 			for(var i = 0; i < arr.length; i++){
-				var row = "<tr id=" + arr[i].id + ">" + "<td>";
+				var row = "<tr><td>";
 				row += arr[i].name;
 				row += '</td><td style="text-align:right;">';
 				row += arr[i].address;
-				row += "</td><td>";
-				row += arr[i].postalCode;
-				row += "</td><td>";
-				row += arr[i].city;
 				row += "</td><td>";
 				row += arr[i].orgNumber;
 				row += "</td><td>";
 				row += arr[i].phone;
 				row += "</td><td>";
-				
-				if($.isNumeric(arr[i].user)){
-				    for(var j = 0; j < arr.length; j++){
-				     if(arr[j].user['@id'] == arr[i].user){
-				      arr[i].user = arr[j].user;
-						row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
-				     }
-				    }
-				   } else {
-						row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
-				   }
-
+				row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
 				row += '</td><td style="text-align:center;">';
-				row += '<a class="link" href="editShop/?id=' + arr[i].id + '"><i class="fa fa-pencil"></i></a>';
-				row += '&nbsp;<a class="no_refresh" href="#" onclick="deleteShop(event, ' + arr[i].id + ')"><i class="fa fa-times"></i></a>';
+				row += '<a class="link" href="editShop/?id=' + arr[i].id + '">Redigera</a>';
 				row += "</td></tr>";
 				$(".shopTable").append(row);
 			}
 			
-		    $(".shopTable").append("</tbody>");
-		    
+			$(".shopTable").append("</tbody>");
+			
+			$(".shopTable").find(".link").click(function (event){
+				event.preventDefault();
+				openPageUrl(this.href);
+			});
+			
 			$('.shopTable').dataTable({
 				"aLengthMenu": [
 		            [25, 50, 100, -1],
@@ -143,11 +89,11 @@ $( document ).ready(function() {
 		        "bScrollCollapse": false,
 		        "sScrollY": "300px",
 				"oLanguage": {
-					"sLengthMenu": "Visar _MENU_ butiker per sida",
-					"sZeroRecords": "Hittade inget - tyvärr",
+					"sLengthMenu": "Visar _MENU_ produkter per sida",
+					"sZeroRecords": "Hittade inget - tyvÃ¤rr",
 					"sInfo": "Visar _START_ till _END_ av _TOTAL_ varor",
-					"sInfoEmpty": "Visar 0 av 0 butiker",
-					"sInfoFiltered": "(filtrerat från _MAX_ varor)",
+					"sInfoEmpty": "Visar 0 av 0 varor",
+					"sInfoFiltered": "(filtrerat frÃ¥n _MAX_ varor)",
 					"sSearch": "Filtrera: "
 				}		
 			});
@@ -156,6 +102,6 @@ $( document ).ready(function() {
 			alert("Error: " + textStatus + ", " + jqXHR);
 		}
 	});
-	
 });
+
 </script>

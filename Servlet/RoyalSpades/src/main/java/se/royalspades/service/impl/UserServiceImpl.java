@@ -4,7 +4,6 @@ import java.util.List;
 
 //import javax.transaction.Transactional;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -39,11 +38,6 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public User getUser(int userId) {
 		return userDAO.getUser(userId);
-	}
-	
-	@Transactional
-	public boolean checkIfUserExists(String username){
-		return userDAO.checkIfUserExists(username);
 	}
 	
 	// Used for login
