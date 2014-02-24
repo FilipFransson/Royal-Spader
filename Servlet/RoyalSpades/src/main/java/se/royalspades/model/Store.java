@@ -13,17 +13,14 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
  
@@ -35,12 +32,16 @@ public class Store implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String name;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String orgNumber;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String address;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String phone;
 	private User user;
     private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>(0);
@@ -124,8 +125,8 @@ public class Store implements Serializable{
 		this.user = user;
 	}
 	
-	@JsonIgnoreProperties(value = { "storeProduct", "storeProducts", "store" })
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.store")
+	@JsonIgnoreProperties(value = { "storeProduct", "storeProducts", "store", "products" })
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.store", cascade = CascadeType.ALL, orphanRemoval=true)
 	public Set<StoreProduct> getStoreProduct() {
 		return storeProducts;
 	}

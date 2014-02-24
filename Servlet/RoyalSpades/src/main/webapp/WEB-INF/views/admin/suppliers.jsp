@@ -30,8 +30,46 @@
 		</tr>	
 	</thead>
 </table>
+<br />
+<div class="error"></div>
 
 <script>
+
+function deleteSupplier(event, id){
+	$('.error').text("");
+	
+	if (confirm('är du säker på att du vill ta bort leverantören?')) {
+   
+		$.ajax({
+			url:'/royalspades/api/brand/admin/remove_brand/' + id, 
+			type:'DELETE',
+  		  	contentType:'application/json',
+		  	accept:'application/json',
+		  	processData:false,
+			complete: function(response) {
+	    		console.log(response);
+	    		
+	    		if(response.status == 200){
+	    			// shop was removed
+		    		// remove from table
+	    			$('#' + id).remove();
+	    		} else {
+	    			// can't remove that shop
+	    			$('.error').text(response.responseText);
+	    		}
+	    		
+			},
+			error: function (response, data, textStatus, jqXHR) {
+				if(response.status != 200){
+					$('.error').text("Error: " + textStatus + ", " + jqXHR);
+				}
+			}
+	    });
+    }
+	return false;
+}	
+
+
 $( document ).ready(function() {	
 	function preZero(s){
 		s += "";
@@ -43,7 +81,6 @@ $( document ).ready(function() {
 	var d = new Date();
 	$("input[name$='date']").val(d.getFullYear() + "-" + preZero(d.getMonth()+1) + "-" + preZero(d.getDate()) + " " + preZero(d.getHours()) + ":" + preZero(d.getMinutes())).prop('disabled', true);
 	
-	
 	$.ajax({
 		type: "GET",
 		url: "/royalspades/api/brand/all/",
@@ -53,11 +90,11 @@ $( document ).ready(function() {
 		},
 		dataType: "json",
 		success: function (data, textStatus, jqXHR) {
-			var arr = JSON.parse(data);
+			var arr = data;
 			
 			$(".supplierTable").append("<tbody>");
 			for(var i = 0; i < arr.length; i++){
-				var row = "<tr><td>";
+				var row = "<tr id=" + arr[i].id + ">" + "<td>";
 				row += arr[i].name;
 				row += '</td><td style="text-align:right;">';
 				row += arr[i].address;
@@ -66,15 +103,26 @@ $( document ).ready(function() {
 				row += "</td><td>";
 				row += arr[i].phone;
 				row += "</td><td>";
-				row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
+				
+				if($.isNumeric(arr[i].user)){
+				    for(var j = 0; j < arr.length; j++){
+				     if(arr[j].user['@id'] == arr[i].user){
+				      arr[i].user = arr[j].user;
+						row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
+				     }
+				    }
+				   } else {
+						row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
+				   }
+				
 				row += '</td><td style="text-align:center;">';
-				row += '<a class="link" href="editSupplier/?id=' + arr[i].id + '">Redigera</a>';
-				row += '&nbsp;<a class="link" href="deleteSupplier/?id=' + arr[i].id + '">X</a>';
+				row += '<a class="link" href="editSupplier/?id=' + arr[i].id + '"><i class="fa fa-pencil"></i></a>';
+				row += '&nbsp;<a class="no_refresh" href="#" onclick="deleteSupplier(event, ' + arr[i].id + ')"><i class="fa fa-times"></i></a>';
 				row += "</td></tr>";
 				$(".supplierTable").append(row);
 			}
 			
-			$(".supplierTable").append("</tbody>");
+			   $(".supplierTable").append("</tbody>");
 			
 			$('.supplierTable').dataTable({
 				"aLengthMenu": [

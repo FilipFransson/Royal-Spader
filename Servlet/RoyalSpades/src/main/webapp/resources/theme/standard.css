@@ -1,4 +1,4 @@
-﻿/* Notes
+/* Notes
 	
 */
 
@@ -163,7 +163,6 @@ table.listtable{
 	text-align:right;
 }
 
-
 /* Text */
 .red {
 	color:red;
@@ -255,4 +254,13 @@ input:not([type="checkbox"]), select {
 	border-radius: 3px;
 	box-shadow: 0px 1px 4px 0px rgba(168, 168, 168, 0.6) inset;
 	transition: all 0.2s linear;
+}
+
+/* AJAX Error and Response */
+.maincontent .error {
+	color:red;
+}
+
+.maincontent .response {
+	
 }

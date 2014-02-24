@@ -9,7 +9,7 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script src="http://datatables.net/download/build/jquery.dataTables.min.js"></script>
 		<script src="<c:url value="/resources/scripts/JsonParse.js" />"></script>
-
+		
 		<!-- Will load different scripts, for different roles in the system -->
 		<sec:authorize access="hasRole('ROLE_ADMIN')">
 			<!-- admin -->		

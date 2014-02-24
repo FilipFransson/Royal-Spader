@@ -17,7 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping(value = "/admin")
 public class AdminController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	@SuppressWarnings("unused")
+	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -44,6 +45,14 @@ public class AdminController {
 		model.addAttribute("pageUid", "1c63de21-99cc-21e3-baa8-9830222c9a66" );
 		
 		return "admin/help";
+	}
+	
+	@RequestMapping("/apihelp")
+	public String apiHelp(Locale locale, Model model){
+		//Admin - API Help page
+		model.addAttribute("pageUid", "1c33de21-22cc-21e3-b1a8-1830222c9a66" );
+		
+		return "admin/apihelp";
 	}
 	
 	@RequestMapping("/shops")
@@ -75,13 +84,15 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/editSupplier")
-	public String editSupplier(Locale locale, Model model){
+	public String editSupplier(Locale locale, Model model, @RequestParam(value = "id", required = true) int id){
 		//Admin - supplier page
 		model.addAttribute("pageUid", "cfcd9e0b-c1cd-4122-9486-b96cb026bb3c" );
 		
-		
+		model.addAttribute("id", id);
+
 		return "admin/editSupplier";
 	}
+	
 	
 	@RequestMapping("/user")
 	public String user(Locale locale, Model model){

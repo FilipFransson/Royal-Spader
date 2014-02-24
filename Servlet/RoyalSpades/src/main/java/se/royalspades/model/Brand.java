@@ -14,8 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -31,12 +31,16 @@ public class Brand implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private int id;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String name;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String orgNumber;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String address;
 	@NotEmpty
+	@Size(min = 2, max = 45)
 	private String phone;
 	private User user;
     private Set<Product> brandProducts = new HashSet<Product>(0);
