@@ -25,6 +25,22 @@
 		</tr>
 		<tr>
 			<td>
+				<label for="postalCode">Postnummer: </label>
+			</td>
+			<td>
+				<input name="postalCode" id="postalCode"><br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="city">Stad: </label>
+			</td>
+			<td>
+				<input name="city" id="city"><br />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<label for="orgNumber">Org.nr: </label>
 			</td>
 			<td>

@@ -25,6 +25,22 @@
 		</tr>
 		<tr>
 			<td>
+				<label for="postalCode">Postnummer: </label>
+			</td>
+			<td>
+				<input name="postalCode" id="postalCode"><br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="city">Stad: </label>
+			</td>
+			<td>
+				<input name="city" id="city"><br />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<label for="orgNumber">Org.nr: </label>
 			</td>
 			<td>
@@ -82,6 +98,8 @@ $(document).ready(function() {
 			.done(function(data) {
 				$("input[name='name']").val(data.name);
 				$("input[name='address']").val(data.address);
+				$("input[name='postalCode']").val(data.postalCode);
+				$("input[name='city']").val(data.city);
 				$("input[name='orgNumber']").val(data.orgNumber);
 				$("input[name='phone']").val(data.phone);
 				$("input[name='user']").val(data.user.id);

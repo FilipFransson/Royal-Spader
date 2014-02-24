@@ -16,6 +16,12 @@
 				Adress
 			</th>
 			<th>
+				Postnummer
+			</th>
+			<th>
+				Stad
+			</th>
+			<th>
 				Org. nr
 			</th>
 			<th>
@@ -97,6 +103,10 @@ $( document ).ready(function() {
 				row += arr[i].name;
 				row += '</td><td style="text-align:right;">';
 				row += arr[i].address;
+				row += "</td><td>";
+				row += arr[i].postalCode;
+				row += "</td><td>";
+				row += arr[i].city;
 				row += "</td><td>";
 				row += arr[i].orgNumber;
 				row += "</td><td>";

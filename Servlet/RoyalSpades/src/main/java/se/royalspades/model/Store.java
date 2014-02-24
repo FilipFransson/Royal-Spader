@@ -43,6 +43,12 @@ public class Store implements Serializable{
 	@NotEmpty
 	@Size(min = 2, max = 45)
 	private String phone;
+	@NotEmpty
+	@Size(min = 2, max = 45)
+	private String city;
+	@NotEmpty
+	@Size(min = 2, max = 6)
+	private String postalCode;
 	private User user;
     private Set<StoreProduct> storeProducts = new HashSet<StoreProduct>(0);
     
@@ -113,7 +119,24 @@ public class Store implements Serializable{
 		this.phone = phone;
 	}
 	
-	
+    @Column(name = "city", length = 45)
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+    @Column(name = "postal_code", length = 45)
+	public String getPostalCode() {
+		return postalCode;
+	}
+
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
 	@OneToOne(fetch = FetchType.EAGER)
 	//@PrimaryKeyJoinColumn
 	@JoinColumn(name = "user_id")

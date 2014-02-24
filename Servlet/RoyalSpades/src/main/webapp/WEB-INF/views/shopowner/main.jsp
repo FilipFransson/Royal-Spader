@@ -55,8 +55,8 @@
             </select>
         </div>
         <div>
-            <form id="shopFormNewProducts">
-                <table id="shopTableNewProducts" class="listtable shopTableNewProducts">
+            <form>
+                <table class="listtable shopTableNewProducts">
                     <thead>
                     <tr>
                         <th>Brand</th>
@@ -72,11 +72,10 @@
                         <td>Mineralvatten</td>
                         <td>LÃsk</td>
                         <td>9.98</td>
-                        <td><i class="fa fa-times shopRemoveRow"></i></td>
+                        <td><i class="fa fa-times"></i></td>
                     </tr>
                     </tbody>
                 </table>
-                <button type="submit">Submit</button>
             </form>
         </div>
     </div>
@@ -97,10 +96,10 @@
 	</table>
 </fieldset>
 <script>
-
-
-
+    var allProducts;
+    var allCategories;
     $( document ).ready(function() {
+        console.log("fail");
         function preZero(s){
             s += "";
             if(s.length < 2){
@@ -227,12 +226,74 @@
                 allCategories = data;
                 //console.log(data);
                 //data = parseJSON(data);
-        setStoreAllProducts();
-        setStoreProductTable(2);
-        setStoreNewProductBrandSelect();
-        setStoreCategoriesTable();
 
 
+                $(".categoryTable tbody").empty();
+                for(var i = 0; i < data.length; i++){
+                    var row = '<tr>' +
+                            '<td><a href="#"><i class="fa fa-sort-down"></i></a></td>' +
+                            '<td><a href="#"><i class="fa fa-sort-up"></i></a></td>' +
+                            '<td>';
+                    row += data[i]["name"];
+                    row += '</td></tr>';
+
+                    $(".categoryTable tbody").append(row);
+                }
+            },
+            error: function (data, textStatus, jqXHR) {
+                alert("Error: " + textStatus + ", " + jqXHR);
+            }
+        });
+        $( document).on("click", "#shopProductCreateNew", function(){
+            $(".shopProductPage").slideUp();
+            $("#shopSelectNewContainer").slideDown();
+
+            $("#shopProductCreateNew").addClass('active');
+            $("#shopProductShow").removeClass('active');
+        });
+        $( document).on("click", "#shopProductShow", function(){
+            $(".shopProductPage").slideDown();
+            $("#shopSelectNewContainer").slideUp();
+
+            $("#shopProductCreateNew").removeClass('active');
+            $("#shopProductShow").addClass('active');
+        });
+        $( document).on("click", "#shopNewProductsAdd", function(){
+            var selected = $("#selectNewProducts").val();
+            var tableBody = $(".shopTableNewProducts tbody");
+            var deleteIcon = '<td><i class="fa fa-times"></i></td>';
+
+            tableBody.empty();
+            console.log(allProducts);
+
+            for (var i = 0; i < selected.length; i++) {
+
+                for (var j = 0; j < allProducts.length; j++) {
+                    if (selected[i] == allProducts[j]['id']){
+                        var d = allProducts[j];
+                        console.log(d);
+                        var row = '<tr>' +
+                                '<td>'+d['brand']['name']+'</td>' +
+                                '<td>'+d['name']+'</td>' +
+                                '<td>'+createCategorySelect(d['category']['id'])+'</td>' +
+                                '<td><input class="priceInput" name="productPrice" placeholder="Pris"></td>' +
+                                deleteIcon + '</tr>';
+                        tableBody.append(row);
+                        break;
+                    }
+                }
+            }
+        });
     });
-
+    function createCategorySelect(selected){
+        var html = '<select name="category">';
+        for (var i = 0; i < allCategories.length; i++) {
+            var d = allCategories[i];
+            var select = (selected == d['id']) ? "selected" : "";
+            var row = '<option '+select+' value="'+d['id']+'">'+d['name']+'</option>';
+            html += row;
+        }
+        html += '</select>';
+        return html;
+    }
 </script>
