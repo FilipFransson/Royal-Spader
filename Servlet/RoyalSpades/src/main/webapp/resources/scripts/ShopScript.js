@@ -62,7 +62,7 @@ $( document).on("click", "#shopFormNewProducts button", function(event){
         var data = {
             store: rawFormData[0].value,
             category: rawFormData[1].value,
-            price: {storePrice: rawFormData[2].value}
+            price: JSON.stringify({storePrice: rawFormData[2].value})
         };
         console.log(data);
         addStoreProduct(data);
@@ -250,7 +250,7 @@ function addStoreProduct(storeProduct){
     // /api/product/add_product_to_store/{storeId}/product/{productId}/store_category/{storeCategory}
     var url = '/api/product/add_product_to_store/'+storeID+'/product/'+productID+'/store_category/'+categoryID;
 
-    $.post(url, JSON.stringify(price), function Success(data, textStatus){
+    $.post(url, price, function Success(data, textStatus){
         console.log(data);
         console.log(textStatus);
     });
