@@ -1,10 +1,10 @@
-ï»¿<script>
+<script>
 	window.location.hash = "p=" + '${pageUid}';
 </script>
 <h2> 
-	LeverantÃ¶r
+	Leverantör
 </h2>
-<a class="link" href="newSupplier">Ny leverantÃ¶r</a>
+<a class="link" href="newSupplier">Ny leverantör</a>
 <br />
 <table id="dataTable" class="supplierTable listtable">
 	<thead>
@@ -14,6 +14,12 @@
 			</th>
 			<th>
 				Adress
+			</th>
+			<th>
+				Postnummer
+			</th>
+			<th>
+				Stad
 			</th>
 			<th>
 				Org. nr
@@ -30,13 +36,16 @@
 		</tr>	
 	</thead>
 </table>
+<br />
+<div class="error"></div>
 
 <script>
 var oTable;
+
 function deleteSupplier(event, id){
 	$('.error').text("");
 	
-	if (confirm('Ã„r du sÃ¤ker pÃ¥ att du vill ta bort leverantÃ¶ren?')) {
+	if (confirm('är du säker på att du vill ta bort leverantören?')) {
    
 		$.ajax({
 			url:'/royalspades/api/brand/admin/remove_brand/' + id, 
@@ -45,16 +54,13 @@ function deleteSupplier(event, id){
 		  	accept:'application/json',
 		  	processData:false,
 			complete: function(response) {
-	    		console.log(response);
 	    		
 	    		if(response.status == 200){
 	    			// shop was removed
 		    		// remove from table
-	    			
-	    			var pos = oTable.fnGetPosition( $('#' + id) );
-	    			oTable.fnDeleteRow(pos);
+	    			var pos = oTable.fnGetPosition( $('#' + id)[0]);
+	    	        oTable.fnDeleteRow(pos);
 	    			$('#' + id).remove();
-	    			
 	    		} else {
 	    			// can't remove that shop
 	    			$('.error').text(response.responseText);
@@ -71,6 +77,7 @@ function deleteSupplier(event, id){
 	return false;
 }	
 
+
 $( document ).ready(function() {	
 	function preZero(s){
 		s += "";
@@ -82,7 +89,6 @@ $( document ).ready(function() {
 	var d = new Date();
 	$("input[name$='date']").val(d.getFullYear() + "-" + preZero(d.getMonth()+1) + "-" + preZero(d.getDate()) + " " + preZero(d.getHours()) + ":" + preZero(d.getMinutes())).prop('disabled', true);
 	
-	
 	$.ajax({
 		type: "GET",
 		url: "/royalspades/api/brand/all/",
@@ -92,22 +98,38 @@ $( document ).ready(function() {
 		},
 		dataType: "json",
 		success: function (data, textStatus, jqXHR) {
-			var arr = JSON.parse(data);
+			var arr = data;
 			
 			$(".supplierTable").append("<tbody>");
 			for(var i = 0; i < arr.length; i++){
-				var row = "<tr><td>";
+				var row = "<tr id=" + arr[i].id + ">" + "<td>";
 				row += arr[i].name;
 				row += '</td><td style="text-align:right;">';
 				row += arr[i].address;
+				row += "</td><td>";
+				row += arr[i].postalCode;
+				row += "</td><td>";
+				row += arr[i].city;
 				row += "</td><td>";
 				row += arr[i].orgNumber;
 				row += "</td><td>";
 				row += arr[i].phone;
 				row += "</td><td>";
-				row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
+				
+				if($.isNumeric(arr[i].user)){
+				    for(var j = 0; j < arr.length; j++){
+				     if(arr[j].user['@id'] == arr[i].user){
+				      arr[i].user = arr[j].user;
+						row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
+				     }
+				    }
+				   } else {
+						row += arr[i].user.firstName + " " + arr[i].user.lastName + " (" + arr[i].user.email + ")";
+				   }
+				
 				row += '</td><td style="text-align:center;">';
-				row += '<a class="link" href="editSupplier/?id=' + arr[i].id + '">Redigera</a>';
+				row += '<a class="link" href="editSupplier/?id=' + arr[i].id + '"><i class="fa fa-pencil"></i></a>';
+				row += '&nbsp;<a class="no_refresh" href="#" onclick="deleteSupplier(event, ' + arr[i].id + ')"><i class="fa fa-times"></i></a>';
 				row += "</td></tr>";
 				$(".supplierTable").append(row);
 			}
@@ -124,10 +146,10 @@ $( document ).ready(function() {
 		        "sScrollY": "300px",
 				"oLanguage": {
 					"sLengthMenu": "Visar _MENU_ produkter per sida",
-					"sZeroRecords": "Hittade inget - tyvÃ¤rr",
+					"sZeroRecords": "Hittade inget - tyvärr",
 					"sInfo": "Visar _START_ till _END_ av _TOTAL_ varor",
 					"sInfoEmpty": "Visar 0 av 0 varor",
-					"sInfoFiltered": "(filtrerat frÃ¥n _MAX_ varor)",
+					"sInfoFiltered": "(filtrerat från _MAX_ varor)",
 					"sSearch": "Filtrera: "
 				}		
 			});

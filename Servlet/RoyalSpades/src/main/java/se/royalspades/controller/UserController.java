@@ -50,9 +50,9 @@ public class UserController {
 	
 	// return single user
 	@Secured({"ROLE_USER","ROLE_ADMIN","ROLE_MODERATOR","ROLE_SUPERVISOR"})
-	@RequestMapping(value = "/user/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
-	public @ResponseBody User getSingleUserResponse(@PathVariable int id){
-		User user = userService.getUser(id);
+	@RequestMapping(value = "/user/{userName}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+	public @ResponseBody User getSingleUserResponse(@PathVariable String userName){
+		User user = userService.getUserByUsername(userName);
 		
 		// get the user calling the method
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -174,12 +174,12 @@ public class UserController {
 		return new ResponseEntity<String>("Ändringar för " + user.getUsername() + " sparade!", HttpStatus.OK);
 	}
 	
-	
-	// modify your own account  (send old password as JSON in body ex. {"oldPassword":"hejhej"}
+													// skapa object för input och använd sedan värden ifrån object till att skapa user...
+	// modify your own account details            (OBS "Disable" valid here, send full object and ignore passwords?, then set password here from old user?)?
 	@SuppressWarnings("unchecked")
 	@Secured({"ROLE_USER","ROLE_ADMIN","ROLE_MODERATOR","ROLE_SUPERVISOR"})
 	@RequestMapping(value="/user/edit_account", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = "application/json; charset=utf-8")
-	ResponseEntity <String> editYourUser(@RequestBody @Valid User user, @RequestBody String oldPassword){			
+	ResponseEntity <String> editYourUser(@RequestBody @Valid User user){			
 		// get the user calling the method
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     	String username = authentication.getName();
@@ -197,7 +197,43 @@ public class UserController {
 		    			
 			// get current password
 			User oldUser = userService.getUser(user.getId());
-			String currentPassword = oldUser.getPassword();
+			
+			// set same password
+			user.setPassword(oldUser.getPassword());
+			
+			userService.edit(user);		
+	    	return new ResponseEntity<String>("Ändringar för " + user.getUsername() + " sparade!", HttpStatus.OK);
+			
+    	} else {
+    		return new ResponseEntity<String>("Du kan inte ändra ett användarkonto som inte tillhör dig!", HttpStatus.UNAUTHORIZED);
+    	}
+	}
+	
+	// modify your own password						(OBS Check valid at controller level here??)
+	@SuppressWarnings("unchecked")
+	@Secured({"ROLE_USER","ROLE_ADMIN","ROLE_MODERATOR","ROLE_SUPERVISOR"})
+	@RequestMapping(value="/user/edit_password", method = RequestMethod.PUT, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = "application/json; charset=utf-8")
+	ResponseEntity <String> editYourPassword(@RequestBody int userId, @RequestBody String password, @RequestBody String passwordConfirm, @RequestBody String oldPassword){			
+		// get user with id
+		User user = userService.getUser(userId);
+		
+		// get the user calling the method
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String username = authentication.getName();
+		
+    	if(username.equals(user.getUsername())){
+    		
+    		List<User> users = userService.getAllUsers();
+    		
+    		// if the username is taken
+    		for(User u : users){
+    			if(u.getUsername().equals(user.getUsername()) && u.getId() != user.getId()){
+    				return new ResponseEntity<String>("Användarnamnet är upptaget, Välj ett annat.", HttpStatus.BAD_REQUEST);
+    			}
+    		}
+		    			
+			// get current password
+			String currentPassword = user.getPassword();
 			
 			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			
@@ -205,12 +241,12 @@ public class UserController {
 			if(passwordEncoder.matches(oldPassword, currentPassword)){
 				
 				//check if password equals passwordConfirm
-				if(user.getPassword().equals(user.getPasswordConfirm())){
+				if(password.equals(passwordConfirm)){
 					// matches set password
-					user.setPassword(passwordEncoder.encode(user.getPassword()));
+					user.setPassword(passwordEncoder.encode(password));
 	    			userService.edit(user);
 	    			
-	    			return new ResponseEntity<String>("Ändringar för " + user.getUsername() + " sparade!", HttpStatus.OK);
+	    			return new ResponseEntity<String>("Lösenord ändrat!", HttpStatus.OK);
 				} else {
 					return new ResponseEntity<String>("Lösenorden matchar inte varandra!", HttpStatus.BAD_REQUEST);
 				}
@@ -225,7 +261,7 @@ public class UserController {
     		return new ResponseEntity<String>("Du kan inte ändra ett användarkonto som inte tillhör dig!", HttpStatus.UNAUTHORIZED);
     	}
 	}
-	
+
 	
 	@Secured("ROLE_ADMIN")
 	@SuppressWarnings("unchecked")

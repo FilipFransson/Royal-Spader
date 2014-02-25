@@ -25,6 +25,22 @@
 		</tr>
 		<tr>
 			<td>
+				<label for="postalCode">Postnummer: </label>
+			</td>
+			<td>
+				<input name="postalCode" id="postalCode"><br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="city">Stad: </label>
+			</td>
+			<td>
+				<input name="city" id="city"><br />
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<label for="orgNumber">Org.nr: </label>
 			</td>
 			<td>
@@ -51,10 +67,29 @@
     <input type="submit" value="Lägg till">
 </form>
 <br />
-<div id="response"></div>
+<div class="response"></div>
+<div class="error"></div>
 
 <script>
 $(document).ready(function() {
+	
+	$.fn.serializeObject = function()
+	{
+	   var o = {};
+	   var a = this.serializeArray();
+	   
+	   $.each(a, function() {
+	       if (o[this.name]) {
+	           if (!o[this.name].push) {
+	               o[this.name] = [o[this.name]];
+	           }
+	           o[this.name].push(this.value || '');
+	       } else {
+	           o[this.name] = this.value || '';
+	       }
+	   });
+	   return o;
+	};
 	
 	// fill the select box with users that can be a producer administrator
 	$.getJSON("/royalspades/api/admin/user/brand_managers")
@@ -71,31 +106,63 @@ $(document).ready(function() {
 		})
 		.fail(function(jqxhr, textStatus, error) {
 		    var err = textStatus + ", " + error;
-	        $('#error').text("Något gick fel: " + err);
+	        $('.error').text("Något gick fel: " + err);
 		});
 	
 	
-	// Save Shop AJAX Form Submit
+
+	// Save suplier AJAX form
 	$('#newSupplierForm').submit(function(e) {
-		  $("#response").text("");
-		  
+		  $(".response").text("");
+	  	  $('.error').text("");
 	  	  // get userId from selected option
 	  	  var userId = $("#user option:selected").val();
-		  
-	  // will pass the form data using the jQuery serialize function
-	  $.post('/royalspades/api/brand/admin/add_brand/' + userId, $(this).serialize(), function(response) {
-		  
-	    // clear values
-	    $(':input','#newSupplierForm')
-			.not(':button, :submit, :reset, :hidden')
-			.val('')
-			.removeAttr('selected');
-	  	
-	    $('#response').text(response);
-	  });
+		
+	  	  if(userId != 'Välj'){
+	    	  var data = $(this).serializeObject();
+	    	  // will pass the form data and parse it to json string
+	    	  $.ajax({
+	    		  url:'/royalspades/api/brand/admin/add_brand/' + userId,
+	    		  data: JSON.stringify(data),
+	    		  contentType:'application/json',
+	    		  accept:'application/json',
+	    		  processData:false,
+	    		  type: 'POST',
+	    		  complete: function(response) {
+	  				if(response.status == 200){
+	  	    			// clear values
+	  				    $(':input','#newSupplierForm')
+	  						.not(':button, :submit, :reset, :hidden')
+	  						.val('');
+	  		    	    $('.response').text(response.responseText);
+	  				}
+					
+	    		  }, error: function(response){
+	    			if(response.status != 200){
+	        			var responseJSON = response.responseJSON;
+	        			
+	        	  	   	if(typeof responseJSON != 'undefined'){
+	        	  	   		var errors = '';
+	        	  	   		
+	            	  	   	for(var i = 0; i < responseJSON.fieldErrors.length; i ++){
+	                	  	   	errors += (responseJSON.fieldErrors[i].message); 
+	                	  	   	errors += '<br>';
+	            	  	   	}
+	            	  	  	
+	            	  	   	$('.error').append(errors);
+
+	        	  	   	} else {
+	            	  	   	$('.error').text(response.responseText); 
+	        	  	   	}
+	    			}
+	    	  	   	
+	    		  }
+	    	  }); 
+	  	  } else {
+  	  	   	$('.error').text("Du måste välja en administratör!"); 
+	  	  }
 	   
 	  e.preventDefault(); // prevent actual form submit and page reload
 	});
- 
 });
 </script>

@@ -1,5 +1,6 @@
 package se.royalspades.controller;
 
+import java.security.Principal;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -56,8 +57,10 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/settings")
-	public String settings(Locale locale, Model model){
+	public String settings(Locale locale, Model model, Principal principal){
 		//Admin - API Help page
+        final String currentUser = principal.getName();
+        model.addAttribute("username", currentUser);
 		model.addAttribute("pageUid", "aa33de21-23cc-44e3-baa8-2230222c9a66" );
 		
 		return "admin/settings";

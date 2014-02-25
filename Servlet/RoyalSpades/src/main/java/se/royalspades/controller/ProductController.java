@@ -142,6 +142,10 @@ public class ProductController {
 	@RequestMapping(value = "/add_product_to_store/{storeId}/product/{productId}/store_category/{storeCategory}", method = RequestMethod.POST, consumes = { MediaType.APPLICATION_JSON_VALUE }, produces = "application/json; charset=utf-8")
 	ResponseEntity<String> addProductToStore(@PathVariable int storeId, @PathVariable int productId, @PathVariable int storeCategory, @RequestBody int storePrice){
 		
+		if(storePrice > 9000 || storePrice < 1){
+			return new ResponseEntity<String>("Pris kan sättas mellan 1-9000", HttpStatus.BAD_REQUEST);
+		}
+		
 		// get store, product and category
 		Store store = storeService.getStore(storeId);
 		Product product = productService.getProduct(productId);
