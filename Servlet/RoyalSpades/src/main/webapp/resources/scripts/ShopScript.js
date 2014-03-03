@@ -26,7 +26,7 @@ $( document).on("click", "#shopNewProductsAdd", function(){
     var selected = $("#selectNewProducts").val();
     var tableBody = $(".shopTableNewProducts tbody");
 
-    var priceCell = '<td><input class="priceInput" name="storePrice" placeholder="Pris"></td>';
+    var priceCell = '<td><input class="priceInput" name="productPrice" placeholder="Pris"></td>';
     var deleteIconCell = '<td><i class="fa fa-times shopRemoveRow"></i></td>';
 
     //tableBody.empty();
@@ -57,15 +57,7 @@ $( document).on("click", "#shopFormNewProducts button", function(event){
     var select = $("#shopTableNewProducts").find("form");
     console.log(select);
     select.each(function(){
-        var rawFormData = $(this).serializeArray();
-        console.log(rawFormData);
-        var data = {
-            store: rawFormData[0].value,
-            category: rawFormData[1].value,
-            price: JSON.stringify({storePrice: rawFormData[2].value})
-        };
-        console.log(data);
-        addStoreProduct(data);
+        console.log($(this).serializeArray());
     });
 });
 function createCategorySelect(selected){
@@ -80,6 +72,7 @@ function createCategorySelect(selected){
     return html;
 }
 function setStoreAllProducts() {
+    console.log("setStoreAllProducts");
     $.ajax({
         type: "GET",
         url: "/api/product/all/",
@@ -97,6 +90,7 @@ function setStoreAllProducts() {
     });
 }
 function setStoreProductTable(id){
+    console.log("setStoreProductTable");
     $.ajax({
         type: "GET",
         url: '/api/store/'+id+'/',
@@ -149,6 +143,7 @@ function setStoreNewProductBrandSelect(){
         },
         dataType: "text",
         success: function (data) {
+            console.log(data);
             data = parseJSON(data);
             //console.log(data);
             //var arr = JSON.parse([data]);
@@ -239,20 +234,4 @@ function setStoreCategoriesTable() {
             alert("Error: " + textStatus + ", " + jqXHR);
         }
     });
-}
-
-function addStoreProduct(storeProduct){
-    var storeID = 2;
-    var productID = storeProduct.store;
-    var categoryID = storeProduct.category;
-    var price = storeProduct.price;
-
-    // /api/product/add_product_to_store/{storeId}/product/{productId}/store_category/{storeCategory}
-    var url = '/api/product/add_product_to_store/'+storeID+'/product/'+productID+'/store_category/'+categoryID;
-
-    $.post(url, price, function Success(data, textStatus){
-        console.log(data);
-        console.log(textStatus);
-    });
-
 }

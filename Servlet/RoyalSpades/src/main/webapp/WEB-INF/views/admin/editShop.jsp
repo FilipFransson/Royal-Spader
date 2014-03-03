@@ -77,7 +77,7 @@ $(document).ready(function() {
 	{
 	   var o = {};
 	   var a = this.serializeArray();
-	   a.re
+	
 	   $.each(a, function() {
 	       if (o[this.name]) {
 	           if (!o[this.name].push) {

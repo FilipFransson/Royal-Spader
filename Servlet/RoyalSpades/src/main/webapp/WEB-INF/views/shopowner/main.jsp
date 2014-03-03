@@ -132,6 +132,7 @@
             },
             dataType: "text",
             success: function (data, textStatus, jqXHR) {
+                console.log(data);
                 data = parseJSON(data);
                 var arr = data["storeProduct"];
                 $("#shopName").html(data["name"]);

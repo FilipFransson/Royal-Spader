@@ -1,5 +1,6 @@
 package se.royalspades.controller;
 
+import java.security.Principal;
 import java.util.Locale;
 
 import org.slf4j.Logger;
@@ -48,12 +49,24 @@ public class ProducerController {
 	}
 	
 	@RequestMapping("/wares")
-	public String wares(Locale locale, Model model){
+	public String wares(Locale locale, Model model, Principal principal){
 		//Producer - wares page
+        final String currentUser = principal.getName();
+        model.addAttribute("username", currentUser);
 		model.addAttribute("pageUid", "a1d6aec0-8d78-11e3-baa8-0800200c9a66" );
-		
+	
 		
 		return "producer/wares";
+	}
+	
+	@RequestMapping("/settings")
+	public String settings(Locale locale, Model model, Principal principal){
+		//Producer - wares page
+        final String currentUser = principal.getName();
+        model.addAttribute("username", currentUser);
+		model.addAttribute("pageUid", "d2d3dec0-9d78-99e3-bda8-1230246c9a66" );
+		
+		return "producer/settings";
 	}
 	
 	@RequestMapping("/help")
