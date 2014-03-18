@@ -8,6 +8,6 @@
     <string name="password">Lösenord</string>
     <string name="loginBtn">OK</string>
     <string name="groceries_list">Dina varor</string>
-    <string name="bags">Dina matkassar</string>
+    <string name="bags">Matkassar</string>
 
 </resources>

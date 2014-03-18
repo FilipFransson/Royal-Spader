@@ -56,7 +56,8 @@ public class ProductDeserializer implements JsonDeserializer<Product> {
 		}
 		List<StoreProduct> productStores = new ArrayList<StoreProduct>();
 
-		JsonArray psArray = jsonObject.get("storeProducts").getAsJsonArray();
+
+		/*JsonArray psArray = jsonObject.get("storeProducts").getAsJsonArray();
 		for(int i = 0; i < psArray.size(); i++){
 			if (psArray.get(i).isJsonObject()){
 				productStores.add(context.<StoreProduct>deserialize(psArray.get(i), StoreProduct.class));
@@ -64,7 +65,7 @@ public class ProductDeserializer implements JsonDeserializer<Product> {
 				productStores.add(null);
 			}
 		}
-
+*/
 
 
 		product.setBrand(brand);

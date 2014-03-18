@@ -10,26 +10,31 @@ import java.util.List;
  */
 public class DataModule {
 
+    public volatile static List<Bag> bags = new ArrayList<Bag>();
 	public volatile static List<Product> products = new ArrayList<Product>();
 	public volatile static List<Store> stores = new ArrayList<Store>();
 	public volatile static List<Brand> brands = new ArrayList<Brand>();
 	public volatile static List<Category> categories = new ArrayList<Category>();
 
 	public static void instantiate(){
-		products = new ArrayList<Product>();
+        bags = new ArrayList<Bag>();
+        products = new ArrayList<Product>();
 		stores = new ArrayList<Store>();
 		brands = new ArrayList<Brand>();
 		categories = new ArrayList<Category>();
 	}
 
-	public static Category getCategory(int categoryToken) {
-		for(Category category : categories){
-			if(category.tokenId == categoryToken){
-				return category;
-			}
-		}
-		return null;
-	}
+    public static Bag getBag(int index) {
+        return bags.get(index);
+    }
+    public static Category getCategory(int categoryToken) {
+        for(Category category : categories){
+            if(category.tokenId == categoryToken){
+                return category;
+            }
+        }
+        return null;
+    }
 	public static Store getStore(int storeToken) {
 		for(Store store: stores){
 			if(store.tokenId == storeToken){

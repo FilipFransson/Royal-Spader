@@ -1,12 +1,17 @@
 package com.royalspader.app;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.royalspader.app.json.BagDeserializer;
 import com.royalspader.app.json.BrandDeserializer;
 import com.royalspader.app.json.CategoryDeserializer;
 import com.royalspader.app.json.StoreDeserializer;
 import com.royalspader.app.json.StoreProductDeserializer;
+import com.royalspader.app.objects.Bag;
 import com.royalspader.app.objects.Brand;
 import com.royalspader.app.objects.Category;
 import com.royalspader.app.objects.DataModule;
@@ -17,6 +22,7 @@ import com.royalspader.app.objects.StoreProduct;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -36,18 +42,114 @@ public class APIManager {
 		gsonBuilder.registerTypeAdapter(Category.class, new CategoryDeserializer());
 		gsonBuilder.registerTypeAdapter(Product.class, new ProductDeserializer());
 		gsonBuilder.registerTypeAdapter(Store.class, new StoreDeserializer());
-		gsonBuilder.registerTypeAdapter(StoreProduct.class, new StoreProductDeserializer());
+        gsonBuilder.registerTypeAdapter(StoreProduct.class, new StoreProductDeserializer());
+        gsonBuilder.registerTypeAdapter(Bag.class, new BagDeserializer());
 		gson = gsonBuilder.create();
 
 		communicator = new Communicator();
 	}
+    public String login(Activity activity, JSONObject data){
+        //Login URL
+        String URL = communicator.urlBuilder("login", null);
 
-    public List<Product> getItems(){
+        return communicator.postData(activity, URL, data).toString();
+    }
 
-        String URL = communicator.urlBuilder(Communicator.Type.product, "all"); //"http://172.16.6.175:8080/royalspades/api/product/all/";
+    public List<Bag> getBags(Activity activity){
+        SharedPreferences sharedPref = activity.getPreferences(activity.getBaseContext().MODE_PRIVATE);
 
-        return parseProduct(communicator.getData(URL));
+        String token = sharedPref.getString("com.royalspader.app.logintoken", "");
+        String URL = "http://dev2-vyh.softwerk.se:8080/royalspades/api/grocerylist/mobile/" + token;
+        //String URL = "http://172.16.6.175:8080/royalspades/api/grocerylist/mobile/" + token;
+        return parseBag(communicator.getData(URL));
+    }
 
+    public List<Product> getProducts(){
+        String URL = "http://dev2-vyh.softwerk.se:8080/royalspades/api/product/all/";
+        //String URL = "http://172.16.6.175:8080/royalspades/api/product/all/";
+        if(DataModule.products.isEmpty() || DataModule.products == null){
+            DataModule.products = parseProduct(communicator.getData(URL));
+        }
+
+        return DataModule.products;
+    }
+
+
+    public List<Product> getItems(Activity activity, int bagId){
+
+        List<Bag> bags = getBags(activity);
+
+        if(bags.isEmpty()){
+            return new ArrayList<Product>();
+        }
+
+        for(int i = 0; i < bags.size(); i++){
+            if(bags.get(i).id == bagId){
+                return bags.get(i).products;
+            }
+        }
+        return null;
+    }
+
+
+    private List<Bag> parseBag(JSONArray arr){
+        List<JSONObject> allProducts = new ArrayList<JSONObject>();
+
+        try {
+            for (int bagIndex = 0; bagIndex < arr.length(); bagIndex++){
+
+                JSONArray groceryListProducts = arr.optJSONArray(bagIndex);
+                if(groceryListProducts == null) break;
+
+                for(int groceryIndex = 0; groceryIndex < groceryListProducts.length(); groceryIndex++){
+                    if(groceryListProducts.optJSONObject(groceryIndex) != null){
+                        //Is real product
+                        allProducts.add(groceryListProducts.optJSONObject(groceryIndex));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //allProducts contains all products
+        try {
+            for (int bagIndex = 0; bagIndex < arr.length(); bagIndex++){
+
+                JSONArray groceryListProducts = arr.optJSONArray(bagIndex);
+                if(groceryListProducts == null) break;
+                for(int groceryIndex = 0; groceryIndex < groceryListProducts.length(); groceryIndex++){
+                    if(groceryListProducts.optJSONObject(groceryIndex) == null){
+                        //Is not a product, get from allProducts
+                        int id = groceryListProducts.optInt(groceryIndex);
+
+                        JSONObject product = null;
+                        for(int i = 0; i < allProducts.size(); i++){
+                            if(allProducts.get(i).getInt("@id") == id){
+                                product = allProducts.get(i);
+                            }
+                        }
+
+                        groceryListProducts.put(groceryIndex, product);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
+        for (int i = 0; i < arr.length(); i++) {
+            try {
+                Bag bag = gson.fromJson(arr.getJSONObject(i).toString(), Bag.class);
+                DataModule.bags.add(bag);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return DataModule.bags;
     }
 
 	/**
